@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.sql.*;
 
 public class ConnexionController {
+    /*
+    A mdoifier suivant la bdd
+     */
+    String colonemailBDD = "Mail";
+    String colonemdpBDD = "Mdp";
 
     /*
     Création des boutons
@@ -68,7 +73,7 @@ public class ConnexionController {
             String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
             String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
 
-            String sql = "SELECT * FROM Personne WHERE Mail = ? and Mdp = ?"; //Requet sql
+            String sql = "SELECT * FROM Personne WHERE "+colonemailBDD+" = ? and "+colonemdpBDD+" = ?";
 
             try {
                 preparedStatement = connection.prepareStatement(sql);

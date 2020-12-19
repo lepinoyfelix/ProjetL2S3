@@ -81,7 +81,7 @@ public class InscriptionController{
                             if(confMdp.length() != 0){
                                     if(mdp.equals(confMdp)){
                                         if(mdpisValid(mdp)){
-                                            LabelErreur.setText("ok");
+                                            LabelErreur.setText("ok"); //A finir
                                         }else{
                                             LabelErreur.setText("Veuillez verfier que votre mdp  contien une maj une min et un nombre e t qu'il fait plus de 8 caractére");
                                         }
