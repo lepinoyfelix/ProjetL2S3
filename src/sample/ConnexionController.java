@@ -1,11 +1,17 @@
 package sample;
+import javafx.fxml.FXMLLoader;
+import sample.ConnexionController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import DataBase.ConexionBDD;
+
+import java.io.IOException;
 import java.sql.*;
 
 public class ConnexionController {
@@ -73,6 +79,9 @@ public class ConnexionController {
                     LabelErreurConnexion.setText("Mail ou Mdp invalide,  veuillez réessayez");
                 } else {
                     LabelErreurConnexion.setText("Connexion ok");
+                    //Fermeture de la fenttre
+                    Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
+                    stage.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -84,17 +93,23 @@ public class ConnexionController {
     /*
     Création  action bouton Inscription
      */
-        public void ButtonInscriptionOnAction (ActionEvent event){
+    public void ButtonInscriptionOnAction (ActionEvent event) throws IOException {
+        // appel fenetre d'inscription
+        Stage stage = (Stage) ButtonInscription.getScene().getWindow();
+        stage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Inscription.fxml")));
+        stage.setScene(scene);
+        stage.show();
 
-        }
+    }
 
     /*
     Création  action bouton Fermer
      */
-        public void ButtonFermerOnAction (ActionEvent event){
-            Stage stage = (Stage) ButtonInscription.getScene().getWindow();
-            stage.close();
-        }
-
+    public void ButtonFermerOnAction (ActionEvent event){
+        Stage stage = (Stage) ButtonInscription.getScene().getWindow();
+        stage.close();
     }
+
+}
 
