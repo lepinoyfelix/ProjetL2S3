@@ -15,9 +15,6 @@ public class ConexionBDD {
             JOptionPane.showMessageDialog(null, e);
             return null;
         }
-
-
-
     }
 
 }

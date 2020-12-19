@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 public class InscriptionController{
 
+
     /*
     Creation des bouttons
      */
@@ -38,18 +39,32 @@ public class InscriptionController{
     private PasswordField PasswordFieldConfMdp;
 
     /*
-    Label qui  on un msg variable
+    Label qui on un msg variable
      */
     @FXML
     private Label LabelErreur;
 
-    public static boolean isValid(String mail) {
-        String emailRegex = "^[_A-Za-z0-9._%+-]+@[_A-Za-z0-9._%+-]+\\.[A-Za-z]{2,6}$";
+    /*
+    fonction verification mail (a modifier pour mettre univ tours)
+     */
+
+    public static boolean mailisValid(String mail) {
+        String emailRegex = "^[A-Za-z0-9.-]{1,}"+"@"+"[A-Za-z0-9.-]*"+"univ-tours.fr"; //verfication que l'email est universitaire et * autorise caractére null
+
         Pattern pat = Pattern.compile(emailRegex);
         if (mail == null)
             return false;
         return pat.matcher(mail).matches();
 
+    }
+
+    public static boolean mdpisValid(String mdp){
+        String mdpRegex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
+
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (mdp == null)
+            return false;
+        return pat.matcher(mdp).matches();
     }
 
     public void ButtonInscriptionOnAction (ActionEvent event) throws IOException {
@@ -61,10 +76,27 @@ public class InscriptionController{
         if(mail.length()!=0){ //verification si TextFIeldMail n'es pas vide
             if(confMail.length() !=0){ //verification si TextFieldConfMail
                 if(mail.equals(confMail)){ //verification que les 2 email sont identique
-                    if (isValid(mail))
-                        System.out.print("Yes");
+                    if (mailisValid(mail)){
+                        if(mdp.length()!=0){
+                            if(confMdp.length() != 0){
+                                    if(mdp.equals(confMdp)){
+                                        if(mdpisValid(mdp)){
+                                            LabelErreur.setText("ok");
+                                        }else{
+                                            LabelErreur.setText("Veuillez verfier que votre mdp  contien une maj une min et un nombre e t qu'il fait plus de 8 caractére");
+                                        }
+                                    }else{
+                                        LabelErreur.setText("Veuillez saisir 2 mdp  identique");
+                                    }
+                            }else{
+                                LabelErreur.setText("Veuilez confirmer votre mdp");
+                            }
+                        }else{
+                         LabelErreur.setText("Veuilez saisir un mdp");
+                        }
+                    }
                     else
-                        System.out.print("No");
+                        LabelErreur.setText("Veuillez saisir une adresse mail de l'université de tours");
 
                 }else{
                     LabelErreur.setText("Les 2 mail ne sont pas identique");

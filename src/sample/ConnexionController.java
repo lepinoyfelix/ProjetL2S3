@@ -68,7 +68,7 @@ public class ConnexionController {
             String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
             String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
 
-            String sql = "SELECT * FROM Personne WHERE Mail = ? and Mdp = ?";
+            String sql = "SELECT * FROM Personne WHERE Mail = ? and Mdp = ?"; //Requet sql
 
             try {
                 preparedStatement = connection.prepareStatement(sql);
