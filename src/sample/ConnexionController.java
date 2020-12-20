@@ -1,15 +1,13 @@
 package sample;
 import javafx.fxml.FXMLLoader;
-import sample.ConnexionController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import DataBase.ConexionBDD;
+import AutreClasse.ConexionBDD;
 
 import java.io.IOException;
 import java.sql.*;
@@ -20,6 +18,7 @@ public class ConnexionController {
      */
     String colonemailBDD = "Mail";
     String colonemdpBDD = "Mdp";
+    String tableUser = "personne";
 
     /*
     Création des boutons
@@ -37,14 +36,14 @@ public class ConnexionController {
     @FXML
     private Label LabelErreurConnexion;
 
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+
 
     /*
     Connexion classe BDD
      */
-
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
     public ConnexionController() {
         connection = ConexionBDD.connectdb();
     }
@@ -73,7 +72,7 @@ public class ConnexionController {
             String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
             String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
 
-            String sql = "SELECT * FROM Personne WHERE "+colonemailBDD+" = ? and "+colonemdpBDD+" = ?";
+            String sql = "SELECT * FROM "+tableUser+" WHERE "+colonemailBDD+" = ? and "+colonemdpBDD+" = ?";
 
             try {
                 preparedStatement = connection.prepareStatement(sql);

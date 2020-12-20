@@ -1,4 +1,4 @@
-package DataBase;
+package AutreClasse;
 import javax.swing.*;
 import java.sql.*;
 
