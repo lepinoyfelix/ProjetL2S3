@@ -9,9 +9,14 @@ import sample.InscriptionController;
 
 
 public class EnvoiMailUtil {
+    public static int nombreAleatoireVerificationMail = 100000 + (int)(Math.random() * ((999999 - 100000) + 1));
 
+    public static int getNombreAleatoireVerificationMail() {
+        return nombreAleatoireVerificationMail;
+    }
 
     public static void EnvoiMail(String recepient) throws Exception {
+
         System.out.println("Prepaation pour l'envoi");
         Properties properties = new Properties();
 
@@ -38,14 +43,12 @@ public class EnvoiMailUtil {
 
     public static  Message prepareMessage(Session session, String MoncompteEmail, String recepient){
 
-        int nombreAleatoireVerificationMail = 100000 + (int)(Math.random() * ((999999 - 100000) + 1)); // nombre aléatoire pour verification  de l'email
-
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(MoncompteEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Code de validation de votre adresse mail");
-            message.setText("Bonjour, veuillez rentre dans la zone fait pour sa le code ci join : "+nombreAleatoireVerificationMail);
+            message.setText("Bonjour, veuillez rentre dans la zone fait pour sa le code ci join : "+EnvoiMailUtil.getNombreAleatoireVerificationMail());
             return message;
         } catch (Exception ex) {
             Logger.getLogger(EnvoiMailUtil.class.getName()).log(Level.SEVERE, null, ex);

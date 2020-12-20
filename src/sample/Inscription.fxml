@@ -8,7 +8,7 @@
       <AnchorPane layoutX="134.0" layoutY="41.0" prefHeight="318.0" prefWidth="332.0">
          <children>
             <Button fx:id="ButtonAnnuler" layoutX="211.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonAnnulerOnAction" text="Annuler " />
-            <Button fx:id="ButtonInscription" layoutX="56.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonInscriptionOnAction" text="Inscription" />
+            <Button fx:id="ButtonInscription" layoutX="56.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonInscriptionOnAction" text="Inscription" visible="true" />
             <Label layoutX="92.0" layoutY="35.0" text="Mail" />
             <TextField fx:id="TextFieldMail" layoutX="92.0" layoutY="52.0" promptText="Mail" />
             <TextField fx:id="TextFieldConfMail" layoutX="92.0" layoutY="96.0" promptText="Confirmation Mail" />
@@ -20,6 +20,7 @@
             <Label fx:id="LabelErreur" alignment="CENTER" layoutX="5.0" layoutY="259.0" prefHeight="17.0" prefWidth="324.0" textFill="RED" />
             <Label fx:id="LabelCodeConfMail" layoutX="90.0" layoutY="210.0" text="Code de confirmation" visible="false" />
             <TextField fx:id="TextFieldCodeConfMail" layoutX="91.0" layoutY="227.0" visible="false" />
+            <Button fx:id="ButtonInscriptionFinal" layoutX="56.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonInscriptionFinalOnAction" text="Inscription" visible="false" />
          </children>
       </AnchorPane>
    </children>

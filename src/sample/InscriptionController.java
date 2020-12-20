@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 
@@ -27,6 +28,7 @@ public class InscriptionController{
     String colonemailBDD = "Mail";
     String colonemdpBDD = "Mdp";
     String tableUser = "personne";
+    String coloneidrole= "idRole";
 
     /*
     Creation des bouttons
@@ -35,6 +37,8 @@ public class InscriptionController{
     private Button ButtonInscription;
     @FXML
     private Button ButtonAnnuler;
+    @FXML
+    private Button ButtonInscriptionFinal;
 
     /*
     Creation des TextFiled
@@ -58,15 +62,19 @@ public class InscriptionController{
     @FXML
     private Label LabelCodeConfMail ;
 
-        /*
-    Connexion classe BDD
-     */
+    /*
+Connexion classe BDD
+ */
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
+    /*
+    Variable pour inscription
+     */
     public InscriptionController() {
         connection = ConexionBDD.connectdb();
+
     }
 
     /*
@@ -75,6 +83,7 @@ public class InscriptionController{
 
     public static boolean mailisValid(String mail) {
         String emailRegex = "^[A-Za-z0-9.-]{1,}"+"@"+"[A-Za-z0-9.-]*"+"univ-tours.fr"; //verfication que l'email est universitaire et * autorise caractére null
+        //String emailRegex = "^[A-Za-z0-9.-]{1,}"+"@"+"[A-Za-z0-9.-]*"+"gmail.com";
 
         Pattern pat = Pattern.compile(emailRegex);
         if (mail == null)
@@ -97,45 +106,46 @@ public class InscriptionController{
         String confMail = TextFieldConfMail.getText().toString(); //Récupération  de  confirmation de l'email
         String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
         String confMdp = PasswordFieldConfMdp.getText().toString(); //Récupération  de  confirmation mdp
-        String codeConf = TextFieldCodeConfMail.getText();
-
         if(mail.length()!=0){ //verification si TextFIeldMail n'es pas vide
             if(confMail.length() !=0){ //verification si TextFieldConfMail
                 if(mail.equals(confMail)){ //verification que les 2 email sont identique
                     if (mailisValid(mail)){
                         if(mdp.length()!=0){
                             if(confMdp.length() != 0){
-                                    if(mdp.equals(confMdp)){
-                                        if(mdpisValid(mdp)){
-                                            String sqlVerifictionMail = "SELECT * FROM "+tableUser+" WHERE "+colonemailBDD+" = ?"; //requet sql pour savoir si l'email  rentré existe déja
+                                if(mdp.equals(confMdp)){
+                                    if(mdpisValid(mdp)){
+                                        String sqlVerifictionMail = "SELECT * FROM "+tableUser+" WHERE "+colonemailBDD+" = ?"; //requet sql pour savoir si l'email  rentré existe déja
 
-                                            try {
-                                                preparedStatement = connection.prepareStatement(sqlVerifictionMail);
-                                                preparedStatement.setString(1, mail);
-                                                resultSet = preparedStatement.executeQuery();
-                                                if (!resultSet.next()) {
-                                                        EnvoiMailUtil.EnvoiMail(mail);
-                                                    LabelCodeConfMail.setVisible(true);
-                                                    TextFieldCodeConfMail.setVisible(true);
-                                                    LabelErreur.setText("ok");
-                                                } else {
-                                                    LabelErreur.setText("Un compte avec cette adresse mail existe déjà");
-                                                }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
+                                        try {
+                                            preparedStatement = connection.prepareStatement(sqlVerifictionMail);
+                                            preparedStatement.setString(1, mail);
+                                            resultSet = preparedStatement.executeQuery();
+                                            if (!resultSet.next()) {
+                                                EnvoiMailUtil.EnvoiMail(mail);
+                                                LabelCodeConfMail.setVisible(true);
+                                                TextFieldCodeConfMail.setVisible(true);
+                                                LabelErreur.setText("Veuillez regarder vos mail");
+                                                ButtonInscription.setVisible(false);
+                                                ButtonInscriptionFinal.setVisible(true);
+
+                                            }else{
+                                                LabelErreur.setText("Un compte avec cette adresse mail existe déjà");
                                             }
-
-                                        }else{
-                                            LabelErreur.setText("Veuillez verfier que votre mdp  contien une maj une min et un nombre et qu'il fait plus de 8 caractére");
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
                                         }
+
                                     }else{
-                                        LabelErreur.setText("Veuillez saisir 2 mdp  identique");
+                                        LabelErreur.setText("Veuillez verfier que votre mdp  contien une maj une min et un nombre et qu'il fait plus de 8 caractére");
                                     }
+                                }else{
+                                    LabelErreur.setText("Veuillez saisir 2 mdp  identique");
+                                }
                             }else{
                                 LabelErreur.setText("Veuilez confirmer votre mdp");
                             }
                         }else{
-                         LabelErreur.setText("Veuilez saisir un mdp");
+                            LabelErreur.setText("Veuilez saisir un mdp");
                         }
                     }
                     else
@@ -152,7 +162,47 @@ public class InscriptionController{
         }
 
     }
+    public void ButtonInscriptionFinalOnAction(ActionEvent event){
+        String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
+        String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
+        String codeConf = TextFieldCodeConfMail.getText().toString();
+        String codeEnvoyerParMail = String.valueOf(EnvoiMailUtil.getNombreAleatoireVerificationMail());
+        String adresseEtudiant = "etu.univ-tours.fr";
+        int idRoleProf = 2;
+        int idRoleEleve = 1;
 
+        if(codeEnvoyerParMail.equals(codeConf)) {
+            LabelErreur.setText("nous procédons a l'engregistrement de votre profil");
+
+            int index = mail.indexOf(adresseEtudiant);
+            try{
+                if(index == -1) {
+                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
+                    PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
+                    preparedStatement.setString(1, mail);
+                    preparedStatement.setString(2, mdp);
+                    preparedStatement.setInt(3, idRoleProf);
+                    preparedStatement.executeUpdate();
+                    System.out.println("prof");
+                }else{
+                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
+                    PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
+                    preparedStatement.setString(1, mail);
+                    preparedStatement.setString(2, mdp);
+                    preparedStatement.setInt(3, idRoleEleve);
+                    preparedStatement.executeUpdate();
+                    System.out.println("eleve");
+                }
+
+            }catch (Exception e){
+                new Exception(e);
+            }
+
+        }else{
+            LabelErreur.setText("Code invalide veuillez le resaisir"); //a  améliorer pour la sécurité et eviter les prog qui teste tout les chifre
+        }
+
+    }
 
     public void ButtonAnnulerOnAction (ActionEvent event) throws IOException {
         Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
@@ -160,7 +210,6 @@ public class InscriptionController{
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Connexion.fxml")));
         stage.setScene(scene);
         stage.show();
-
     }
 
 }
