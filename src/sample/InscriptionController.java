@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 
-public class InscriptionController{
+public class InscriptionController {
 
     /*
     A modifier en fonction des BDD
@@ -28,7 +28,7 @@ public class InscriptionController{
     String colonemailBDD = "Mail";
     String colonemdpBDD = "Mdp";
     String tableUser = "personne";
-    String coloneidrole= "idRole";
+    String coloneidrole = "idRole";
 
     /*
     Creation des bouttons
@@ -60,7 +60,7 @@ public class InscriptionController{
     @FXML
     private Label LabelErreur;
     @FXML
-    private Label LabelCodeConfMail ;
+    private Label LabelCodeConfMail;
 
     /*
 Connexion classe BDD
@@ -82,7 +82,7 @@ Connexion classe BDD
      */
 
     public static boolean mailisValid(String mail) {
-        String emailRegex = "^[A-Za-z0-9.-]{1,}"+"@"+"[A-Za-z0-9.-]*"+"univ-tours.fr"; //verfication que l'email est universitaire et * autorise caractére null
+        String emailRegex = "^[A-Za-z0-9.-]{1,}" + "@" + "[A-Za-z0-9.-]*" + "univ-tours.fr"; //verfication que l'email est universitaire et * autorise caractére null
         //String emailRegex = "^[A-Za-z0-9.-]{1,}"+"@"+"[A-Za-z0-9.-]*"+"gmail.com";
 
         Pattern pat = Pattern.compile(emailRegex);
@@ -92,7 +92,7 @@ Connexion classe BDD
 
     }
 
-    public static boolean mdpisValid(String mdp){
+    public static boolean mdpisValid(String mdp) {
         String mdpRegex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
 
         Pattern pat = Pattern.compile(mdpRegex);
@@ -101,20 +101,20 @@ Connexion classe BDD
         return pat.matcher(mdp).matches();
     }
 
-    public void ButtonInscriptionOnAction (ActionEvent event) throws IOException {
+    public void ButtonInscriptionOnAction(ActionEvent event) throws IOException {
         String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
         String confMail = TextFieldConfMail.getText().toString(); //Récupération  de  confirmation de l'email
         String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
         String confMdp = PasswordFieldConfMdp.getText().toString(); //Récupération  de  confirmation mdp
-        if(mail.length()!=0){ //verification si TextFIeldMail n'es pas vide
-            if(confMail.length() !=0){ //verification si TextFieldConfMail
-                if(mail.equals(confMail)){ //verification que les 2 email sont identique
-                    if (mailisValid(mail)){
-                        if(mdp.length()!=0){
-                            if(confMdp.length() != 0){
-                                if(mdp.equals(confMdp)){
-                                    if(mdpisValid(mdp)){
-                                        String sqlVerifictionMail = "SELECT * FROM "+tableUser+" WHERE "+colonemailBDD+" = ?"; //requet sql pour savoir si l'email  rentré existe déja
+        if (mail.length() != 0) { //verification si TextFIeldMail n'es pas vide
+            if (confMail.length() != 0) { //verification si TextFieldConfMail
+                if (mail.equals(confMail)) { //verification que les 2 email sont identique
+                    if (mailisValid(mail)) {
+                        if (mdp.length() != 0) {
+                            if (confMdp.length() != 0) {
+                                if (mdp.equals(confMdp)) {
+                                    if (mdpisValid(mdp)) {
+                                        String sqlVerifictionMail = "SELECT * FROM " + tableUser + " WHERE " + colonemailBDD + " = ?"; //requet sql pour savoir si l'email  rentré existe déja
 
                                         try {
                                             preparedStatement = connection.prepareStatement(sqlVerifictionMail);
@@ -128,88 +128,85 @@ Connexion classe BDD
                                                 ButtonInscription.setVisible(false);
                                                 ButtonInscriptionFinal.setVisible(true);
 
-                                            }else{
+                                            } else {
                                                 LabelErreur.setText("Un compte avec cette adresse mail existe déjà");
                                             }
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
 
-                                    }else{
+                                    } else {
                                         LabelErreur.setText("Veuillez verfier que votre mdp  contien une maj une min et un nombre et qu'il fait plus de 8 caractére");
                                     }
-                                }else{
+                                } else {
                                     LabelErreur.setText("Veuillez saisir 2 mdp  identique");
                                 }
-                            }else{
+                            } else {
                                 LabelErreur.setText("Veuilez confirmer votre mdp");
                             }
-                        }else{
+                        } else {
                             LabelErreur.setText("Veuilez saisir un mdp");
                         }
-                    }
-                    else
+                    } else
                         LabelErreur.setText("Veuillez saisir une adresse mail de l'université de tours");
 
-                }else{
+                } else {
                     LabelErreur.setText("Les 2 mail ne sont pas identique");
                 }
-            }else{
+            } else {
                 LabelErreur.setText("veuillez confirmaer votre email");
             }
-        }else{
+        } else {
             LabelErreur.setText("Veuillez rentrez un mail");
         }
 
     }
-    public void ButtonInscriptionFinalOnAction(ActionEvent event){
+
+    public void ButtonInscriptionFinalOnAction(ActionEvent event) {
         String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
         String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
         String codeConf = TextFieldCodeConfMail.getText().toString();
         String codeEnvoyerParMail = String.valueOf(EnvoiMailUtil.getNombreAleatoireVerificationMail());
         String adresseEtudiant = "etu.univ-tours.fr";
-        int idRoleProf = 2;
-        int idRoleEleve = 1;
+        int idRoleProf = 1;
+        int idRoleEleve = 2;
 
-        if(codeEnvoyerParMail.equals(codeConf)) {
+        if (codeEnvoyerParMail.equals(codeConf)) {
             LabelErreur.setText("nous procédons a l'engregistrement de votre profil");
 
             int index = mail.indexOf(adresseEtudiant);
-            try{
-                if(index == -1) {
+            try {
+                if (index == -1) {
                     String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
                     PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
                     preparedStatement.setString(1, mail);
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleProf);
                     preparedStatement.executeUpdate();
-                    System.out.println("prof");
-                }else{
+                } else {
                     String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
                     PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
                     preparedStatement.setString(1, mail);
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleEleve);
                     preparedStatement.executeUpdate();
-                    System.out.println("eleve");
                 }
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 new Exception(e);
             }
 
-        }else{
+        } else {
             LabelErreur.setText("Code invalide veuillez le resaisir"); //a  améliorer pour la sécurité et eviter les prog qui teste tout les chifre
         }
 
     }
 
-    public void ButtonAnnulerOnAction (ActionEvent event) throws IOException {
+    public void ButtonAnnulerOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
         stage.close();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Connexion.fxml")));
         stage.setScene(scene);
         stage.show();
     }
-
 }
