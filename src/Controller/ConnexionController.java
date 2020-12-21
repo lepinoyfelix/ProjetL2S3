@@ -86,6 +86,9 @@ public class ConnexionController {
                     //Fermeture de la fenttre
                     Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
                     stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Accueil.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

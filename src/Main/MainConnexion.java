@@ -8,11 +8,11 @@ import javafx.stage.Stage;
 public class MainConnexion extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStageConnexion) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml"));
-        primaryStage.setTitle("Connexion");
-        primaryStage.setScene(new Scene(root, 520, 400));
-        primaryStage.show();
+        primaryStageConnexion.setTitle("Connexion");
+        primaryStageConnexion.setScene(new Scene(root, 520, 400));
+        primaryStageConnexion.show();
     }
 
     public static void main(String[] args) {

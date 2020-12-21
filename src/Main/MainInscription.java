@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 public class MainInscription extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStageInscription) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Inscription.fxml"));
-        primaryStage.setTitle("Inscription");
-        primaryStage.setScene(new Scene(root, 520, 400));
-        primaryStage.show();
+        primaryStageInscription.setTitle("Inscription");
+        primaryStageInscription.setScene(new Scene(root, 520, 400));
+        primaryStageInscription.show();
     }
 
 }
