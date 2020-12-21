@@ -5,9 +5,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccueilController">
     <children>
-        <AnchorPane layoutX="100.0" layoutY="68.0" prefHeight="324.0" prefWidth="314.0">
-            <children>
-            </children>
+        <AnchorPane layoutX="100.0" layoutY="68.0" prefHeight="324.0" prefWidth="314.0" >
+         <children>
+            <Label fx:id="LabelTest" layoutY="154.0" prefHeight="17.0" prefWidth="347.0" />
+            <Button fx:id="Button" layoutX="140.0" layoutY="91.0" mnemonicParsing="false" text="Button" />
+         </children>
         </AnchorPane>
     </children>
 </Pane>

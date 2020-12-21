@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 
 
 public class InscriptionController {
-
     /*
     A modifier en fonction des BDD
      */
@@ -207,5 +206,6 @@ Connexion classe BDD
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("Connexion");
     }
 }

@@ -17,11 +17,12 @@ public class ConnexionController {
     A mdoifier suivant la bdd
      */
     String colonemailBDD = "Mail";
+    String coloneroleID = "idRole";
     String colonemdpBDD = "Mdp";
     String tableUser = "personne";
 
     /*
-    Création des boutons
+    Création des boutons/label/text field
      */
     @FXML
     private Button ButtonConnexion;
@@ -36,12 +37,11 @@ public class ConnexionController {
     @FXML
     private Label LabelErreurConnexion;
 
-
-
     /*
     Connexion classe BDD
      */
     Connection connection = null;
+    Statement statement =null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     public ConnexionController() {
@@ -83,12 +83,25 @@ public class ConnexionController {
                     LabelErreurConnexion.setText("Mail ou Mdp invalide,  veuillez réessayez");
                 } else {
                     LabelErreurConnexion.setText("Connexion ok");
-                    //Fermeture de la fenttre
+
+                    String ConnexionValidersql = "SELECT "+coloneroleID+" FROM " +tableUser+ " WHERE " +colonemailBDD+ " like \""+mail+"\"";
+
+                    statement = connection.createStatement();
+                    resultSet = statement.executeQuery(ConnexionValidersql);
+                    while (resultSet.next()) {
+                        int idRoleConnexion;
+                        idRoleConnexion = resultSet.getInt(coloneroleID);
+                        System.out.println(idRoleConnexion+" "+mail);
+
+                    }
+
                     Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Accueil.fxml")));
                     stage.setScene(scene);
                     stage.show();
+                    stage.setTitle("Accueil");
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -107,6 +120,7 @@ public class ConnexionController {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Inscription.fxml")));
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("Inscription");
 
     }
 
