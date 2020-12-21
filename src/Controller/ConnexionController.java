@@ -16,10 +16,17 @@ public class ConnexionController {
     /*
     A mdoifier suivant la bdd
      */
-    String colonemailBDD = "Mail";
-    String coloneroleID = "idRole";
-    String colonemdpBDD = "Mdp";
     String tableUser = "personne";
+    String tableRole = "role";
+    String colonemailTableUtilisateur = "Mail";
+    String coloneroleIDTableUtilisateur = "idRole";
+    String colonemdpBDDTableUtilisateur = "Mdp";
+    String coloneRoleTableRole = "role";
+    String roleEtudiantTableRole= "Etudiant";
+    String rolePresonelTableRole= "Personel";
+    int idroleEtudiantTableRole = 2;
+    int idrolePersonelTableRole =1;
+    String coloneidRoleTableRole = "idRole";
 
     /*
     Création des boutons/label/text field
@@ -72,7 +79,7 @@ public class ConnexionController {
             String mail = TextFieldMail.getText().toString(); //Récupération  de  l'email
             String mdp = PasswordFieldMdp.getText().toString();//Récupération du Mdp
 
-            String sql = "SELECT * FROM "+tableUser+" WHERE "+colonemailBDD+" = ? and "+colonemdpBDD+" = ?";
+            String sql = "SELECT * FROM "+tableUser+" WHERE "+colonemailTableUtilisateur+" = ? and "+ colonemdpBDDTableUtilisateur +" = ?";
 
             try {
                 preparedStatement = connection.prepareStatement(sql);
@@ -82,31 +89,54 @@ public class ConnexionController {
                 if (!resultSet.next()) {
                     LabelErreurConnexion.setText("Mail ou Mdp invalide,  veuillez réessayez");
                 } else {
+
                     LabelErreurConnexion.setText("Connexion ok");
 
-                    String ConnexionValidersql = "SELECT "+coloneroleID+" FROM " +tableUser+ " WHERE " +colonemailBDD+ " like \""+mail+"\"";
-
+                    String roleMailenCourDeConnexionsql = "SELECT " + coloneroleIDTableUtilisateur + " FROM " + tableUser + " WHERE " + colonemailTableUtilisateur + " like \"" + mail + "\"";
                     statement = connection.createStatement();
-                    resultSet = statement.executeQuery(ConnexionValidersql);
+                    resultSet = statement.executeQuery(roleMailenCourDeConnexionsql);
+                    String roleMailConnexion = null;
+                    int idRoleConnexion = 0;
                     while (resultSet.next()) {
-                        int idRoleConnexion;
-                        idRoleConnexion = resultSet.getInt(coloneroleID);
-                        System.out.println(idRoleConnexion+" "+mail);
+
+                        idRoleConnexion = resultSet.getInt(coloneroleIDTableUtilisateur);
+
+                        roleMailConnexion = "SELECT " + coloneRoleTableRole + " FROM " + tableRole + " WHERE " + coloneidRoleTableRole + " = " + idRoleConnexion;
+                        statement = connection.createStatement();
+                        resultSet = statement.executeQuery(roleMailConnexion);
+
+                        while (resultSet.next()) {
+                            roleMailConnexion = resultSet.getString(coloneRoleTableRole);
+                        }
+                        System.out.println(roleMailConnexion + " = " + roleEtudiantTableRole);
+                        System.out.println(idRoleConnexion + " = " + idroleEtudiantTableRole);
 
                     }
+                    if (idRoleConnexion == idrolePersonelTableRole && roleMailConnexion.equals(rolePresonelTableRole)) {
+                        System.out.println("Personel");
+                        Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
+                        stage.close();
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AccueilPersonel.fxml")));
+                        stage.setScene(scene);
+                        stage.show();
+                        stage.setTitle("Accueil Personel");
 
-                    Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
-                    stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Accueil.fxml")));
-                    stage.setScene(scene);
-                    stage.show();
-                    stage.setTitle("Accueil");
+                    } else if (idRoleConnexion == idroleEtudiantTableRole && roleMailConnexion.equals(roleEtudiantTableRole)) {
+                        LabelErreurConnexion.setText("Etudiant");
+                        Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
+                        stage.close();
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AccueilEtudiant.fxml")));
+                        stage.setScene(scene);
+                        stage.show();
+                        stage.setTitle("Accueil Etudiant");
 
+                    } else {
+                        LabelErreurConnexion.setText("Probleme role pas reconeu");
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 

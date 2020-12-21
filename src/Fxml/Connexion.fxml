@@ -7,13 +7,13 @@
    <children>
       <AnchorPane layoutX="100.0" layoutY="68.0" prefHeight="324.0" prefWidth="314.0">
          <children>
+            <TextField fx:id="TextFieldMail" layoutX="87.0" layoutY="71.0" promptText="Mail " />
+            <PasswordField fx:id="PasswordFieldMdp" layoutX="87.0" layoutY="139.0" promptText="Mot de passe " />
             <Button fx:id="ButtonConnexion" layoutX="107.0" layoutY="225.0" mnemonicParsing="false" onAction="#ButtonConnexionOnAction" prefHeight="25.0" prefWidth="108.0" text="Connexion" />
             <Button fx:id="ButtonInscription" layoutX="87.0" layoutY="188.0" mnemonicParsing="false" onAction="#ButtonInscriptionOnAction" text="Inscritpiton " />
             <Button fx:id="ButtonFermer" layoutX="175.0" layoutY="188.0" mnemonicParsing="false" onAction="#ButtonFermerOnAction" text="Fermer " />
-            <PasswordField fx:id="PasswordFieldMdp" layoutX="87.0" layoutY="139.0" promptText="Mot de passe " />
             <Label fx:id="LabelMdp" layoutX="87.0" layoutY="124.0" text="Mdp :" />
             <Label fx:id="LabelMail" layoutX="87.0" layoutY="54.0" text="Mail :" />
-            <TextField fx:id="TextFieldMail" layoutX="87.0" layoutY="71.0" promptText="Mail " />
             <Label fx:id="LabelErreurConnexion" alignment="CENTER" layoutX="14.0" layoutY="270.0" prefHeight="17.0" prefWidth="299.0" textFill="RED" />
          </children>
       </AnchorPane>

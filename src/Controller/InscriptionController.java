@@ -181,6 +181,13 @@ Connexion classe BDD
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleProf);
                     preparedStatement.executeUpdate();
+
+                    Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setTitle("Connexion");
                 } else {
                     String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
                     PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
@@ -188,6 +195,13 @@ Connexion classe BDD
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleEleve);
                     preparedStatement.executeUpdate();
+
+                    Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setTitle("Connexion");
                 }
 
             } catch (Exception e) {
