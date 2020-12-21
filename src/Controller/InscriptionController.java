@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import AutreClasse.ConexionBDD;
 import AutreClasse.EnvoiMailUtil;
