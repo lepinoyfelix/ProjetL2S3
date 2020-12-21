@@ -205,7 +205,7 @@ Connexion classe BDD
     public void ButtonAnnulerOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
         stage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Connexion.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
         stage.setScene(scene);
         stage.show();
     }

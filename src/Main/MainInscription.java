@@ -10,7 +10,7 @@ public class MainInscription extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Inscription.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Inscription.fxml"));
         primaryStage.setTitle("Inscription");
         primaryStage.setScene(new Scene(root, 520, 400));
         primaryStage.show();

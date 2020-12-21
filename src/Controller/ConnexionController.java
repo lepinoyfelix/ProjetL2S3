@@ -101,7 +101,7 @@ public class ConnexionController {
         // appel fenetre d'inscription
         Stage stage = (Stage) ButtonInscription.getScene().getWindow();
         stage.close();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Inscription.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Inscription.fxml")));
         stage.setScene(scene);
         stage.show();
 
