@@ -175,13 +175,15 @@ Connexion classe BDD
             int index = mail.indexOf(adresseEtudiant);
             try {
                 if (index == -1) {
-                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
+                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)"; //inscription prof/personel
                     PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
                     preparedStatement.setString(1, mail);
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleProf);
                     preparedStatement.executeUpdate();
-
+                     /*
+                    ouvre  connexion si l'inscription est lavidé
+                    */
                     Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
@@ -189,13 +191,15 @@ Connexion classe BDD
                     stage.show();
                     stage.setTitle("Connexion");
                 } else {
-                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)";
+                    String ajoutUtilisateur = "INSERT INTO " + tableUser + " ( " + colonemailBDD + " , " + colonemdpBDD + " , " + coloneidrole + " ) VALUES  (?, ?, ?)"; // inscription Eleve
                     PreparedStatement preparedStatement = connection.prepareStatement(ajoutUtilisateur);
                     preparedStatement.setString(1, mail);
                     preparedStatement.setString(2, mdp);
                     preparedStatement.setInt(3, idRoleEleve);
                     preparedStatement.executeUpdate();
-
+                    /*
+                    ouvre  connexion si l'inscription est lavidé
+                    */
                     Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));

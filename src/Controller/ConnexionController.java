@@ -108,8 +108,6 @@ public class ConnexionController {
                         while (resultSet.next()) {
                             roleMailConnexion = resultSet.getString(coloneRoleTableRole);
                         }
-                        System.out.println(roleMailConnexion + " = " + roleEtudiantTableRole);
-                        System.out.println(idRoleConnexion + " = " + idroleEtudiantTableRole);
 
                     }
                     if (idRoleConnexion == idrolePersonelTableRole && roleMailConnexion.equals(rolePresonelTableRole)) {
