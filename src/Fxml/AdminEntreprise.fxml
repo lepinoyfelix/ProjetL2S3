@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminEntrepriseController">
+   <children>
+      <AnchorPane prefHeight="900.0" prefWidth="1600.0">
+         <children>
+            <Button fx:id="btnMooveToEntreprise" layoutX="238.0" layoutY="42.0" mnemonicParsing="false" onAction="#MooveToEntreprise" prefHeight="80.0" prefWidth="270.0" text="Entreprise" AnchorPane.leftAnchor="238.0">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMooveToCours" layoutX="800.0" layoutY="41.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="270.0" text="Cours" AnchorPane.leftAnchor="800.0">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMooveToStagiaires" layoutX="1078.0" layoutY="41.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="270.0" text="Stagiaires" AnchorPane.leftAnchor="1078.0">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMooveToAEtudiants" layoutX="1360.0" layoutY="42.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="198.0" text="Anciens étudiants" AnchorPane.leftAnchor="1360.0">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMooveToEvenements" layoutX="520.0" layoutY="42.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="80.0" prefWidth="270.0" text="Evènements" AnchorPane.leftAnchor="520.0">
+               <font>
+                  <Font name="Arial Bold" size="27.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAddEntreprise" layoutX="14.0" layoutY="153.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Ajouter" />
+            <Button fx:id="btnModifyEntreprise" layoutX="124.0" layoutY="153.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Modifier" />
+            <Button fx:id="btnDeleteEntreprise" layoutX="238.0" layoutY="153.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Supprimer" />
+            <Button fx:id="btnSearchCriteres" layoutX="1478.0" layoutY="178.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Rechercher" />
+            <Button fx:id="btnDeconnexion" layoutX="1402.0" layoutY="135.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="139.0" text="Déconnexion" />
+            <ComboBox fx:id="CBoxCritereEntreprises" layoutX="1069.0" layoutY="178.0" prefHeight="26.0" prefWidth="197.0" promptText="Critères" />
+            <TextField fx:id="SearchCritere" layoutX="1299.0" layoutY="178.0" prefHeight="26.0" prefWidth="163.0" text="Recherche" />
+
+            <VBox prefHeight="751.0" prefWidth="255.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
+               <children>
+                  <Label prefHeight="100.0" prefWidth="240.0" text="Nom">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="240.0" text="Dénomination">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="68.0" prefHeight="100.0" prefWidth="239.0" text="Adresse du siège">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="127.0" prefHeight="100.0" prefWidth="239.0" text="Secteur d'activité">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="185.0" prefHeight="100.0" prefWidth="239.0" text="Employés">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="244.0" prefHeight="100.0" prefWidth="239.0" text="Succursales">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="302.0" prefHeight="100.0" prefWidth="239.0" text="Sites internet">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="360.0" prefHeight="100.0" prefWidth="239.0" text="Autres infos">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <ScrollPane prefHeight="751.0" prefWidth="1278.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="240.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="738.0" prefWidth="1578.0" />
+              </content>
+            </ScrollPane>
+         </children></AnchorPane>
+   </children>
+</Pane>

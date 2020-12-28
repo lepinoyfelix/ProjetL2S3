@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminEntrepriseController">
+    <children>
+        <AnchorPane prefHeight="900.0" prefWidth="1600.0">
+            <children>
+                <Button fx:id="btnAddEntreprise" layoutX="142.0" layoutY="67.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="AjouterSecondaireEssai" />
+                <Button fx:id="btnDeleteEntreprise" layoutX="263.0" layoutY="67.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Supprimer" />
+                <Button fx:id="btnModifyEntreprise" layoutX="24.0" layoutY="67.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Modifier" />
+                <Button fx:id="btnSearchCriteres" layoutX="1189.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Rechercher" />
+                <ComboBox fx:id="CBoxCritereEntreprises" layoutX="780.0" layoutY="54.0" prefHeight="26.0" prefWidth="197.0" promptText="Critères" />
+                <TextField fx:id="SearchCritere" layoutX="1010.0" layoutY="54.0" prefHeight="26.0" prefWidth="163.0" text="Recherche" />
+                <ScrollPane layoutX="25.0" prefHeight="651.0" prefWidth="1549.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="240.0">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="738.0" prefWidth="1568.0" />
+                    </content>
+                </ScrollPane>
+            <ScrollPane layoutX="6.0" layoutY="128.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+               <content>
+                  <HBox>
+                     <children>
+                              <Label prefHeight="100.0" prefWidth="159.0" text="Nom">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="240.0" text="Dénomination">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="266.0" text="Adresse du siège">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="239.0" text="Autres infos">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="239.0" text="Sites internet">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="239.0" text="Succursales">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="239.0" text="Employés">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                              <Label prefHeight="100.0" prefWidth="239.0" text="Secteur d'activité">
+                                  <font>
+                                      <Font size="30.0" />
+                                  </font>
+                              </Label>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+            </children></AnchorPane>
+    </children>
+</Pane>
