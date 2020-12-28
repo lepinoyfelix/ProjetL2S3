@@ -7,7 +7,7 @@
    <children>
       <AnchorPane layoutX="96.0" layoutY="41.0" prefHeight="318.0" prefWidth="267.0">
          <children>
-            <Button fx:id="ButtonAnnuler" layoutX="211.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonAnnulerOnAction" text="Annuler " />
+            <Button fx:id="ButtonAnnuler" layoutX="211.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonAnnulerOnAction"  text="Annuler " />
             <Button fx:id="ButtonInscription" layoutX="56.0" layoutY="280.0" mnemonicParsing="false" onAction="#ButtonInscriptionOnAction" text="Inscription" visible="true" />
             <Label layoutX="92.0" layoutY="35.0" text="Mail" />
             <TextField fx:id="TextFieldMail" layoutX="92.0" layoutY="52.0" promptText="Mail" />
