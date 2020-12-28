@@ -6,6 +6,29 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView layoutX="346.0" layoutY="203.0" prefHeight="200.0" prefWidth="200.0" />
+      <TableView layoutX="137.0" layoutY="97.0" prefHeight="706.0" prefWidth="1327.0">
+        <columns>
+          <TableColumn prefWidth="150.0" text="Nom " />
+            <TableColumn prefWidth="160.0" text="Numero De Siren" />
+            <TableColumn prefWidth="157.0" text="Localisation">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="Code Postal" />
+                  <TableColumn prefWidth="75.0" text="Ville" />
+                  <TableColumn prefWidth="75.0" text="Adresse" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="90.0" text="Fax" />
+            <TableColumn prefWidth="90.0" text="Tel" />
+            <TableColumn prefWidth="90.0" text="Site Web" />
+            <TableColumn prefWidth="75.0" text="Autre Info" />
+            <TableColumn prefWidth="139.0" text="Taxe d'apprentissage">
+               <columns>
+                  <TableColumn prefWidth="98.0" text="Date payment" />
+                  <TableColumn prefWidth="52.0" text="Montant" />
+               </columns>
+            </TableColumn>
+            <TableColumn prefWidth="75.0" />
+        </columns>
+      </TableView>
    </children>
 </Pane>
