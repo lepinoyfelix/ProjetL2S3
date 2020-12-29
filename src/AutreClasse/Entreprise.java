@@ -1,7 +1,5 @@
 package AutreClasse;
 
-import java.util.Date;
-
 public class Entreprise {
 
     int Num_SIREN, Code_Postal, fax,tel,DateVErsementTaxeAprentissage,Taxe_Apprentissage;
