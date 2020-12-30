@@ -30,51 +30,49 @@
             <TableColumn fx:id="ColumnCompetence" prefWidth="75.0" text="Compétence" />
         </columns>
       </TableView>
-      <AnchorPane prefHeight="900.0" prefWidth="269.0" style="-fx-background-color: #332E35;">
+      <AnchorPane prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;">
          <children>
-            <Button fx:id="ButtonAjouter" layoutX="65.0" layoutY="610.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
+            <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="ButtonModifier" layoutX="65.0" layoutY="673.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+            <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="672.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="ButtonSupprimer" layoutX="65.0" layoutY="730.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE" onAction="#deleteSelectedRows">
+            <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="729.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font></Button>
-            <TextField fx:id="TextFieldNomEntreprise" layoutX="50.0" layoutY="17.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Entreprise" AnchorPane.topAnchor="17.0" />
-            <TextField fx:id="TextFieldNumSiren" layoutX="50.0" layoutY="57.0" prefHeight="30.0" prefWidth="170.0" promptText="Numero  de SIREN" AnchorPane.topAnchor="57.0" />
-            <TextField fx:id="TextFieldCodePostal" layoutX="50.0" layoutY="97.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal" AnchorPane.topAnchor="97.0" />
-            <TextField fx:id="TextFieldAdresse" layoutX="50.0" layoutY="137.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse" AnchorPane.topAnchor="137.0" />
-            <TextField fx:id="TextFieldVille" layoutX="50.0" layoutY="177.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville" AnchorPane.topAnchor="177.0" />
-            <TextField fx:id="TextFieldFax" layoutX="50.0" layoutY="217.0" prefHeight="30.0" prefWidth="170.0" promptText="Fax" AnchorPane.topAnchor="217.0" />
-            <TextField fx:id="TextFieldTel" layoutX="50.0" layoutY="257.0" prefHeight="30.0" prefWidth="170.0" promptText="Tel" AnchorPane.topAnchor="257.0" />
-            <TextField fx:id="TextFieldSiteWeb" layoutX="50.0" layoutY="297.0" prefHeight="30.0" prefWidth="170.0" promptText="Site Web" AnchorPane.topAnchor="297.0" />
-            <TextField fx:id="TextFieldAutreInfo" layoutX="50.0" layoutY="337.0" prefHeight="30.0" prefWidth="170.0" promptText="Autre Info" AnchorPane.topAnchor="337.0" />
-            <TextField fx:id="TextFieldDateTaxe" layoutX="50.0" layoutY="528.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Payment" visible="false" AnchorPane.topAnchor="528.0" />
-            <TextField fx:id="TextFieldMontantTaxe" layoutX="50.0" layoutY="568.0" prefHeight="30.0" prefWidth="170.0" promptText="Montant" visible="false" AnchorPane.topAnchor="568.0" />
-            <CheckBox fx:id="CheckBoxTaxeApprentissage" layoutX="50.0" layoutY="488.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="30.0" prefWidth="170.0" text="Taxe d'aprentissage" textFill="WHITE" AnchorPane.topAnchor="488.0" />
-            <Button fx:id="ButtonImprier" layoutX="65.0" layoutY="849.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #94A7B1;" text="Imprimer" textFill="WHITE">
+            <TextField fx:id="TextFieldNomEntreprise" layoutX="74.0" layoutY="16.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Entreprise" AnchorPane.topAnchor="16.0" />
+            <TextField fx:id="TextFieldNumSiren" layoutX="74.0" layoutY="56.0" prefHeight="30.0" prefWidth="170.0" promptText="Numero  de SIREN" AnchorPane.topAnchor="56.0" />
+            <TextField fx:id="TextFieldCodePostal" layoutX="74.0" layoutY="96.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal" AnchorPane.topAnchor="96.0" />
+            <TextField fx:id="TextFieldAdresse" layoutX="74.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse" AnchorPane.topAnchor="136.0" />
+            <TextField fx:id="TextFieldVille" layoutX="74.0" layoutY="176.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville" AnchorPane.topAnchor="176.0" />
+            <TextField fx:id="TextFieldFax" layoutX="74.0" layoutY="216.0" prefHeight="30.0" prefWidth="170.0" promptText="Fax" AnchorPane.topAnchor="216.0" />
+            <TextField fx:id="TextFieldTel" layoutX="74.0" layoutY="256.0" prefHeight="30.0" prefWidth="170.0" promptText="Tel" AnchorPane.topAnchor="256.0" />
+            <TextField fx:id="TextFieldSiteWeb" layoutX="74.0" layoutY="296.0" prefHeight="30.0" prefWidth="170.0" promptText="Site Web" AnchorPane.topAnchor="296.0" />
+            <TextField fx:id="TextFieldAutreInfo" layoutX="74.0" layoutY="336.0" prefHeight="30.0" prefWidth="170.0" promptText="Autre Info" AnchorPane.topAnchor="336.0" />
+            <TextField fx:id="TextFieldDateTaxe" layoutX="74.0" layoutY="527.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Payment" visible="false" AnchorPane.topAnchor="527.0" />
+            <TextField fx:id="TextFieldMontantTaxe" layoutX="74.0" layoutY="567.0" prefHeight="30.0" prefWidth="170.0" promptText="Montant" visible="false" AnchorPane.topAnchor="567.0" />
+            <CheckBox fx:id="CheckBoxTaxeApprentissage" layoutX="74.0" layoutY="487.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="30.0" prefWidth="170.0" text="Taxe d'aprentissage" textFill="WHITE" AnchorPane.topAnchor="487.0" />
+            <Button fx:id="ButtonImprier" layoutX="89.0" layoutY="848.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #94A7B1;" text="Imprimer" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="ButtonAutrePage" layoutX="65.0" layoutY="788.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #1AB1CD;" text="AutrePage" textFill="WHITE">
+            <Button fx:id="ButtonAutrePage" layoutX="89.0" layoutY="787.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #1AB1CD;" text="AutrePage" textFill="WHITE">
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font>
             </Button>
-            <Label layoutX="22.0" layoutY="509.0" text="Label" />
-            <TableView fx:id="TableauCompetence" layoutX="45.0" layoutY="388.0" prefHeight="100.0" prefWidth="180.0">
+            <TableView fx:id="TableauCompetence" layoutX="11.0" layoutY="388.0" prefHeight="100.0" prefWidth="109.0">
               <columns>
                 <TableColumn fx:id="ColumnCompétenceTComp" minWidth="0.0" prefWidth="109.0" text="Compétence" />
-                <TableColumn fx:id="ColumnSelect" prefWidth="67.0" resizable="false" sortable="false" text="Select">
-                </TableColumn>
 
               </columns>
             </TableView>
+            <TextField fx:id="TextFieldCompetence" layoutX="135.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence" />
          </children>
       </AnchorPane>
    </children>

@@ -5,26 +5,26 @@ import javafx.scene.control.CheckBox;
 import java.awt.*;
 
 public class Competence {
-    String Technologie;
-    private CheckBox select;
+    String Competence;
+    int idCompetence;
 
-    public Competence(String Technologie) {
-        this.Technologie = Technologie;
-        this.select = new CheckBox();
+    public Competence(String Competence) {
+        this.Competence = Competence;
+        this.idCompetence = idCompetence;
     }
 
-    public String getTechnologie() {
-        return Technologie;
+    public String getCompetence() {
+        return Competence;
     }
 
-    public void setTechnologie(String Technologie) {
-        this.Technologie = Technologie;
+    public void setCompetence(String Competence) {
+        this.Competence = Competence;
     }
-    public CheckBox getSelect() {
-        return select;
+    public int getIdCompetence() {
+        return idCompetence;
     }
 
-    public void setSelect(CheckBox select) {
-        this.select = select;
+    public void setIdCompetence(int idCompetence) {
+        this.idCompetence = idCompetence;
     }
 }

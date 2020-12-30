@@ -11,7 +11,7 @@ public class ConexionBDD {
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/projetl2info", "root", "");
             return conn;
         }
         catch (Exception e){

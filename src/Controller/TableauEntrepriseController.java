@@ -84,9 +84,9 @@ public class TableauEntrepriseController implements Initializable {
     @FXML
     private TableColumn<Competence, String> ColumnCompétenceTComp;
     @FXML
-    private  TableColumn<Competence, String> ColumnSelect;
-    @FXML
     private TableView<Competence> TableauCompetence;
+    @FXML
+    private TextField TextFieldCompetence;
 
     /*
  Connexion classe BDD
@@ -142,7 +142,7 @@ public class TableauEntrepriseController implements Initializable {
     }
 
     public static boolean FaxIsValide(String Fax) {
-        String mdpRegex = "([0-9]{10}||[0-9]{0}||[NULL])";
+        String mdpRegex = "([0-9]*)";
         Pattern pat = Pattern.compile(mdpRegex);
         if (Fax == null)
             return false;
@@ -174,11 +174,11 @@ public class TableauEntrepriseController implements Initializable {
         ObservableList<Competence> list = FXCollections.observableArrayList();
 
         try {
-            String CompetenceSQL = "SELECT Technologie FROM lesdifferenttechnologie";
+            String CompetenceSQL = "SELECT Competence FROM Competence";
             PreparedStatement ps = connection.prepareStatement(CompetenceSQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                list.add(new Competence(rs.getString("Technologie")));
+                list.add(new Competence(rs.getString("Competence")));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -199,7 +199,7 @@ public class TableauEntrepriseController implements Initializable {
             String EntrepriseSQL = "SELECT * FROM entreprise";
             PreparedStatement ps = connection.prepareStatement(EntrepriseSQL);
             ResultSet rs = ps.executeQuery();
-            String CompetenceEntrepriseSQL = "SELECT L.Technologie, E.RAISON_SOCIALE FROM  lesdifferenttechnologie L INNER JOIN entreprisetechnologie ET ON L.IDTHECNOLOGIE=ET.IDTHECNOLOGIE INNER JOIN entreprise E ON ET.IDENTREPRISE = E.IDENTREPRISE";
+            String CompetenceEntrepriseSQL = "SELECT C.Competence, E.RAISON_SOCIALE FROM  Competence C INNER JOIN entreprise E ON C.idCompetence=E.idCompetence";
             PreparedStatement psCompetenceEntreprise = connection.prepareStatement(CompetenceEntrepriseSQL);
             ResultSet rsCompetenceEntreprise = psCompetenceEntreprise.executeQuery();
             while (rs.next() && rsCompetenceEntreprise.next()) {
@@ -214,7 +214,7 @@ public class TableauEntrepriseController implements Initializable {
                         rs.getString("Autre_Info"),
                         Integer.parseInt(rs.getString("Taxe_Apprentissage")),
                         Integer.parseInt(rs.getString("DateVErsementTaxeAprentissage")),
-                        rsCompetenceEntreprise.getString("Technologie")));
+                        rsCompetenceEntreprise.getString("Competence")));
 
             }
         } catch (Exception e) {
@@ -237,32 +237,16 @@ public class TableauEntrepriseController implements Initializable {
         ColumnAutreInfo.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Autre_Info"));
         ColumnTaxeAprentissageDatePayment.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Taxe_Apprentissage"));
         ColumnTaxeAprentissageMontant.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("DateVErsementTaxeAprentissage"));
-        ColumnCompetence.setCellValueFactory(new PropertyValueFactory<Competence, String>("Technologie"));
-
+        ColumnCompetence.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
         listM = getDataEntreprise();
         TableauEntreprise.setItems(listM);
 
-        ColumnCompétenceTComp.setCellValueFactory((new PropertyValueFactory<Competence, String>("Technologie")));
-        ColumnSelect.setCellValueFactory(new PropertyValueFactory<Competence, String >("select"));
+        ColumnCompétenceTComp.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
         listCompetence = getDataCompetence();
         TableauCompetence.setItems(listCompetence);
 
     }
-    @FXML
-    private void deleteSelectedRows(ActionEvent event) {
 
-        ObservableList<Competence> dataListRemove = FXCollections.observableArrayList();
-
-        for(Competence bean : listCompetence)
-        {
-            if(bean.getSelect().isSelected())
-            {
-                System.out.println(bean.getSelect());
-            }
-
-        }
-
-    }
     public void checkEvent(javafx.event.ActionEvent actionEvent) {
         if (CheckBoxTaxeApprentissage.isSelected()) {
             TextFieldDateTaxe.setVisible(true);
@@ -284,6 +268,7 @@ public class TableauEntrepriseController implements Initializable {
         String Tel = TextFieldTel.getText();
         String SiteWeb =TextFieldSiteWeb.getText();
         String AutreInfo =TextFieldAutreInfo.getText();
+        String Competence = TextFieldCompetence.getText();
         String DateTaxe = TextFieldDateTaxe.getText();
         String MontantTaxe = TextFieldMontantTaxe.getText();
 
@@ -293,11 +278,14 @@ public class TableauEntrepriseController implements Initializable {
         if(AutreInfo.length() == 0) {
             AutreInfo = "NULL";
         }
+        if(Fax.length() == 0){
+            Fax ="0";
+        }
         if(DateTaxe.length() == 0) {
-            DateTaxe ="NULL";
+            DateTaxe ="0";
         }
         if(MontantTaxe.length() == 0) {
-            MontantTaxe = "NULL";
+            MontantTaxe = "0";
         }
 
         if (NomEntreprise.length() > 0) {
@@ -313,96 +301,128 @@ public class TableauEntrepriseController implements Initializable {
                                                 if (FaxIsValide(Fax)) {
                                                     if (Tel.length() > 0) {
                                                         if (TelIsValide(Tel)) {
-                                                            if(CheckBoxTaxeApprentissage.isSelected()){
-                                                                if (DateTaxe.length() > 0) {
-                                                                    if(DateIsValide(DateTaxe)){
-                                                                        if(MontantTaxe.length() > 0){
-                                                                            if(MontantTaxeIsValide(MontantTaxe)){
-                                                                                String verfiEntrepriseExisteSQL = "SELECT * FROM entreprise WHERE Raison_Sociale = ? || Num_SIREN = ?";
-                                                                                try{
-                                                                                    preparedStatement = connection.prepareStatement(verfiEntrepriseExisteSQL);
-                                                                                    preparedStatement.setString(1, NomEntreprise);
-                                                                                    preparedStatement.setString(2, NumSiren);
-                                                                                    resultSet = preparedStatement.executeQuery();
-                                                                                    if(!resultSet.next()){
-                                                                                        String AjouterEntrepriseSql = "INSERT INTO Entreprise (Raison_Sociale, Num_SIREN,Code_Postal,Ville,Adresse,Fax,Tel,Site_Web,Autre_Info,Taxe_Apprentissage,DateVErsementTaxeAprentissage) value(?,?,?,?,?,?,?,?,?,?,?)";
+                                                            if(Competence.length() > 0){
+                                                                String CompetenceSQL= "SELECT * FROM Competence Where Competence = ?";
+                                                                try {
+                                                                    preparedStatement = connection.prepareStatement(CompetenceSQL);
+                                                                    preparedStatement.setString(1, Competence);
+                                                                    resultSet = preparedStatement.executeQuery();
+                                                                    if(resultSet.next()) {
+                                                                        String IdCompetenceSQL = "SELECT idCompetence FROM Competence Where Competence = ?";
+                                                                        try {
+                                                                            preparedStatement = connection.prepareStatement(IdCompetenceSQL);
+                                                                            preparedStatement.setString(1, Competence);
+                                                                            resultSet = preparedStatement.executeQuery();
+                                                                            if(resultSet.next()){
+                                                                                String idCompetence = resultSet.getString("idCompetence");
+                                                                                if(CheckBoxTaxeApprentissage.isSelected()){
+                                                                                    if (DateTaxe.length() > 0) {
+                                                                                        if(DateIsValide(DateTaxe)){
+                                                                                            if(MontantTaxe.length() > 0){
+                                                                                                if(MontantTaxeIsValide(MontantTaxe)){
+                                                                                                    String verfiEntrepriseExisteSQL = "SELECT * FROM entreprise WHERE Raison_Sociale = ? || Num_SIREN = ?";
+                                                                                                    try{
+                                                                                                        preparedStatement = connection.prepareStatement(verfiEntrepriseExisteSQL);
+                                                                                                        preparedStatement.setString(1, NomEntreprise);
+                                                                                                        preparedStatement.setString(2, NumSiren);
+                                                                                                        resultSet = preparedStatement.executeQuery();
+                                                                                                        if(!resultSet.next()){
+                                                                                                            String AjouterEntrepriseSql = "INSERT INTO Entreprise (Raison_Sociale, Num_SIREN,Code_Postal,Ville,Adresse,Fax,Tel,Site_Web,Autre_Info,Taxe_Apprentissage,DateVErsementTaxeAprentissage, idCompetence ) value(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                                                                                        try {
+                                                                                                            try {
 
-                                                                                            preparedStatement = connection.prepareStatement(AjouterEntrepriseSql);
-                                                                                            preparedStatement.setString(1, NomEntreprise);
-                                                                                            preparedStatement.setString(2, NumSiren);
-                                                                                            preparedStatement.setString(3, CodePostal);
-                                                                                            preparedStatement.setString(4, Adresse);
-                                                                                            preparedStatement.setString(5, Ville);
-                                                                                            preparedStatement.setString(6, Fax);
-                                                                                            preparedStatement.setString(7, Tel);
-                                                                                            preparedStatement.setString(8, SiteWeb);
-                                                                                            preparedStatement.setString(9, AutreInfo);
-                                                                                            preparedStatement.setString(10, DateTaxe);
-                                                                                            preparedStatement.setString(11, MontantTaxe);
-                                                                                            preparedStatement.execute();
+                                                                                                                preparedStatement = connection.prepareStatement(AjouterEntrepriseSql);
+                                                                                                                preparedStatement.setString(1, NomEntreprise);
+                                                                                                                preparedStatement.setString(2, NumSiren);
+                                                                                                                preparedStatement.setString(3, CodePostal);
+                                                                                                                preparedStatement.setString(4, Adresse);
+                                                                                                                preparedStatement.setString(5, Ville);
+                                                                                                                preparedStatement.setString(6, Fax);
+                                                                                                                preparedStatement.setString(7, Tel);
+                                                                                                                preparedStatement.setString(8, SiteWeb);
+                                                                                                                preparedStatement.setString(9, AutreInfo);
+                                                                                                                preparedStatement.setString(10, DateTaxe);
+                                                                                                                preparedStatement.setString(11, MontantTaxe);
+                                                                                                                preparedStatement.setString(12, idCompetence );
+                                                                                                                preparedStatement.execute();
 
-                                                                                            JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
+                                                                                                                JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
 
-                                                                                        } catch (Exception e) {
-                                                                                            e.printStackTrace();
+                                                                                                            } catch (Exception e) {
+                                                                                                                e.printStackTrace();
+                                                                                                            }
+                                                                                                        }else{
+                                                                                                            JOptionPane.showMessageDialog(null, "Une entreprise avec le meme nom et/ou la meme raison sociale existe déja");
+                                                                                                        }
+                                                                                                    }catch (Exception e) {
+                                                                                                        e.printStackTrace();
+                                                                                                    }
+                                                                                                }else{
+                                                                                                    JOptionPane.showMessageDialog(null,"Veuyer saisir un montant sous se format la : 00000.000000");
+                                                                                                }
+                                                                                            }else{
+                                                                                                JOptionPane.showMessageDialog(null,"Veuillez saisir un montant pour la taxe d'aprentissage ou decochez la case ");
+                                                                                            }
+                                                                                        }else{
+                                                                                            JOptionPane.showMessageDialog(null, "Veuillez saisir la date sous le format mm/dd/year");
                                                                                         }
-                                                                                    }else{
-                                                                                        JOptionPane.showMessageDialog(null, "Une entreprise avec le meme nom et/ou la meme raison sociale existe déja");
+                                                                                    } else {
+                                                                                        JOptionPane.showMessageDialog(null, "La date de versement de la taxe d'aprentisage doit etre saisi ou decochez la case");
                                                                                     }
-                                                                                }catch (Exception e) {
-                                                                                    e.printStackTrace();
+                                                                                }else{
+                                                                                    String verfiEntrepriseExisteSQL = "SELECT * FROM entreprise WHERE Raison_Sociale = ? || Num_SIREN = ?";
+                                                                                    try{
+                                                                                        preparedStatement = connection.prepareStatement(verfiEntrepriseExisteSQL);
+                                                                                        preparedStatement.setString(1, NomEntreprise);
+                                                                                        preparedStatement.setString(2, NumSiren);
+                                                                                        resultSet = preparedStatement.executeQuery();
+                                                                                        if(!resultSet.next()){
+                                                                                            String AjouterEntrepriseSql = "INSERT INTO Entreprise (Raison_Sociale, Num_SIREN,Code_Postal,Ville,Adresse,Fax,Tel,Site_Web,Autre_Info,Taxe_Apprentissage,DateVErsementTaxeAprentissage, idCompetence) value(?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                                                                                            try {
+
+                                                                                                preparedStatement = connection.prepareStatement(AjouterEntrepriseSql);
+                                                                                                preparedStatement.setString(1, NomEntreprise);
+                                                                                                preparedStatement.setString(2, NumSiren);
+                                                                                                preparedStatement.setString(3, CodePostal);
+                                                                                                preparedStatement.setString(4, Adresse);
+                                                                                                preparedStatement.setString(5, Ville);
+                                                                                                preparedStatement.setString(6, Fax);
+                                                                                                preparedStatement.setString(7, Tel);
+                                                                                                preparedStatement.setString(8, SiteWeb);
+                                                                                                preparedStatement.setString(9, AutreInfo);
+                                                                                                preparedStatement.setString(10, "0");
+                                                                                                preparedStatement.setString(11, "0");
+                                                                                                preparedStatement.setString(12, idCompetence );
+                                                                                                preparedStatement.execute();
+
+                                                                                                JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
+
+                                                                                            } catch (Exception e) {
+                                                                                                e.printStackTrace();
+                                                                                            }
+                                                                                        }else{
+                                                                                            JOptionPane.showMessageDialog(null, "Une entreprise avec le meme nom et/ou la meme raison sociale existe déja");
+                                                                                        }
+                                                                                    }catch (Exception e) {
+                                                                                        e.printStackTrace();
+                                                                                    }
                                                                                 }
                                                                             }else{
-                                                                                JOptionPane.showMessageDialog(null,"Veuyer saisir un montant sous se format la : 00000.000000");
+                                                                                System.out.printf("PB");
                                                                             }
-                                                                        }else{
-                                                                            JOptionPane.showMessageDialog(null,"Veuillez saisir un montant pour la taxe d'aprentissage ou decochez la case ");
+                                                                        } catch (SQLException throwables) {
+                                                                            throwables.printStackTrace();
                                                                         }
                                                                     }else{
-                                                                        JOptionPane.showMessageDialog(null, "Veuillez saisir la date sous le format mm/dd/year");
+                                                                        JOptionPane.showMessageDialog(null,"Veuille saisir une donnée présent dans la table de gauche");
                                                                     }
-                                                                } else {
-                                                                    JOptionPane.showMessageDialog(null, "La date de versement de la taxe d'aprentisage doit etre saisi ou decochez la case");
+
+                                                                } catch (SQLException throwables) {
+                                                                    throwables.printStackTrace();
                                                                 }
-                                                            }else{
-                                                                String verfiEntrepriseExisteSQL = "SELECT * FROM entreprise WHERE Raison_Sociale = ? || Num_SIREN = ?";
-                                                                try{
-                                                                    preparedStatement = connection.prepareStatement(verfiEntrepriseExisteSQL);
-                                                                    preparedStatement.setString(1, NomEntreprise);
-                                                                    preparedStatement.setString(2, NumSiren);
-                                                                    resultSet = preparedStatement.executeQuery();
-                                                                    if(!resultSet.next()){
-                                                                        String AjouterEntrepriseSql = "INSERT INTO Entreprise (Raison_Sociale, Num_SIREN,Code_Postal,Ville,Adresse,Fax,Tel,Site_Web,Autre_Info,Taxe_Apprentissage,DateVErsementTaxeAprentissage) value(?,?,?,?,?,?,?,?,?,?,?)";
-
-                                                                        try {
-
-                                                                            preparedStatement = connection.prepareStatement(AjouterEntrepriseSql);
-                                                                            preparedStatement.setString(1, NomEntreprise);
-                                                                            preparedStatement.setString(2, NumSiren);
-                                                                            preparedStatement.setString(3, CodePostal);
-                                                                            preparedStatement.setString(4, Adresse);
-                                                                            preparedStatement.setString(5, Ville);
-                                                                            preparedStatement.setString(6, Fax);
-                                                                            preparedStatement.setString(7, Tel);
-                                                                            preparedStatement.setString(8, SiteWeb);
-                                                                            preparedStatement.setString(9, AutreInfo);
-                                                                            preparedStatement.setString(10, "NULL");
-                                                                            preparedStatement.setString(11, "NULL");
-                                                                            preparedStatement.execute();
-
-                                                                            JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
-
-                                                                        } catch (Exception e) {
-                                                                            e.printStackTrace();
-                                                                        }
-                                                                    }else{
-                                                                        JOptionPane.showMessageDialog(null, "Une entreprise avec le meme nom et/ou la meme raison sociale existe déja");
-                                                                    }
-                                                                }catch (Exception e) {
-                                                                    e.printStackTrace();
-                                                                }
+                                                            }else {
+                                                                JOptionPane.showMessageDialog(null,"Une competence est obligatoire");
                                                             }
                                                         } else {
                                                             JOptionPane.showMessageDialog(null, "Le numero  de tel est invalide");

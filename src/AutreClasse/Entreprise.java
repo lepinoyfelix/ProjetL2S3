@@ -3,10 +3,10 @@ package AutreClasse;
 public class Entreprise {
 
     int Num_SIREN, Code_Postal, fax,tel,DateVErsementTaxeAprentissage,Taxe_Apprentissage;
-    String Raison_Sociale, ville, adresse, Site_Web, Autre_Info, technologie;
+    String Raison_Sociale, ville, adresse, Site_Web, Autre_Info, Competence;
 
 
-    public Entreprise(String Raison_Sociale, int Num_SIREN, int Code_Postal,String adresse, String ville,  int fax, int tel,String Site_Web, String Autre_Info, int DateVErsementTaxeAprentissage, int Taxe_Apprentissage, String technologie) {
+    public Entreprise(String Raison_Sociale, int Num_SIREN, int Code_Postal,String adresse, String ville,  int fax, int tel,String Site_Web, String Autre_Info, int DateVErsementTaxeAprentissage, int Taxe_Apprentissage, String Competence) {
         this.Raison_Sociale = Raison_Sociale;
         this.Num_SIREN = Num_SIREN;
         this.Code_Postal = Code_Postal;
@@ -18,7 +18,7 @@ public class Entreprise {
         this.Autre_Info = Autre_Info;
         this.DateVErsementTaxeAprentissage = DateVErsementTaxeAprentissage;
         this.Taxe_Apprentissage = Taxe_Apprentissage;
-        this.technologie = technologie;
+        this.Competence = Competence;
     }
 
     public int getNum_SIREN() {
@@ -109,8 +109,8 @@ public class Entreprise {
         this.Autre_Info = Autre_Info;
     }
 
-    public String getTechnologie(){ return technologie;}
+    public String getCompetence(){ return Competence;}
 
-    public void setTechnologie(String technologie) { this.technologie = technologie; }
+    public void setCompetence(String Competence) { this.Competence = Competence; }
 
 }
