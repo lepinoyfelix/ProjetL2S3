@@ -6,7 +6,7 @@
 
 <Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TableauEntrepriseController">
    <children>
-      <TableView fx:id="TableauEntreprise" layoutX="394.0" layoutY="331.0" onMouseClicked="#getSelectEntreprise" prefHeight="400.0" prefWidth="1136.0">
+      <TableView fx:id="TableauEntreprise" layoutX="394.0" layoutY="250.0" prefHeight="400.0" prefWidth="1136.0">
         <columns>
           <TableColumn fx:id="ColumnNom" prefWidth="150.0" text="Nom " />
             <TableColumn fx:id="ColumnNumerDeSiren" prefWidth="160.0" text="Numero De Siren" />
@@ -30,17 +30,17 @@
             <TableColumn fx:id="ColumnCompetence" prefWidth="75.0" text="Compétence" />
         </columns>
       </TableView>
-      <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;" visible="true">
+      <AnchorPane prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;">
          <children>
             <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="672.0" mnemonicParsing="false" onAction="#EditEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+            <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="672.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font></Button>
-            <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="729.0" mnemonicParsing="false" onAction="#SupprimerEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
+            <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="729.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font></Button>
@@ -66,25 +66,13 @@
                   <Font name="Alef Bold" size="16.0" />
                </font>
             </Button>
-            <TableView fx:id="TableauCompetence" layoutX="11.0" layoutY="388.0" onMouseClicked="#getSelectCompetence" prefHeight="100.0" prefWidth="125.0">
+            <TableView fx:id="TableauCompetence" layoutX="11.0" layoutY="388.0" prefHeight="100.0" prefWidth="109.0">
               <columns>
                 <TableColumn fx:id="ColumnCompétenceTComp" minWidth="0.0" prefWidth="109.0" text="Compétence" />
 
               </columns>
             </TableView>
-            <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence" />
-         </children>
-      </AnchorPane>
-      <Button fx:id="ButtonMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" text="Menu" />
-      <AnchorPane fx:id="AnchorPane2" layoutX="317.0" prefHeight="250.0" prefWidth="1290.0" style="-fx-background-color: #332E35;" visible="true">
-         <children>
-            <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#cachermenue" text="Quitter Menu" />
-            <Button fx:id="ButtonRecherche" layoutX="728.0" layoutY="113.0" mnemonicParsing="false" onAction="#BtnRechercheAtion" text="Rechercher" />
-            <TextField fx:id="TextFieldRecherche" layoutX="509.0" layoutY="113.0" />
-            <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
-            <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
-
-
+            <TextField fx:id="TextFieldCompetence" layoutX="135.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence" />
          </children>
       </AnchorPane>
    </children>
