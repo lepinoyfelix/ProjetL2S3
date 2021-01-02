@@ -30,7 +30,7 @@
             <TableColumn fx:id="ColumnCompetence" prefWidth="75.0" text="Compétence" />
         </columns>
       </TableView>
-      <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;" visible="true">
+      <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;" visible="false">
          <children>
             <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
                <font>
@@ -73,19 +73,20 @@
               </columns>
             </TableView>
             <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence" />
+            <Button layoutX="264.0" layoutY="299.0" mnemonicParsing="false" onAction="#cachermenue" prefWidth="100.0" text="Quitter Menu" />
          </children>
       </AnchorPane>
-      <Button fx:id="ButtonMenu" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" text="Menu" />
       <AnchorPane fx:id="AnchorPane2" layoutX="317.0" prefHeight="250.0" prefWidth="1290.0" style="-fx-background-color: #332E35;" visible="true">
          <children>
-            <Button layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#cachermenue" text="Quitter Menu" />
             <Button fx:id="ButtonRecherche" layoutX="728.0" layoutY="113.0" mnemonicParsing="false" onAction="#BtnRechercheAtion" text="Rechercher" />
             <TextField fx:id="TextFieldRecherche" layoutX="509.0" layoutY="113.0" />
             <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
             <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
+            <Button fx:id="BouttonPageEvenement" layoutX="463.0" layoutY="47.0" mnemonicParsing="false" onAction="#BouttonPageEvenementOnAction" text="Page Evenement" />
 
 
          </children>
       </AnchorPane>
+      <Button fx:id="ButtonMenu" layoutX="267.0" layoutY="299.0" mnemonicParsing="false" onAction="#affichermenue" prefWidth="100.0" text="Menu" />
    </children>
 </Pane>

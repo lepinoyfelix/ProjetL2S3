@@ -23,7 +23,7 @@ public class Test extends Application {
         primaryStageTableauEntreprise.show();
         primaryStageTableauEntreprise.setMaximized(true);
         */
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/TableauEntreprise.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/TableauEvenement.fxml"));
         primaryStageTableauEntreprise.setTitle("Connexion");
         primaryStageTableauEntreprise.setScene(new Scene(root, 1600, 900));
         primaryStageTableauEntreprise.show();

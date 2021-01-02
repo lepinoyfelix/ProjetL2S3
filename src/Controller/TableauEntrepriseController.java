@@ -3,29 +3,27 @@ package Controller;
 import AutreClasse.Competence;
 import AutreClasse.ConexionBDD;
 import AutreClasse.Entreprise;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 
-import sun.plugin.javascript.navig.Anchor;
+import javafx.stage.Stage;
 
 
 import javax.swing.*;
-import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -106,7 +104,8 @@ public class TableauEntrepriseController implements Initializable {
     private ChoiceBox<String> ChoiceBoxRecherche;
     @FXML
     private Label labelCatégorierecherche;
-
+    @FXML
+    private Button  BouttonPageEvenement;
 
     /*
  Connexion classe BDD
@@ -122,6 +121,7 @@ public class TableauEntrepriseController implements Initializable {
     public TableauEntrepriseController() {
         connection = ConexionBDD.connectdb();
     }
+
 
     public static boolean TextMajIsValide(String TextMaj) {
         String mdpRegex = "[A-Z0-9 ]*";
@@ -289,7 +289,7 @@ public class TableauEntrepriseController implements Initializable {
         ColumnCompetence.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
         listM = getDataEntreprise();
         TableauEntreprise.setItems(listM);
-        search_user();
+        Entreprise_Search();
     }
 
     public void checkEvent(javafx.event.ActionEvent actionEvent) {
@@ -516,7 +516,7 @@ public class TableauEntrepriseController implements Initializable {
         } else {
             JOptionPane.showMessageDialog(null, "Veuillez rentrer Le nom de l'entreprise ! ");
         }
-        search_user();
+        Entreprise_Search();
     }
 
     public void SupprimerEntreprise(ActionEvent actionEvent) {
@@ -533,7 +533,7 @@ public class TableauEntrepriseController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        search_user();
+        Entreprise_Search();
     }
 
     public void EditEntreprise(ActionEvent actionEvent) {
@@ -743,7 +743,7 @@ public class TableauEntrepriseController implements Initializable {
         } else {
             JOptionPane.showMessageDialog(null, "Veuillez rentrer Le nom de l'entreprise ! ");
         }
-        search_user();
+        Entreprise_Search();
     }
 
 
@@ -833,13 +833,14 @@ public class TableauEntrepriseController implements Initializable {
     @FXML
     private void ButtonRechercheOnAction(ActionEvent event) {
         labelCatégorierecherche.setText(ChoiceBoxRecherche.getValue());
+        Entreprise_Search();
 
     }
 
     ObservableList<Entreprise> ListRechecher;
 
     @FXML
-    void search_user() {
+    void Entreprise_Search() {
         ListRechecher = getDataEntreprise();
         TableauEntreprise.setItems(ListRechecher);
 
@@ -932,6 +933,20 @@ public class TableauEntrepriseController implements Initializable {
                         return false;
 
                 });
+            }else if(labelCatégorierecherche.getText().equals("Nom Entreprise")) {
+                filteredData.setPredicate(person -> {
+
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (person.getRaison_Sociale().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else
+                        return false;
+
+                });
             }
         });
         SortedList<Entreprise> sortedData = new SortedList<>(filteredData);
@@ -945,6 +960,14 @@ public class TableauEntrepriseController implements Initializable {
         if(labelCatégorierecherche.getText().equals("Tout")){
             System.out.println("2");
         }
+    }
+
+    public void BouttonPageEvenementOnAction(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage)  BouttonPageEvenement.getScene().getWindow();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEvenement.fxml")));
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Evenement");
     }
 }
 

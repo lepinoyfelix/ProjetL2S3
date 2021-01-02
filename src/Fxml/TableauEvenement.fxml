@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TableauEvenementControler">
+    <children>
+        <TableView fx:id="TableauEvenement" layoutX="395.0" layoutY="333.0" onMouseClicked="#getSelectEvenment" prefHeight="400.0">
+            <columns>
+                <TableColumn fx:id="ColumnNom" prefWidth="77.0" text="Nom " />
+                <TableColumn prefWidth="298.0" text="Localisation">
+                    <columns>
+                        <TableColumn fx:id="ColumnCodePostal" prefWidth="75.0" text="Code Postal" />
+                        <TableColumn fx:id="ColumnVille" prefWidth="75.0" text="Ville" />
+                        <TableColumn fx:id="ColumnAdresse" prefWidth="75.0" text="Adresse" />
+                    </columns>
+                </TableColumn>
+                <TableColumn fx:id="ColumnDate" prefWidth="65.0" text="Date" />
+                <TableColumn fx:id="ColumnHeure" prefWidth="62.0" text="Heure" />
+                <TableColumn fx:id="ColumnProf" prefWidth="75.0" text="Intervenant" />
+                <TableColumn prefWidth="353.0" text="Cours">
+                    <columns>
+                        <TableColumn fx:id="ColumnSalle" prefWidth="75.0" text="Salle" />
+                        <TableColumn fx:id="ColumnBatiment" prefWidth="75.0" text="Batiment" />
+                        <TableColumn fx:id="ColumnDureeCours" prefWidth="75.0" text="Duree Cours" />
+                    </columns>
+                </TableColumn>
+                <TableColumn prefWidth="85.0" text="Conference">
+                    <columns>
+                        <TableColumn fx:id="ColumnDureeConference" prefWidth="75.0" text="DureeConference" />
+                    </columns>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="110.0" text="Autre Evenement">
+                    <columns>
+                        <TableColumn fx:id="ColumnDescriptionAutrevenement" minWidth="120.0" prefWidth="20.0" text="Desccription" />
+                    </columns>
+                </TableColumn>
+                <TableColumn fx:id="ColumnTypeEvenement" minWidth="0.0" prefWidth="117.0" text="Type d'evenement" />
+                <TableColumn fx:id="ColumnCompetence" minWidth="0.0" prefWidth="98.0" text="Competence" />
+            </columns>
+        </TableView>
+        <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;" visible="true">
+            <children>
+                <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font></Button>
+                <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="672.0" mnemonicParsing="false" onAction="#EditEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+                    <font>
+                        <Font name="Alef Bold" size="16.0" />
+                    </font></Button>
+                <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="729.0" mnemonicParsing="false" onAction="#SupprimerEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
+                    <font>
+                        <Font name="Alef Bold" size="16.0" />
+                    </font></Button>
+                <TextField fx:id="TextFieldNomEvenement" layoutX="24.0" layoutY="14.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Evenement" visible="false" AnchorPane.topAnchor="14.0" />
+                <TextField fx:id="TextFieldVilleEvenement" layoutX="24.0" layoutY="59.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment ville" visible="false" AnchorPane.topAnchor="59.0" />
+                <TextField fx:id="TextFieldDateEvenement" layoutX="24.0" layoutY="101.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Evenement" visible="false" AnchorPane.topAnchor="101.0" />
+                <TextField fx:id="TextFieldIntervenant" layoutX="24.0" layoutY="145.0" prefHeight="30.0" prefWidth="170.0" promptText="Intervenant" visible="false" AnchorPane.topAnchor="145.0" />
+                <TextField fx:id="TextFieldBatimentCours" layoutX="24.0" layoutY="196.0" prefHeight="30.0" prefWidth="170.0" promptText="Batiment Cours" visible="false" AnchorPane.topAnchor="196.0" />
+                <Button fx:id="ButtonImprier" layoutX="89.0" layoutY="848.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #94A7B1;" text="Imprimer" textFill="WHITE" visible="false">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                <Button fx:id="ButtonAutrePage" layoutX="89.0" layoutY="787.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #1AB1CD;" text="AutrePage" textFill="WHITE">
+                    <font>
+                        <Font name="Alef Bold" size="16.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="TextFieldDureeConf" layoutX="24.0" layoutY="249.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Conference" visible="false"/>
+                <TextField fx:id="TextFieldAutreEvenement" layoutX="24.0" layoutY="298.0" prefHeight="30.0" prefWidth="170.0" promptText="Description Autre Evenement" visible="false"/>
+                <TableView fx:id="TableauTypeEvenement" layoutX="14.0" layoutY="335.0" onMouseClicked="#getSelectTypeEvenement" prefHeight="100.0" prefWidth="125.0" >
+                    <columns>
+                        <TableColumn fx:id="ColumnTypeEvenementTTypeEvent" prefWidth="125.0" text="TypeEvenement" />
+                    </columns>
+                </TableView>
+                <TableView fx:id="TableauCompetence" layoutX="14.0" layoutY="450.0" onMouseClicked="#getSelectCompetence" prefHeight="100.0" prefWidth="125.0">
+                    <columns>
+                        <TableColumn fx:id="ColumnCompétenceTComp" prefWidth="125.0" text="Competence" />
+                    </columns>
+                </TableView>
+                <Label fx:id="LabelTypeEvenement" layoutX="180.0" layoutY="377.0" textFill="WHITE" />
+                <Label fx:id="LabelCompetence" layoutX="180.0" layoutY="492.0" textFill="WHITE" />
+                <Label fx:id="labelChoiceBoxActiion" layoutX="180.0" layoutY="492.0" textFill="WHITE" visible="false" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="AnchorPane2" layoutX="317.0" prefHeight="250.0" prefWidth="1290.0" style="-fx-background-color: #332E35;" visible="true">
+            <children>
+                <TextField fx:id="TextFieldRecherche" layoutX="509.0" layoutY="113.0" visible="false" />
+                <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="false" />
+                <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
+                <Button fx:id="BouttonPageEntreprise" layoutX="464.0" layoutY="48.0" mnemonicParsing="false" onAction="#BouttonPageEntrepriseOnActionOnAction" text="Page Entreprise" />
+                <Button fx:id="BtnTout" layoutX="638.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnToutOnAction" text="Tout" />
+                <Button fx:id="BtnConf" layoutX="713.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnConfOnAction" text="Conf" />
+                <Button fx:id="BtnAutre" layoutX="795.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnAutreOnAction" text="Autre" />
+                <Button fx:id="BtnCours" layoutX="878.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnCoursOnAction" text="Cours" />
+                <Button fx:id="BtnRechercher" layoutX="183.0" layoutY="113.0" mnemonicParsing="false" onAction="#BtnRechercheOnAction" text="Button" />
+                <TextField fx:id="TextFieldCodePostalEvenement" layoutX="-73.0" layoutY="13.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment CP" AnchorPane.topAnchor="13.0" visible="false" />
+                <TextField fx:id="TextFieldAdresseEvenement" layoutX="-71.0" layoutY="58.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment Adresse" AnchorPane.topAnchor="58.0" visible="false"/>
+                <TextField fx:id="TextFieldHeureEvenement" layoutX="-71.0" layoutY="98.0" prefHeight="30.0" prefWidth="170.0" promptText="Heure Evenement" AnchorPane.topAnchor="98.0" visible="false"/>
+                <TextField fx:id="TextFieldSalleCours" layoutX="-73.0" layoutY="146.0" prefHeight="30.0" prefWidth="170.0" promptText="Salle Cours" AnchorPane.topAnchor="146.0" visible="false"/>
+                <TextField fx:id="TextFieldDureeCours" layoutX="-73.0" layoutY="194.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Cours" visible="false"/>
+                <Button layoutX="244.0" layoutY="210.0" mnemonicParsing="false" onAction="#cachermenue" prefWidth="100.0" text="Quitter Menu" />
+                <ChoiceBox fx:id="ChoiceBoxActiion" layoutX="122.0" layoutY="16.0" onAction="#ChoiceBoxActionOnAction" prefWidth="150.0" />
+
+
+            </children>
+        </AnchorPane>
+        <Label fx:id="LabelChoixVueTableau" layoutX="786.0" layoutY="291.0" visible="false" />
+        <Button fx:id="ButtonMenu" layoutX="574.0" layoutY="257.0" mnemonicParsing="false" onAction="#affichermenue" prefWidth="100.0" text="Menu" />
+    </children>
+</Pane>
