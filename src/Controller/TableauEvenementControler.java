@@ -1,10 +1,8 @@
 package Controller;
 
-import AutreClasse.Competence;
-import AutreClasse.ConexionBDD;
-import AutreClasse.Evenement;
+import AutreClasse.*;
 
-import AutreClasse.TypeEvenement;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -20,16 +18,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.scene.control.Button;
+
+import javax.swing.*;
 
 public class TableauEvenementControler implements Initializable {
 
@@ -96,7 +97,7 @@ public class TableauEvenementControler implements Initializable {
     @FXML
     private TextField TextFieldDateEvenement;
     @FXML
-    private TextField TextFieldIntervenant;
+    private Label LabelIntervenant;
     @FXML
     private TextField TextFieldBatimentCours;
     @FXML
@@ -115,6 +116,15 @@ public class TableauEvenementControler implements Initializable {
     private TextField TextFieldCodePostalEvenement;
     @FXML
     private ChoiceBox<String>ChoiceBoxActiion;
+    @FXML
+    private CheckBox CheckBoxAjouterEvent;
+    @FXML
+    private  Button ButtonAjouter;
+    @FXML
+    private TableView<Intervenant> TableViewIntervenant;
+    @FXML
+    private TableColumn<Intervenant, String> ColumnInterveant;
+
     /*
  Connexion classe BDD
   */
@@ -135,7 +145,7 @@ public class TableauEvenementControler implements Initializable {
 
 
         try {
-            String EvenementSql = "SELECT * FROM evenement E LEFT OUTER JOIN cours C ON C.idCours=E.idEvenement LEFT OUTER JOIN conference Conf ON Conf.idEvenement=E.idEvenement LEFT OUTER JOIN typeevenement T ON T.idtypeEvenement=E.idtypeEvenement LEFT OUTER JOIN autreevenement A ON A.idEvenement = E.idEvenement LEFT OUTER JOIN competence Comp ON Comp.idCompetence=E.idCompetence";
+            String EvenementSql = "SELECT * FROM evenement E LEFT OUTER JOIN cours C ON C.idEvenement=E.idEvenement LEFT OUTER JOIN conference Conf ON Conf.idEvenement=E.idEvenement LEFT OUTER JOIN typeevenement T ON T.idtypeEvenement=E.idtypeEvenement LEFT OUTER JOIN autreevenement A ON A.idEvenement = E.idEvenement LEFT OUTER JOIN competence Comp ON Comp.idCompetence=E.idCompetence";
             PreparedStatement ps = connection.prepareStatement(EvenementSql);
             ResultSet rs = ps.executeQuery();
 
@@ -211,6 +221,26 @@ public class TableauEvenementControler implements Initializable {
         return list;
     }
 
+    ObservableList<Intervenant> listIntervenant;
+
+    public static ObservableList<Intervenant> getDataIntervenant() {
+        Connection connection = ConexionBDD.connectdb();
+        ObservableList<Intervenant> list = FXCollections.observableArrayList();
+
+        try {
+            String CompetenceSQL = "SELECT NomPersone FROM persone";
+            PreparedStatement ps = connection.prepareStatement(CompetenceSQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Intervenant(rs.getString("NomPersone")));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         ColumnNom.setCellValueFactory(new PropertyValueFactory<Evenement, String>("NomEvenement"));
@@ -239,6 +269,10 @@ public class TableauEvenementControler implements Initializable {
         listTypeEvenement = getDataTypeEvenement();
         TableauTypeEvenement.setItems(listTypeEvenement);
 
+        ColumnInterveant.setCellValueFactory((new  PropertyValueFactory<Intervenant, String>("NomPersone")));
+        listIntervenant = getDataIntervenant();
+        TableViewIntervenant.setItems(listIntervenant);
+
         loadData();
         loadDataChoiceBoxActiion();
 
@@ -265,38 +299,91 @@ public class TableauEvenementControler implements Initializable {
 
     }
 
-    public void AjouterEvenement(ActionEvent actionEvent) {
-    }
-
-    public void EditEvenement(ActionEvent actionEvent) {
-    }
-
-    public void SupprimerEvenement(ActionEvent actionEvent) {
-    }
-
     public void cachermenue(ActionEvent actionEvent) {
     }
 
-    public void BtnRechercheAtion(ActionEvent actionEvent) {
 
-    }
-    int index = -1;
+    int index3 = -1;
     @FXML
     public void getSelectCompetence(javafx.scene.input.MouseEvent mouseEvent) {
-        index = TableauCompetence.getSelectionModel().getSelectedIndex();
-        if (index <= -1) {
+        index3 = TableauCompetence.getSelectionModel().getSelectedIndex();
+        if (index3 <= -1) {
             return;
         }
-        LabelCompetence.setText(ColumnCompétenceTComp.getCellData(index).toString());
+        LabelCompetence.setText(ColumnCompétenceTComp.getCellData(index3).toString());
+
     }
 
     @FXML
-    public void getSelectTypeEvenement(javafx.scene.input.MouseEvent mouseEvent) {
-        index = TableauTypeEvenement.getSelectionModel().getSelectedIndex();
-        if (index <= -1) {
+    int index1= -1;
+    public void getSelectIntervenant(javafx.scene.input.MouseEvent mouseEvent) {
+        index1 = TableViewIntervenant.getSelectionModel().getSelectedIndex();
+        if (index1 <= -1) {
             return;
         }
-        LabelTypeEvenement.setText(ColumnTypeEvenementTTypeEvent.getCellData(index).toString());
+        LabelIntervenant.setText(ColumnInterveant.getCellData(index1).toString());
+
+    }
+
+
+    @FXML
+    int index2= -1;
+    public void getSelectTypeEvenement(javafx.scene.input.MouseEvent mouseEvent) {
+        index2 = TableauTypeEvenement.getSelectionModel().getSelectedIndex();
+        if (index2 <= -1) {
+            return;
+        }
+
+        LabelTypeEvenement.setText(ColumnTypeEvenementTTypeEvent.getCellData(index2).toString());
+        ButtonAjouter.setDisable(false);
+        if(LabelTypeEvenement.getText().equals("Cours")){
+            TextFieldVisivbiliti();
+            TextFieldSalleCours.setVisible(true);
+            TextFieldDureeCours.setVisible(true);
+            TextFieldBatimentCours.setVisible(true);
+            TextFieldDureeConf.setVisible(false);
+            TextFieldAutreEvenement.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            TextFieldClear();
+
+        }else if(LabelTypeEvenement.getText().equals("Conference")){
+
+            TextFieldVisivbiliti();
+            TextFieldDureeConf.setVisible(true);
+            TextFieldSalleCours.setVisible(false);
+            TextFieldDureeCours.setVisible(false);
+            TextFieldBatimentCours.setVisible(false);
+            TextFieldAutreEvenement.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            TextFieldClear();
+
+
+        }else if(LabelTypeEvenement.getText().equals("AutreEvenement")){
+            TextFieldVisivbiliti();
+            TextFieldAutreEvenement.setVisible(true);
+            TextFieldDureeConf.setVisible(false);
+            TextFieldSalleCours.setVisible(false);
+            TextFieldDureeCours.setVisible(false);
+            TextFieldBatimentCours.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            TextFieldClear();
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Une erreur est survenue veuillez ressayer");
+            TextFieldVisivbiliti();
+            TextFieldAutreEvenement.setVisible(false);
+            TextFieldDureeConf.setVisible(false);
+            TextFieldSalleCours.setVisible(false);
+            TextFieldDureeCours.setVisible(false);
+            TextFieldBatimentCours.setVisible(false);
+            TextFieldNomEvenement.setVisible(false);
+            TextFieldVilleEvenement.setVisible(false);
+            TextFieldDateEvenement.setVisible(false);
+            TextFieldCodePostalEvenement.setVisible(false);
+            LabelIntervenant.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            LabelCompetence.setVisible(false);
+        }
     }
 
     ObservableList listeActionTableau = FXCollections.observableArrayList();
@@ -320,18 +407,23 @@ public class TableauEvenementControler implements Initializable {
         TextFieldNomEvenement.setVisible(true);
         TextFieldVilleEvenement.setVisible(true);
         TextFieldDateEvenement.setVisible(true);
+        TextFieldAdresseEvenement.setVisible(true);
         TextFieldCodePostalEvenement.setVisible(true);
-        TextFieldIntervenant.setVisible(true);
-        LabelTypeEvenement.setVisible(true);
+        TextFieldHeureEvenement.setVisible(true);
+        LabelIntervenant.setVisible(true);
         LabelCompetence.setVisible(true);
+        TableauCompetence.setVisible(true);
+        TableViewIntervenant.setVisible(true);
 
     }
     private void TextFieldClear(){
         TextFieldNomEvenement.clear();
         TextFieldVilleEvenement.clear();
+        TextFieldAdresseEvenement.clear();
+        TextFieldHeureEvenement.clear();
         TextFieldDateEvenement.clear();
         TextFieldCodePostalEvenement.clear();
-        TextFieldIntervenant.clear();
+        LabelIntervenant.setText("");
         LabelTypeEvenement.setText("");
         LabelCompetence.setText("");
         TextFieldSalleCours.clear();
@@ -342,6 +434,7 @@ public class TableauEvenementControler implements Initializable {
 
 
     }
+    int index =  -1;
     @FXML
     public void getSelectEvenment(javafx.scene.input.MouseEvent mouseEvent) {
         index = TableauEvenement .getSelectionModel().getSelectedIndex();
@@ -349,6 +442,9 @@ public class TableauEvenementControler implements Initializable {
             return;
         }
         TextFieldClear();
+        CheckBoxAjouterEvent.setSelected(false);
+
+        CheckBoxAjouterEventOnAction();
         labelChoiceBoxActiion.setText(ColumnTypeEvenement.getCellData(index).toString());
 
         if(labelChoiceBoxActiion.getText().equals("Cours")){
@@ -359,12 +455,15 @@ public class TableauEvenementControler implements Initializable {
             TextFieldBatimentCours.setVisible(true);
             TextFieldDureeConf.setVisible(false);
             TextFieldAutreEvenement.setVisible(false);
+            TableauCompetence.setVisible(true);
 
             TextFieldNomEvenement.setText(ColumnNom.getCellData(index).toString());
             TextFieldVilleEvenement.setText(ColumnVille.getCellData(index).toString());
+            TextFieldAdresseEvenement.setText(ColumnAdresse.getCellData(index).toString());
+            TextFieldHeureEvenement.setText(ColumnHeure.getCellData(index).toString());
             TextFieldDateEvenement.setText(ColumnDate.getCellData(index).toString());
             TextFieldCodePostalEvenement.setText(ColumnCodePostal.getCellData(index).toString());
-            TextFieldIntervenant.setText(ColumnProf.getCellData(index).toString());
+            LabelIntervenant.setText(ColumnProf.getCellData(index).toString());
             LabelTypeEvenement.setText(ColumnTypeEvenement.getCellData(index).toString());
             LabelCompetence.setText(ColumnCompetence.getCellData(index).toString());
 
@@ -385,9 +484,11 @@ public class TableauEvenementControler implements Initializable {
 
             TextFieldNomEvenement.setText(ColumnNom.getCellData(index).toString());
             TextFieldVilleEvenement.setText(ColumnVille.getCellData(index).toString());
+            TextFieldAdresseEvenement.setText(ColumnAdresse.getCellData(index).toString());
+            TextFieldHeureEvenement.setText(ColumnHeure.getCellData(index).toString());
             TextFieldDateEvenement.setText(ColumnDate.getCellData(index).toString());
             TextFieldCodePostalEvenement.setText(ColumnCodePostal.getCellData(index).toString());
-            TextFieldIntervenant.setText(ColumnProf.getCellData(index).toString());
+            LabelIntervenant.setText(ColumnProf.getCellData(index).toString());
             LabelTypeEvenement.setText(ColumnTypeEvenement.getCellData(index).toString());
             LabelCompetence.setText(ColumnCompetence.getCellData(index).toString());
 
@@ -406,9 +507,11 @@ public class TableauEvenementControler implements Initializable {
 
             TextFieldNomEvenement.setText(ColumnNom.getCellData(index).toString());
             TextFieldVilleEvenement.setText(ColumnVille.getCellData(index).toString());
+            TextFieldAdresseEvenement.setText(ColumnAdresse.getCellData(index).toString());
+            TextFieldHeureEvenement.setText(ColumnHeure.getCellData(index).toString());
             TextFieldDateEvenement.setText(ColumnDate.getCellData(index).toString());
             TextFieldCodePostalEvenement.setText(ColumnCodePostal.getCellData(index).toString());
-            TextFieldIntervenant.setText(ColumnProf.getCellData(index).toString());
+            LabelIntervenant.setText(ColumnProf.getCellData(index).toString());
             LabelTypeEvenement.setText(ColumnTypeEvenement.getCellData(index).toString());
             LabelCompetence.setText(ColumnCompetence.getCellData(index).toString());
 
@@ -667,6 +770,322 @@ public class TableauEvenementControler implements Initializable {
         ChoiceBoxRecherche.setVisible(true);
         TextFieldRecherche.setVisible(true);
         recherche_Evenement();
+    }
+    public void CheckBoxAjouterEventOnAction() {
+        if (CheckBoxAjouterEvent.isSelected()) {
+            TableauTypeEvenement.setVisible(true);
+            TextFieldNomEvenement.setVisible(false);
+            TextFieldVilleEvenement.setVisible(false);
+            TextFieldAdresseEvenement.setVisible(false);
+            TextFieldHeureEvenement.setVisible(false);
+            TextFieldDateEvenement.setVisible(false);
+            TextFieldCodePostalEvenement.setVisible(false);
+            LabelCompetence.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            LabelIntervenant.setVisible(false);
+            TextFieldSalleCours.setVisible(false);
+            TextFieldDureeCours.setVisible(false);
+            TextFieldBatimentCours.setVisible(false);
+            TextFieldAutreEvenement.setVisible(false);
+            TextFieldDureeConf.setVisible(false);
+            TableauCompetence.setVisible(false);
+            TableViewIntervenant.setVisible(false);
+
+        } else {
+            TableauTypeEvenement.setVisible(false);
+            ButtonAjouter.setDisable(true);
+            TextFieldNomEvenement.setVisible(false);
+            TextFieldVilleEvenement.setVisible(false);
+            TextFieldAdresseEvenement.setVisible(false);
+            TextFieldHeureEvenement.setVisible(false);
+            TextFieldDateEvenement.setVisible(false);
+            TextFieldCodePostalEvenement.setVisible(false);
+            LabelCompetence.setVisible(false);
+            LabelTypeEvenement.setVisible(false);
+            LabelIntervenant.setVisible(false);
+            TextFieldSalleCours.setVisible(false);
+            TextFieldDureeCours.setVisible(false);
+            TextFieldBatimentCours.setVisible(false);
+            TextFieldAutreEvenement.setVisible(false);
+            TextFieldDureeConf.setVisible(false);
+            TableauCompetence.setVisible(false);
+            TableViewIntervenant.setVisible(false);
+
+        }
+    }
+    public static boolean TextMajIsValide(String TextMaj) {
+        String mdpRegex = "[A-Z0-9 ]*";
+
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (TextMaj == null)
+            return false;
+        return pat.matcher(TextMaj).matches();
+    }
+    public static boolean CodePostaleIsValide(String CodePostale) {
+        String mdpRegex = "[0-9]{5}";
+
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (CodePostale == null)
+            return false;
+        return pat.matcher(CodePostale).matches();
+    }
+    public static boolean AdresseIsValide(String Adresse) {
+        String mdpRegex = "[0-9]{0,4}[ ]{1}[0-9A-Z ]*";
+
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (Adresse == null)
+            return false;
+        return pat.matcher(Adresse).matches();
+    }
+    public static boolean DateIsValide(String Date) {
+        String mdpRegex = "([0-9]{2}[/][0-9]{2}[/][0-9]{4})";
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (Date == null)
+            return false;
+        return pat.matcher(Date).matches();
+    }
+    public static boolean HeureIsValide(String Heure) {
+        String mdpRegex = "([0-9]{1,2}[:][0-9]{2})";
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (Heure == null)
+            return false;
+        return pat.matcher(Heure).matches();
+    }
+    public static boolean SalleIsValide(String Salle) {
+        String mdpRegex = "([0-9]{1,6})";
+
+        Pattern pat = Pattern.compile(mdpRegex);
+        if (Salle == null)
+            return false;
+        return pat.matcher(Salle).matches();
+    }
+
+    public void AjouterEvenement() {
+LabelTypeEvenement.setText(ColumnTypeEvenementTTypeEvent.getCellData(index2));
+        String NomEvenement = TextFieldNomEvenement.getText();
+        String VilleEvenemen = TextFieldVilleEvenement.getText();
+        String AdresseEvenement = TextFieldAdresseEvenement.getText();
+        String HeureEvenement = TextFieldHeureEvenement.getText();
+        String DateEvenement = TextFieldDateEvenement.getText();
+        String CodePostalEvenemen = TextFieldCodePostalEvenement.getText();
+        String Intervenant = LabelIntervenant.getText();
+        String SalleCours = TextFieldSalleCours.getText();
+        String DureeCours = TextFieldDureeCours.getText();
+        String BatimentCours = TextFieldBatimentCours.getText();
+        String AutreEvenement = TextFieldAutreEvenement.getText();
+        String DureeConf = TextFieldDureeConf.getText();
+        String labelCompetence = LabelCompetence.getText();
+        String labelTypeEvenement = LabelTypeEvenement.getText();
+
+
+
+        if(labelTypeEvenement.length() > 0) {
+
+            if (labelTypeEvenement.equals("Cours")) {
+
+                if(NomEvenement.length()>0){
+                    if(TextMajIsValide(NomEvenement)){
+                        if (CodePostalEvenemen.length() > 0) {
+                            if (CodePostaleIsValide(CodePostalEvenemen)) {
+                                if (VilleEvenemen.length() > 0) {
+                                    if (TextMajIsValide(VilleEvenemen)) {
+                                        if (AdresseEvenement.length() > 0) {
+                                            if (AdresseIsValide(AdresseEvenement)) {
+                                                if (DateEvenement.length() > 0) {
+                                                    if (DateIsValide(DateEvenement)) {
+                                                        if(HeureEvenement.length() > 0){
+                                                            if(HeureIsValide(HeureEvenement)){
+                                                                if (labelCompetence.length() > 0) {
+                                                                    String CompetenceSQL = "SELECT * FROM Competence Where Competence = ?";
+                                                                    try {
+                                                                        preparedStatement = connection.prepareStatement(CompetenceSQL);
+                                                                        preparedStatement.setString(1, labelCompetence);
+                                                                        resultSet = preparedStatement.executeQuery();
+                                                                        if (resultSet.next()) {
+
+                                                                            String IdCompetenceSQL = "SELECT idCompetence FROM Competence Where Competence = ?";
+                                                                            try{
+                                                                                preparedStatement = connection.prepareStatement(IdCompetenceSQL);
+                                                                                preparedStatement.setString(1, labelCompetence);
+                                                                                resultSet = preparedStatement.executeQuery();
+                                                                                if (resultSet.next()) {
+                                                                                    String idCompetence = resultSet.getString("idCompetence");
+                                                                                    if (Intervenant.length() > 0) {
+                                                                                        String IntervenantSQL = "SELECT * FROM persone Where NomPersone = ?";
+                                                                                        try {
+                                                                                            preparedStatement = connection.prepareStatement(IntervenantSQL);
+                                                                                            preparedStatement.setString(1, Intervenant);
+                                                                                            resultSet = preparedStatement.executeQuery();
+                                                                                            if (resultSet.next()) {
+                                                                                                String idIntervenantSQL = "SELECT idPersone FROM persone Where NomPersone = ?";
+                                                                                                try{
+                                                                                                    preparedStatement = connection.prepareStatement(idIntervenantSQL);
+                                                                                                    preparedStatement.setString(1, Intervenant);
+                                                                                                    resultSet = preparedStatement.executeQuery();
+                                                                                                    if (resultSet.next()) {
+                                                                                                        String idPersone = resultSet.getString("idPersone");
+                                                                                                        if(SalleCours.length()>0){
+                                                                                                            if(SalleIsValide(SalleCours)){
+                                                                                                                if(BatimentCours.length()>0){
+                                                                                                                    if(TextMajIsValide(BatimentCours)){
+                                                                                                                        if(DureeCours.length()>0){
+                                                                                                                            if(HeureIsValide(DureeCours)){
+                                                                                                                                String TypeEvenmentSQL="SELECT idtypeEvenement FROM typeevenement WHERE  typeEvenement = ?";
+                                                                                                                                try {
+                                                                                                                                    preparedStatement = connection.prepareStatement(TypeEvenmentSQL);
+                                                                                                                                    preparedStatement.setString(1, labelTypeEvenement);
+                                                                                                                                    resultSet = preparedStatement.executeQuery();
+                                                                                                                                    if (resultSet.next()) {
+                                                                                                                                        String idtypeEvenement= resultSet.getString("idtypeEvenement");
+                                                                                                                                        String AjoutEvenemntSQL ="INSERT INTO evenement ( NomEvenement, CodePostal, Ville, Adresse, Date,Heure,IdCompetence, idPersone,idtypeEvenement ) VALUE( ?,?,?,?,?,?,?,?,?)";
+                                                                                                                                        try {
+                                                                                                                                            preparedStatement = connection.prepareStatement(AjoutEvenemntSQL);
+                                                                                                                                            preparedStatement.setString(1, NomEvenement);
+                                                                                                                                            preparedStatement.setString(2, CodePostalEvenemen);
+                                                                                                                                            preparedStatement.setString(3, VilleEvenemen);
+                                                                                                                                            preparedStatement.setString(4, AdresseEvenement);
+                                                                                                                                            preparedStatement.setString(5, DateEvenement);
+                                                                                                                                            preparedStatement.setString(6, HeureEvenement);
+                                                                                                                                            preparedStatement.setString(7, idCompetence);
+                                                                                                                                            preparedStatement.setString(8, idPersone);
+                                                                                                                                            preparedStatement.setString(9, idtypeEvenement);
+                                                                                                                                            preparedStatement.execute();
+
+                                                                                                                                            String idEvenementSQL="SELECT idEvenement FROM evenement WHERE  NomEvenement = '"+NomEvenement+"' AND CodePostal = '"+CodePostalEvenemen+"' AND Ville = '"+VilleEvenemen+"' AND Adresse = '"+AdresseEvenement+"' AND Date = '"+DateEvenement+"' AND Heure = '"+HeureEvenement+"' AND IdCompetence = '"+idCompetence+"' AND idPersone = '"+idPersone+"' AND idtypeEvenement = '"+idtypeEvenement+"' ";
+                                                                                                                                            try {
+                                                                                                                                                preparedStatement = connection.prepareStatement(idEvenementSQL);
+                                                                                                                                                resultSet = preparedStatement.executeQuery();
+                                                                                                                                                if (resultSet.next()) {
+                                                                                                                                                    String idEvenement = resultSet.getString("idEvenement");
+                                                                                                                                                    String AjoutCoursSQL ="INSERT INTO cours ( idEvenement,Salle, Batiment, DureeCours) VALUE(?, ?,?,?)";
+                                                                                                                                                    try {
+                                                                                                                                                        preparedStatement = connection.prepareStatement(AjoutCoursSQL);
+                                                                                                                                                        preparedStatement.setString(1, idEvenement);
+                                                                                                                                                        preparedStatement.setString(2, SalleCours);
+                                                                                                                                                        preparedStatement.setString(3, BatimentCours);
+                                                                                                                                                        preparedStatement.setString(4, DureeCours);
+                                                                                                                                                        preparedStatement.execute();
+                                                                                                                                                        JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
+                                                                                                                                                        UpdateTable();
+                                                                                                                                                        TextFieldClear();
+
+
+                                                                                                                                                    }catch (SQLException throwables){
+                                                                                                                                                        throwables.printStackTrace();
+                                                                                                                                                    }
+
+                                                                                                                                                }else{
+                                                                                                                                                    System.out.println("pb1");
+                                                                                                                                                }
+                                                                                                                                            }catch (SQLException throwables){
+                                                                                                                                                throwables.printStackTrace();
+                                                                                                                                            }
+
+                                                                                                                                        }catch (SQLException throwables){
+                                                                                                                                            throwables.printStackTrace();
+                                                                                                                                        }
+                                                                                                                                    }else {
+                                                                                                                                    }
+                                                                                                                                }catch (SQLException throwables){
+                                                                                                                                    throwables.printStackTrace();
+                                                                                                                                }
+                                                                                                                            }else{
+                                                                                                                                JOptionPane.showMessageDialog(null, "Duree de cours non valide veuillez saisir sous le format suivant 00:00");
+                                                                                                                            }
+                                                                                                                        }else{
+                                                                                                                            JOptionPane.showMessageDialog(null, "Veuillez saisir une Duree de cours");
+                                                                                                                        }
+                                                                                                                    }else{
+                                                                                                                        JOptionPane.showMessageDialog(null, "Nom de bat invalide Veuillez saisir en Maj et/ou avec des Chifre et  espace");
+                                                                                                                    }
+                                                                                                                }else{
+                                                                                                                    JOptionPane.showMessageDialog(null, "Veuillez saisir un nom de batiment");
+                                                                                                                }
+                                                                                                            }else{
+                                                                                                                JOptionPane.showMessageDialog(null, "Nuero de salle invalide saisire seulement des chifre");
+                                                                                                            }
+                                                                                                        }else{
+                                                                                                            JOptionPane.showMessageDialog(null, "Veuillez saisir un numero de salle");
+                                                                                                        }
+                                                                                                    }else{
+                                                                                                        JOptionPane.showMessageDialog(null, "persone");
+                                                                                                    }
+                                                                                                }catch (SQLException throwables){
+                                                                                                    throwables.printStackTrace();
+                                                                                                }
+                                                                                            }else{
+                                                                                                JOptionPane.showMessageDialog(null, "Veuille saisir une donnée présent dans la table du dessus");
+                                                                                            }
+                                                                                        } catch (SQLException throwables) {
+                                                                                            throwables.printStackTrace();
+                                                                                        }
+                                                                                    }else {
+                                                                                        JOptionPane.showMessageDialog(null, "Un Intervenant est obligatoire");
+                                                                                    }
+                                                                                }else{
+                                                                                }
+                                                                            }catch (SQLException throwables){
+                                                                                throwables.printStackTrace();
+                                                                            }
+                                                                        }else{
+                                                                            JOptionPane.showMessageDialog(null, "Veuille saisir une donnée présent dans la table de gauche");
+                                                                        }
+                                                                    } catch (SQLException throwables) {
+                                                                        throwables.printStackTrace();
+                                                                    }
+                                                                }else {
+                                                                    JOptionPane.showMessageDialog(null, "Une competence est obligatoire");
+                                                                }
+
+                                                            }else {
+                                                                JOptionPane.showMessageDialog(null, "Veuillez saisir l'heure sous le format 00:00");
+                                                            }
+                                                        }else {
+                                                            JOptionPane.showMessageDialog(null, "Saisire une Heure Svp");
+                                                        }
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(null, "Veuillez saisir la date sous le format mm/dd/year");
+                                                    }
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Date Obligaoiree");
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Verifier que l'adresse est corect et qu'elle est en Maj ");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "L'Adresse'est obligatoire");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Veuillez rentre le nom de la ville en  Maj");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "La ville est obligatoire");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Une erreur a était détecter dans le Code Postal ");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Le Code Postal est obligatoire");
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Veuillez Verifier que le nom de l'evenment contien que des MAJ et ou des Chifre");
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Veuillez saisir un nom d'evenement");
+                }
+
+            }else if (labelTypeEvenement.equals("Conference")){
+                System.out.println("conf");
+
+            }else if(labelTypeEvenement.equals("AutreEvenement")){
+                System.out.println("autre Event");
+
+            }else{
+                JOptionPane.showMessageDialog(null, "Veuillez redemarer l'application un problem est survenue");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Veuillez saisir un Type d'evenement");
+        }
     }
 }
 
