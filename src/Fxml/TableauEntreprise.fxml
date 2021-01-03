@@ -6,7 +6,7 @@
 
 <Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TableauEntrepriseController">
    <children>
-      <TableView fx:id="TableauEntreprise" layoutX="394.0" layoutY="331.0" onMouseClicked="#getSelectEntreprise" prefHeight="400.0" prefWidth="1136.0">
+      <TableView fx:id="TableauEntreprise" layoutX="432.0" layoutY="330.0" onMouseClicked="#getSelectEntreprise" prefHeight="400.0" prefWidth="1136.0">
         <columns>
           <TableColumn fx:id="ColumnNom" prefWidth="150.0" text="Nom " />
             <TableColumn fx:id="ColumnNumerDeSiren" prefWidth="160.0" text="Numero De Siren" />
