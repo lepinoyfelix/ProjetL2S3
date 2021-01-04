@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="ProjetJavaFx">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjetJavaFx</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="Main.MainConnexion" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/UnivTours-logo.png" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="EntrepriseGestorFac" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="ProjetJavaFx.jar">
+        <element id="module-output" name="ProjetJavaFx" />
+        <element id="file-copy" path="$PROJECT_DIR$/mysql-connector-java-8.0.13.jar" />
+      </element>
+    </root>
+  </artifact>
+</component>
