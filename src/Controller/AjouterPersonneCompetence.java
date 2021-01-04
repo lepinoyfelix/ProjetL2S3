@@ -227,7 +227,7 @@ Connexion classe BDD
         ObservableList<NomEvenemnt> list = FXCollections.observableArrayList();
 
         try {
-            String CompetenceSQL = "SELECT NomEvenement FROM evenement WHERE idtypeEvenement =3 ";
+            String CompetenceSQL = "SELECT NomEvenement FROM evenement WHERE idtypeEvenement =3 ";//
             PreparedStatement ps = connection.prepareStatement(CompetenceSQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
