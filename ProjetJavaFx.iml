@@ -12,7 +12,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../S3/POA/TP/TP6/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar!/" />
+          <root url="jar://$MODULE_DIR$/../S3/ProjetL2infoS3/ProjetJavaFx/lib/javax.mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -21,7 +21,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../S3/ProjetL2infoS3/ProjetJavaFx/lib/javax.mail.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.22.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
