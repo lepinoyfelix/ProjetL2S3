@@ -2,11 +2,11 @@ package AutreClasse;
 
 public class Entreprise {
 
-    int Num_SIREN, Code_Postal, fax,tel,DateVErsementTaxeAprentissage,Taxe_Apprentissage;
-    String Raison_Sociale, ville, adresse, Site_Web, Autre_Info, Competence;
+    int Num_SIREN, Code_Postal, idEntreprise;
+    String Raison_Sociale, ville, adresse, Site_Web, Autre_Info, Competence, Taxe_Apprentissage,DateVersementTaxeAprentissage,tel,fax;
 
 
-    public Entreprise(String Raison_Sociale, int Num_SIREN, int Code_Postal,String adresse, String ville,  int fax, int tel,String Site_Web, String Autre_Info, int DateVErsementTaxeAprentissage, int Taxe_Apprentissage, String Competence) {
+    public Entreprise(String Raison_Sociale, int Num_SIREN, int Code_Postal,String adresse, String ville,  String fax, String tel,String Site_Web, String Autre_Info,  String Taxe_Apprentissage,String DateVersementTaxeAprentissage, String Competence, int idEntreprise) {
         this.Raison_Sociale = Raison_Sociale;
         this.Num_SIREN = Num_SIREN;
         this.Code_Postal = Code_Postal;
@@ -16,9 +16,10 @@ public class Entreprise {
         this.tel = tel;
         this.Site_Web = Site_Web;
         this.Autre_Info = Autre_Info;
-        this.DateVErsementTaxeAprentissage = DateVErsementTaxeAprentissage;
         this.Taxe_Apprentissage = Taxe_Apprentissage;
+        this.DateVersementTaxeAprentissage = DateVersementTaxeAprentissage;
         this.Competence = Competence;
+        this.idEntreprise = idEntreprise;
     }
 
     public int getNum_SIREN() {
@@ -37,36 +38,36 @@ public class Entreprise {
         this.Code_Postal = Code_Postal;
     }
 
-    public int getFax() {
+    public String getFax() {
         return fax;
     }
 
-    public void setFax(int fax) {
+    public void setFax(String fax) {
         this.fax = fax;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 
-    public int getDateVErsementTaxeAprentissage() {
-        return DateVErsementTaxeAprentissage;
-    }
-
-    public void setDateVErsementTaxeAprentissage(int DateVErsementTaxeAprentissage) {
-        this.DateVErsementTaxeAprentissage = DateVErsementTaxeAprentissage;
-    }
-
-    public int getTaxe_Apprentissage() {
+    public String getTaxe_Apprentissage() {
         return Taxe_Apprentissage;
     }
 
-    public void setTaxe_Apprentissage(int Taxe_Apprentissage) {
+    public void setTaxe_Apprentissage(String Taxe_Apprentissage) {
         this.Taxe_Apprentissage = Taxe_Apprentissage;
+    }
+
+    public String getDateVersementTaxeAprentissage() {
+        return DateVersementTaxeAprentissage;
+    }
+
+    public void setDateVersementTaxeAprentissage(String DateVersementTaxeAprentissage) {
+        this.DateVersementTaxeAprentissage = DateVersementTaxeAprentissage;
     }
 
     public String getRaison_Sociale() {
@@ -113,4 +114,11 @@ public class Entreprise {
 
     public void setCompetence(String Competence) { this.Competence = Competence; }
 
+    public int getIdEntreprise() {
+        return idEntreprise;
+    }
+
+    public void setIdEntreprise(int idEntreprise) {
+        this.idEntreprise = idEntreprise;
+    }
 }

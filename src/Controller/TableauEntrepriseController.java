@@ -13,9 +13,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+
+import sun.plugin.javascript.navig.Anchor;
 
 
 import javax.swing.*;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.*;
 import java.util.Observable;
@@ -38,17 +42,17 @@ public class TableauEntrepriseController implements Initializable {
     @FXML
     private TableColumn<Entreprise, String> ColumnAdresse;
     @FXML
-    private TableColumn<Entreprise, Integer> ColumnFax;
+    private TableColumn<Entreprise, String> ColumnFax;
     @FXML
-    private TableColumn<Entreprise, Integer> ColumnTel;
+    private TableColumn<Entreprise, String> ColumnTel;
     @FXML
     private TableColumn<Entreprise, String> ColumnSiteWeb;
     @FXML
     private TableColumn<Entreprise, String> ColumnAutreInfo;
     @FXML
-    private TableColumn<Entreprise, Integer> ColumnTaxeAprentissageDatePayment;
+    private TableColumn<Entreprise, String> ColumnTaxeAprentissageDatePayment;
     @FXML
-    private TableColumn<Entreprise, Integer> ColumnTaxeAprentissageMontant;
+    private TableColumn<Entreprise, String> ColumnTaxeAprentissageMontant;
     @FXML
     private TableColumn<Competence, String> ColumnCompetence;
     @FXML
@@ -87,6 +91,15 @@ public class TableauEntrepriseController implements Initializable {
     private TableView<Competence> TableauCompetence;
     @FXML
     private TextField TextFieldCompetence;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPane1;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPane2;
+    @FXML
+    private Button ButtonMenu;
+    @FXML
+    private TextField TextFieldRecherche;
+
 
     /*
  Connexion classe BDD
@@ -142,14 +155,14 @@ public class TableauEntrepriseController implements Initializable {
     }
 
     public static boolean FaxIsValide(String Fax) {
-        String mdpRegex = "([0-9]*)";
+        String mdpRegex = "([0][0-9]*)";
         Pattern pat = Pattern.compile(mdpRegex);
         if (Fax == null)
             return false;
         return pat.matcher(Fax).matches();
     }
     public static boolean TelIsValide(String Tel) {
-        String mdpRegex = "([0-9]{10})";
+        String mdpRegex = "([0][0-9]{9})";
         Pattern pat = Pattern.compile(mdpRegex);
         if (Tel == null)
             return false;
@@ -203,18 +216,20 @@ public class TableauEntrepriseController implements Initializable {
             PreparedStatement psCompetenceEntreprise = connection.prepareStatement(CompetenceEntrepriseSQL);
             ResultSet rsCompetenceEntreprise = psCompetenceEntreprise.executeQuery();
             while (rs.next() && rsCompetenceEntreprise.next()) {
-                list.add(new Entreprise(rs.getString("Raison_Sociale"),
+                list.add(new Entreprise(
+                        rs.getString("Raison_Sociale"),
                         Integer.parseInt(rs.getString("Num_SIREN")),
                         Integer.parseInt(rs.getString("Code_Postal")),
                         rs.getString("Adresse"),
                         rs.getString("Ville"),
-                        Integer.parseInt(rs.getString("Fax")),
-                        Integer.parseInt(rs.getString("Tel")),
+                        rs.getString("Fax"),
+                        rs.getString("Tel"),
                         rs.getString("Site_Web"),
                         rs.getString("Autre_Info"),
-                        Integer.parseInt(rs.getString("Taxe_Apprentissage")),
-                        Integer.parseInt(rs.getString("DateVErsementTaxeAprentissage")),
-                        rsCompetenceEntreprise.getString("Competence")));
+                        rs.getString("Taxe_Apprentissage"),
+                        rs.getString("DateVErsementTaxeAprentissage"),
+                        rsCompetenceEntreprise.getString("Competence"),
+                        Integer.parseInt(rs.getString("idEntreprise"))));
 
             }
         } catch (Exception e) {
@@ -231,12 +246,12 @@ public class TableauEntrepriseController implements Initializable {
         ColumnCodePostal.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Code_Postal"));
         ColumnVille.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Ville"));
         ColumnAdresse.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Adresse"));
-        ColumnFax.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Fax"));
-        ColumnTel.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Tel"));
+        ColumnFax.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Fax"));
+        ColumnTel.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Tel"));
         ColumnSiteWeb.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Site_Web"));
         ColumnAutreInfo.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Autre_Info"));
-        ColumnTaxeAprentissageDatePayment.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Taxe_Apprentissage"));
-        ColumnTaxeAprentissageMontant.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("DateVErsementTaxeAprentissage"));
+        ColumnTaxeAprentissageDatePayment.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Taxe_Apprentissage"));
+        ColumnTaxeAprentissageMontant.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("DateVErsementTaxeAprentissage"));
         ColumnCompetence.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
         listM = getDataEntreprise();
         TableauEntreprise.setItems(listM);
@@ -245,6 +260,22 @@ public class TableauEntrepriseController implements Initializable {
         listCompetence = getDataCompetence();
         TableauCompetence.setItems(listCompetence);
 
+    }
+    public void UpdateTable(){
+        ColumnNom.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Raison_Sociale"));
+        ColumnNumerDeSiren.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Num_SIREN"));
+        ColumnCodePostal.setCellValueFactory(new PropertyValueFactory<Entreprise, Integer>("Code_Postal"));
+        ColumnVille.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Ville"));
+        ColumnAdresse.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Adresse"));
+        ColumnFax.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Fax"));
+        ColumnTel.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Tel"));
+        ColumnSiteWeb.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Site_Web"));
+        ColumnAutreInfo.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Autre_Info"));
+        ColumnTaxeAprentissageDatePayment.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("Taxe_Apprentissage"));
+        ColumnTaxeAprentissageMontant.setCellValueFactory(new PropertyValueFactory<Entreprise, String>("DateVErsementTaxeAprentissage"));
+        ColumnCompetence.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
+        listM = getDataEntreprise();
+        TableauEntreprise.setItems(listM);
     }
 
     public void checkEvent(javafx.event.ActionEvent actionEvent) {
@@ -258,7 +289,6 @@ public class TableauEntrepriseController implements Initializable {
     }
 
     public void AjouterEntreprise() {
-
         String NomEntreprise = TextFieldNomEntreprise.getText();
         String NumSiren = TextFieldNumSiren.getText();
         String CodePostal = TextFieldCodePostal.getText();
@@ -271,6 +301,7 @@ public class TableauEntrepriseController implements Initializable {
         String Competence = TextFieldCompetence.getText();
         String DateTaxe = TextFieldDateTaxe.getText();
         String MontantTaxe = TextFieldMontantTaxe.getText();
+
 
         if(SiteWeb.length() == 0) {
             SiteWeb ="NULL";
@@ -335,18 +366,22 @@ public class TableauEntrepriseController implements Initializable {
                                                                                                                 preparedStatement.setString(1, NomEntreprise);
                                                                                                                 preparedStatement.setString(2, NumSiren);
                                                                                                                 preparedStatement.setString(3, CodePostal);
-                                                                                                                preparedStatement.setString(4, Adresse);
-                                                                                                                preparedStatement.setString(5, Ville);
+                                                                                                                preparedStatement.setString(4, Ville);
+                                                                                                                preparedStatement.setString(5, Adresse);
                                                                                                                 preparedStatement.setString(6, Fax);
                                                                                                                 preparedStatement.setString(7, Tel);
                                                                                                                 preparedStatement.setString(8, SiteWeb);
                                                                                                                 preparedStatement.setString(9, AutreInfo);
-                                                                                                                preparedStatement.setString(10, DateTaxe);
-                                                                                                                preparedStatement.setString(11, MontantTaxe);
+                                                                                                                preparedStatement.setString(10, MontantTaxe);
+                                                                                                                preparedStatement.setString(11, DateTaxe);
                                                                                                                 preparedStatement.setString(12, idCompetence );
                                                                                                                 preparedStatement.execute();
 
+
                                                                                                                 JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
+                                                                                                                UpdateTable();
+                                                                                                                ClearTextField(); ;
+
 
                                                                                                             } catch (Exception e) {
                                                                                                                 e.printStackTrace();
@@ -397,6 +432,10 @@ public class TableauEntrepriseController implements Initializable {
                                                                                                 preparedStatement.execute();
 
                                                                                                 JOptionPane.showMessageDialog(null, "Entreprise ajouter avec suces");
+                                                                                                UpdateTable();
+
+
+                                                                                                ClearTextField();
 
                                                                                             } catch (Exception e) {
                                                                                                 e.printStackTrace();
@@ -409,7 +448,6 @@ public class TableauEntrepriseController implements Initializable {
                                                                                     }
                                                                                 }
                                                                             }else{
-                                                                                System.out.printf("PB");
                                                                             }
                                                                         } catch (SQLException throwables) {
                                                                             throwables.printStackTrace();
@@ -464,5 +502,300 @@ public class TableauEntrepriseController implements Initializable {
             JOptionPane.showMessageDialog(null, "Veuillez rentrer Le nom de l'entreprise ! ");
         }
     }
+
+    public void SupprimerEntreprise(ActionEvent actionEvent){
+        String SupprimerEntrepriseSql ="DELETE FROM entreprise WHERE Raison_Sociale = ? AND Num_SIREN = ?";
+        try{
+            preparedStatement = connection.prepareStatement(SupprimerEntrepriseSql);
+            preparedStatement.setString(1, TextFieldNomEntreprise.getText());
+            preparedStatement.setString(2, TextFieldNumSiren.getText());
+            preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "l'entreprise "+TextFieldNomEntreprise.getText()+" a été suprimer");
+            UpdateTable();
+            ClearTextField();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void EditEntreprise(ActionEvent actionEvent){
+
+        String NomEntreprise = TextFieldNomEntreprise.getText();
+        String NumSiren = TextFieldNumSiren.getText();
+        String CodePostal = TextFieldCodePostal.getText();
+        String Adresse = TextFieldAdresse.getText();
+        String Ville = TextFieldVille.getText();
+        String Fax = TextFieldFax.getText();
+        String Tel = TextFieldTel.getText();
+        String SiteWeb =TextFieldSiteWeb.getText();
+        String AutreInfo =TextFieldAutreInfo.getText();
+        String DateTaxe = TextFieldDateTaxe.getText();
+        String MontantTaxe = TextFieldMontantTaxe.getText();
+        String Competence = TextFieldCompetence.getText();
+        if (NomEntreprise.length() > 0) {
+            if (TextMajIsValide(NomEntreprise)) {
+                if (NumSiren.length() > 0) {
+                    if (NumSirenIsValide(NumSiren)) {
+                        if (CodePostal.length() > 0) {
+                            if (CodePostaleIsValide(CodePostal)) {
+                                if (Adresse.length() > 0) {
+                                    if (AdresseIsValide(Adresse)) {
+                                        if (Ville.length() > 0) {
+                                            if (TextMajIsValide(Ville)) {
+                                                if (FaxIsValide(Fax)) {
+                                                    if (Tel.length() > 0) {
+                                                        if (TelIsValide(Tel)) {
+                                                            if(Competence.length() > 0){
+                                                                if(!MontantTaxe.equals("0") && !DateTaxe.equals("0")) {
+                                                                    if (DateTaxe.length() > 0) {
+                                                                        if (DateIsValide(DateTaxe)) {
+                                                                            if (MontantTaxe.length() > 0) {
+                                                                                if (MontantTaxeIsValide(MontantTaxe)) {
+
+
+                                                                                    String CompetenceSQL= "SELECT * FROM Competence Where Competence = ?";
+                                                                                    try {
+                                                                                        preparedStatement = connection.prepareStatement(CompetenceSQL);
+                                                                                        preparedStatement.setString(1, Competence);
+                                                                                        resultSet = preparedStatement.executeQuery();
+                                                                                        if(resultSet.next()) {
+
+                                                                                            String iDEntrepriseSQL = "SELECT idEntreprise FROM entreprise Where Raison_Sociale = ? AND Num_SIREN = ?";
+                                                                                            try {
+                                                                                                preparedStatement = connection.prepareStatement(iDEntrepriseSQL);
+                                                                                                preparedStatement.setString(1, NomEntreprise);
+                                                                                                preparedStatement.setString(2, NumSiren);
+                                                                                                resultSet = preparedStatement.executeQuery();
+                                                                                                if (resultSet.next()) {
+                                                                                                    String idEntreprise = resultSet.getString("idEntreprise");
+                                                                                                    String IdCompetenceSQL = "SELECT idCompetence FROM Competence Where Competence = ?";
+                                                                                                    try {
+                                                                                                        preparedStatement = connection.prepareStatement(IdCompetenceSQL);
+                                                                                                        preparedStatement.setString(1, Competence);
+                                                                                                        resultSet = preparedStatement.executeQuery();
+                                                                                                        if (resultSet.next()) {
+                                                                                                            String idCompetence = resultSet.getString("idCompetence");
+
+                                                                                                            String EditEntrepriseSQL="UPDATE entreprise SET Raison_Sociale = '"+NomEntreprise+"' , " +
+                                                                                                                    "Num_SIREN = '"+NumSiren+"' , " +
+                                                                                                                    "Code_Postal = '"+CodePostal+"' , " +
+                                                                                                                    "Ville = '"+Ville+"' , " +
+                                                                                                                    "Adresse = '"+Adresse+"' , " +
+                                                                                                                    "Fax = '"+Fax+"' , " +
+                                                                                                                    "Tel = '"+Tel+"' , " +
+                                                                                                                    "Site_Web = '"+SiteWeb+"' , " +
+                                                                                                                    "Autre_Info = '"+AutreInfo+"' , " +
+                                                                                                                    "Taxe_Apprentissage = '"+MontantTaxe+"' , " +
+                                                                                                                    "DateVErsementTaxeAprentissage = '"+DateTaxe+"' , " +
+                                                                                                                    "idCompetence  = '"+idCompetence+"' WHERE idEntreprise = '"+idEntreprise+"' ";
+                                                                                                            preparedStatement = connection.prepareStatement(EditEntrepriseSQL);
+                                                                                                            preparedStatement.execute();
+
+                                                                                                            JOptionPane.showMessageDialog(null, "La modification de "+NomEntreprise+ " a etait prise en compte");
+                                                                                                            UpdateTable();
+                                                                                                            ClearTextField();
+                                                                                                        }
+                                                                                                    } catch (SQLException throwables) {
+                                                                                                        JOptionPane.showMessageDialog(null, "Erreur lors de la modification");
+                                                                                                    }
+                                                                                                }
+                                                                                            } catch (SQLException throwables) {
+                                                                                                throwables.printStackTrace();
+                                                                                            }
+
+
+                                                                                        }else{
+                                                                                            JOptionPane.showMessageDialog(null,"Veuille saisir une donnée présent dans la table de gauche");
+                                                                                        }
+
+                                                                                    } catch (SQLException throwables) {
+                                                                                        throwables.printStackTrace();
+                                                                                    }
+                                                                                } else {
+                                                                                    JOptionPane.showMessageDialog(null, "Saisir un montant Valide");
+                                                                                }
+                                                                            } else {
+                                                                                JOptionPane.showMessageDialog(null, "Saisir un montant ");
+                                                                            }
+                                                                        } else {
+                                                                            JOptionPane.showMessageDialog(null, "Saisir une date Valide");
+                                                                        }
+                                                                    } else{
+                                                                        JOptionPane.showMessageDialog(null, "Saisir une date ");
+                                                                    }
+                                                                }else{
+                                                                    String CompetenceSQL= "SELECT * FROM Competence Where Competence = ?";
+                                                                    try {
+                                                                        preparedStatement = connection.prepareStatement(CompetenceSQL);
+                                                                        preparedStatement.setString(1, Competence);
+                                                                        resultSet = preparedStatement.executeQuery();
+                                                                        if(resultSet.next()) {
+
+                                                                            String iDEntrepriseSQL = "SELECT idEntreprise FROM entreprise Where Raison_Sociale = ? AND Num_SIREN = ?";
+                                                                            try {
+                                                                                preparedStatement = connection.prepareStatement(iDEntrepriseSQL);
+                                                                                preparedStatement.setString(1, NomEntreprise);
+                                                                                preparedStatement.setString(2, NumSiren);
+                                                                                resultSet = preparedStatement.executeQuery();
+                                                                                if (resultSet.next()) {
+                                                                                    String idEntreprise = resultSet.getString("idEntreprise");
+                                                                                    String IdCompetenceSQL = "SELECT idCompetence FROM Competence Where Competence = ?";
+                                                                                    try {
+                                                                                        preparedStatement = connection.prepareStatement(IdCompetenceSQL);
+                                                                                        preparedStatement.setString(1, Competence);
+                                                                                        resultSet = preparedStatement.executeQuery();
+                                                                                        if (resultSet.next()) {
+                                                                                            String idCompetence = resultSet.getString("idCompetence");
+
+                                                                                            String EditEntrepriseSQL="UPDATE entreprise SET Raison_Sociale = '"+NomEntreprise+"' , " +
+                                                                                                    "Num_SIREN = '"+NumSiren+"' , " +
+                                                                                                    "Code_Postal = '"+CodePostal+"' , " +
+                                                                                                    "Ville = '"+Ville+"' , " +
+                                                                                                    "Adresse = '"+Adresse+"' , " +
+                                                                                                    "Fax = '"+Fax+"' , " +
+                                                                                                    "Tel = '"+Tel+"' , " +
+                                                                                                    "Site_Web = '"+SiteWeb+"' , " +
+                                                                                                    "Autre_Info = '"+AutreInfo+"' , " +
+                                                                                                    "Taxe_Apprentissage = '"+MontantTaxe+"' , " +
+                                                                                                    "DateVErsementTaxeAprentissage = '"+DateTaxe+"' , " +
+                                                                                                    "idCompetence  = '"+idCompetence+"' WHERE idEntreprise = '"+idEntreprise+"' ";
+                                                                                            preparedStatement = connection.prepareStatement(EditEntrepriseSQL);
+                                                                                            preparedStatement.execute();
+
+                                                                                            JOptionPane.showMessageDialog(null, "La modification de "+NomEntreprise+ " a etait prise en compte");
+                                                                                            UpdateTable();
+                                                                                            ClearTextField();
+                                                                                        }
+                                                                                    } catch (SQLException throwables) {
+                                                                                        JOptionPane.showMessageDialog(null, "Erreur lors de la modification");
+                                                                                    }
+                                                                                }
+                                                                            } catch (SQLException throwables) {
+                                                                                throwables.printStackTrace();
+                                                                            }
+
+
+                                                                        }else{
+                                                                            JOptionPane.showMessageDialog(null,"Veuille saisir une donnée présent dans la table de gauche");
+                                                                        }
+
+                                                                    } catch (SQLException throwables) {
+                                                                        throwables.printStackTrace();
+                                                                    }
+                                                                }
+                                                            }else {
+                                                                JOptionPane.showMessageDialog(null,"Une competence est obligatoire");
+                                                            }
+                                                        } else {
+                                                            JOptionPane.showMessageDialog(null, "Le numero  de tel est invalide");
+                                                        }
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(null, "Le Tel est obligatoire");
+                                                    }
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Le Fax saise est invalide");
+                                                }
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Veuillez rentre le nom de la ville en  Maj");
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "La ville est obligatoire");
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Verifier que l'adresse est corect et qu'elle est en Maj ");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "L'Adresse'est obligatoire");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Une erreur a était détecter dans le Code Postal ");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Le Code Postal est obligatoire");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Une erreur a était détecter dans le numero de siren ");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Numero de SIREN obligatoire ");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Veuillez rentrer Le nom de l'entreprise en MAJ");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Veuillez rentrer Le nom de l'entreprise ! ");
+        }
+    }
+
+
+    @FXML
+    public void getSelectEntreprise(javafx.scene.input.MouseEvent mouseEvent){
+        index = TableauEntreprise.getSelectionModel().getSelectedIndex();
+        if(index  <= -1){
+            return;
+        }
+        TextFieldNomEntreprise.setText(ColumnNom.getCellData(index).toString());
+        TextFieldNumSiren.setText(ColumnNumerDeSiren.getCellData(index).toString());
+        TextFieldCodePostal.setText(ColumnCodePostal.getCellData(index).toString());
+        TextFieldAdresse.setText(ColumnAdresse.getCellData(index).toString());
+        TextFieldVille.setText(ColumnVille.getCellData(index).toString());
+        TextFieldFax.setText(ColumnFax.getCellData(index).toString());
+        TextFieldTel.setText(ColumnTel.getCellData(index).toString());
+        TextFieldSiteWeb.setText(ColumnSiteWeb.getCellData(index).toString());
+        TextFieldAutreInfo.setText(ColumnAutreInfo.getCellData(index).toString());
+        TextFieldCompetence.setText(ColumnCompetence.getCellData(index).toString());
+        TextFieldDateTaxe.setText(ColumnTaxeAprentissageDatePayment.getCellData(index).toString());
+        TextFieldMontantTaxe.setText(ColumnTaxeAprentissageMontant.getCellData(index).toString());
+        if(TextFieldMontantTaxe.getText().equals("0")){
+            CheckBoxTaxeApprentissage.setSelected(false);
+            TextFieldDateTaxe.setVisible(false);
+            TextFieldMontantTaxe.setVisible(false);
+        }else{
+            CheckBoxTaxeApprentissage.setSelected(true);
+            TextFieldDateTaxe.setVisible(true);
+            TextFieldMontantTaxe.setVisible(true);
+        }
+
+
+    }
+    @FXML
+    public void getSelectCompetence(javafx.scene.input.MouseEvent mouseEvent){
+        index = TableauCompetence.getSelectionModel().getSelectedIndex();
+        if(index <= -1) {
+            return;
+        }
+        TextFieldCompetence.setText(ColumnCompétenceTComp.getCellData(index).toString());
+    }
+
+    public void ClearTextField(){
+        TextFieldNomEntreprise.clear();
+        TextFieldNumSiren.clear();
+        TextFieldCodePostal.clear();
+        TextFieldAdresse.clear();
+        TextFieldVille.clear();
+        TextFieldFax.clear();
+        TextFieldTel.clear();
+        TextFieldSiteWeb.clear();
+        TextFieldAutreInfo.clear();
+        TextFieldCompetence.clear();
+        TextFieldDateTaxe.clear();
+        TextFieldMontantTaxe.clear();
+        CheckBoxTaxeApprentissage.setSelected(false);
+        TextFieldDateTaxe.setVisible(false);
+        TextFieldMontantTaxe.setVisible(false);
+    }
+
+    public void affichermenue(ActionEvent actionEvent){
+        AnchorPane1.setVisible(true);
+        AnchorPane2.setVisible(true);
+        ButtonMenu.setVisible(false);
+    }
+    public void cachermenue(ActionEvent actionEvent){
+        AnchorPane1.setVisible(false);
+        AnchorPane2.setVisible(false);
+        ButtonMenu.setVisible(true);
+    }
+
 }
 

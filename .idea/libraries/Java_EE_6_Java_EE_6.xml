@@ -12,6 +12,7 @@
       <root url="jar://$PROJECT_DIR$/lib/javax.servlet.jsp.jstl.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/javax.mail.jar!/" />
       <root url="file://$PROJECT_DIR$/../../../javafx-sdk-15.0.1/lib" />
+      <root url="jar://$PROJECT_DIR$/mysql-connector-java-8.0.13.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
