@@ -1202,6 +1202,20 @@ Connexion classe BDD
                         return false;
 
                 });
+            }else if(labelCatégorierecherche.getText().equals("Competence")) {
+                filteredData.setPredicate(person -> {
+
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (person.getCompetence().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else
+                        return false;
+
+                });
             }
         });
         SortedList<PersonneNomPrenom> sortedData = new SortedList<>(filteredData);
