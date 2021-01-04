@@ -5,23 +5,24 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AjouterPersonneCompetence">
    <children>
-      <TableView fx:id="TableViewPersone" layoutX="375.0" layoutY="307.0" onMouseClicked="#getSelecectpersone" prefHeight="351.0" prefWidth="548.0">
+      <TableView fx:id="TableViewPersone" layoutX="375.0" layoutY="307.0" onMouseClicked="#getSelecectpersone" prefHeight="351.0" prefWidth="604.0">
         <columns>
           <TableColumn fx:id="ColumnNom" prefWidth="129.0" text="Nom" />
             <TableColumn fx:id="ColumnPrenom" prefWidth="98.0" text="Prenom" />
             <TableColumn fx:id="ColumnTel" prefWidth="102.0" text="Tel" />
             <TableColumn fx:id="ColumnEmail" prefWidth="78.0" text="Email" />
-            <TableColumn fx:id="ColumnEntreprise" prefWidth="172.0" text="Entreprise" />
+            <TableColumn fx:id="ColumnEntreprise" prefWidth="85.0" text="Entreprise" />
+            <TableColumn fx:id="ColumnCompetenceTPersone" prefWidth="111.0" text="Competence" />
         </columns>
       </TableView>
-      <TableView fx:id="TableViewCompetence" layoutX="937.0" layoutY="307.0" onMouseClicked="#getSelectCompetence" prefHeight="351.0" prefWidth="200.0">
+      <TableView fx:id="TableViewCompetence" layoutX="988.0" layoutY="307.0" onMouseClicked="#getSelectCompetence" prefHeight="351.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="ColumnCompetence" prefWidth="199.0" text="Competence" />
         </columns>
       </TableView>
       <Button fx:id="BtnAjouter" disable="true" layoutX="80.0" layoutY="307.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="25.0" prefWidth="113.0" text="Ajouter" />
       <Button fx:id="BtnModifierPersonne" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false" onAction="#modifierPersone" text="Modifier" />
-       <Button fx:id="BtnModifierPersonneEvenementEntreprise" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false" onAction="#modifierEvenementEntreprise" text="Modifier" />
+       <Button fx:id="BtnModifierPersonneEvenementEntreprise" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false"  text="Modifier" />
       <Button fx:id="BtnModifierCompetence" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false" onAction="#ModiferCompetence" text="Modifier" />
       <TextField fx:id="TextFieldNom" layoutX="58.0" layoutY="362.0" promptText="Nom" visible="false" />
       <TextField fx:id="TextFieldPrenom" layoutX="58.0" layoutY="403.0" promptText="Prenom" visible="false" />
@@ -48,18 +49,24 @@
        <Button fx:id="BtnSupprimerCompetence" disable="true" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" onAction="#SupprimerCompetence" text="Supprimer" />
       <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="479.0" layoutY="198.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
       <TextField fx:id="TextFieldRecherche" disable="true" layoutX="678.0" layoutY="198.0" onAction="#ButtonRechercheOnAction" />
-      <TableView fx:id="TableViewEvenement" layoutX="1148.0" layoutY="303.0" prefHeight="351.0" prefWidth="213.0" onMouseClicked="#getSelectEntrepriseEvenemnt">
+      <TableView fx:id="TableViewEvenement" layoutX="1201.0" layoutY="307.0" onMouseClicked="#getSelectEntrepriseEvenemnt" prefHeight="351.0" prefWidth="213.0">
         <columns>
           <TableColumn fx:id="ColumnEvenementTEvenement" prefWidth="98.0" text="Evenement" />
           <TableColumn fx:id="ColumnEntrepriseTEvenement" prefWidth="114.0" text="NomEntreprise" />
         </columns>
       </TableView>
       <CheckBox fx:id="CheckBoxkEvententreprise" layoutX="238.0" layoutY="279.0" mnemonicParsing="false" onAction="#CheckEvententreprise" text="Entreprise/Evenment" />
-      <TableView fx:id="TableViewAfficherEvent" layoutX="37.0" layoutY="646.0" prefHeight="100.0" prefWidth="125.0" visible="false" onMouseClicked="#getSelectEventEntreprise">
+      <TableView fx:id="TableViewAfficherEvent" layoutX="37.0" layoutY="646.0" onMouseClicked="#getSelectEventEntreprise" prefHeight="100.0" prefWidth="125.0" visible="false">
         <columns>
           <TableColumn fx:id="ColumnEventTEvent" prefWidth="125.0" text="Evenement" />
         </columns>
       </TableView>
-      <TextField fx:id="TextFieldSelectEvent" layoutX="187.0" layoutY="684.0" disable="true" visible="false" promptText="Select Evenement" />
+      <TextField fx:id="TextFieldSelectEvent" disable="true" layoutX="187.0" layoutY="684.0" promptText="Select Evenement" visible="false" />
+      <TableView fx:id="TableViewCompetence2" layoutX="47.0" layoutY="656.0" onMouseClicked="#getSelectCompetenceP" prefHeight="100.0" prefWidth="125.0" visible="false">
+         <columns>
+            <TableColumn fx:id="ColumnCompetence2" prefWidth="125.0" text="Competence" />
+         </columns>
+      </TableView>
+      <TextField fx:id="ChoixCompetencePersonne" disable="true" layoutX="197.0" layoutY="694.0" promptText="Select Competence From persone" visible="false" />
    </children>
 </Pane>

@@ -108,6 +108,14 @@ public class AjouterPersonneCompetence implements Initializable {
     private Button BtnSupprimerEvenementEntreprise;
     @FXML
     private Button BtnModifierPersonneEvenementEntreprise;
+    @FXML
+    private TableView<Competence> TableViewCompetence2;
+    @FXML
+    private  TableColumn<Competence, String> ColumnCompetence2;
+    @FXML
+    private TextField ChoixCompetencePersonne;
+    @FXML
+    private TableColumn<PersonneNomPrenom, String> ColumnCompetenceTPersone;
 
 
 
@@ -141,7 +149,7 @@ Connexion classe BDD
         ObservableList<PersonneNomPrenom> list = FXCollections.observableArrayList();
 
         try {
-            String PersoneSQL = "SELECT P.NomPersone, P.PrenomPersone, P.TelPersone,P.EmailPersonne, E.RAISON_SOCIALE FROM persone P INNER JOIN Entreprise E ON E.IDENTREPRISE = P.IDENTREPRISE";
+            String PersoneSQL = "SELECT P.NomPersone, P.PrenomPersone, P.TelPersone,P.EmailPersonne, E.RAISON_SOCIALE, C.Competence FROM persone P INNER JOIN Entreprise E ON E.IDENTREPRISE = P.IDENTREPRISE INNER JOIN Competence C ON C.idCompetence = P.idCompetence ";
             PreparedStatement ps = connection.prepareStatement(PersoneSQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -150,7 +158,8 @@ Connexion classe BDD
                         rs.getString("PrenomPersone"),
                         rs.getString("TelPersone"),
                         rs.getString("EmailPersonne"),
-                        rs.getString("Raison_Sociale")));
+                        rs.getString("Raison_Sociale"),
+                        rs.getString("Competence")));
 
             }
 
@@ -241,6 +250,26 @@ Connexion classe BDD
         return list;
     }
 
+    ObservableList<Competence> listCompetence2;
+
+    public static ObservableList<Competence> getDataCompetence2() {
+        Connection connection = ConexionBDD.connectdb();
+        ObservableList<Competence> list = FXCollections.observableArrayList();
+
+        try {
+            String CompetenceSQL = "SELECT Competence FROM Competence";
+            PreparedStatement ps = connection.prepareStatement(CompetenceSQL);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Competence(rs.getString("Competence")));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
 
     ObservableList listRecherche = FXCollections.observableArrayList();
     private void loadData() {
@@ -249,7 +278,8 @@ Connexion classe BDD
         String b = "Prenom";
         String c = "Numero";
         String d ="Entreprise";
-        listRecherche.addAll(a, b,c,d);
+        String e ="Competence";
+        listRecherche.addAll(a, b,c,d,e);
         ChoiceBoxRecherche.getItems().addAll(listRecherche);
     }
     @Override
@@ -259,6 +289,7 @@ Connexion classe BDD
         ColumnTel.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("TelPersone"));
         ColumnEmail.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("EmailPersonne"));
         ColumnEntreprise.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Raison_Sociale"));
+        ColumnCompetenceTPersone.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Competence"));
         listP = getDataPersone();
         TableViewPersone.setItems(listP);
 
@@ -278,6 +309,10 @@ Connexion classe BDD
         ColumnEventTEvent.setCellValueFactory(new PropertyValueFactory<NomEvenemnt, String>("NomEvenement"));
         listEvenement = getDataNomEvenement();
         TableViewAfficherEvent.setItems(listEvenement);
+
+        ColumnCompetence2.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
+        listCompetence2 = getDataCompetence2();
+        TableViewCompetence2.setItems(listCompetence2);
 
 
         loadData();
@@ -290,6 +325,7 @@ Connexion classe BDD
         ColumnTel.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("TelPersone"));
         ColumnEmail.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("EmailPersonne"));
         ColumnEntreprise.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Raison_Sociale"));
+        ColumnCompetenceTPersone.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Competence"));
         listP = getDataPersone();
         TableViewPersone.setItems(listP);
 
@@ -309,6 +345,10 @@ Connexion classe BDD
         ColumnEventTEvent.setCellValueFactory(new PropertyValueFactory<NomEvenemnt, String>("NomEvenement"));
         listEvenement = getDataNomEvenement();
         TableViewAfficherEvent.setItems(listEvenement);
+
+        ColumnCompetence2.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
+        listCompetence2 = getDataCompetence2();
+        TableViewCompetence2.setItems(listCompetence2);
 
 
         loadData();
@@ -323,12 +363,13 @@ Connexion classe BDD
         TextFieldCompetence.clear();
         TextFieldSelectEntreprise.clear();
         TextFieldSelectEvent.clear();
+        ChoixCompetencePersonne.clear();
 
     }
     public void CheckEvententreprise(javafx.event.ActionEvent actionEvent){
         if (CheckBoxkEvententreprise.isSelected()) {
             BtnAjouter.setDisable(false);
-            TextFieldCompetence.setVisible(false);
+            TextFieldCompetence.setVisible(true);
             CheckBoxPersone.setSelected(false);
             CheckBoxCompetence.setSelected(false);
             TextFieldNom.setVisible(false);
@@ -345,6 +386,8 @@ Connexion classe BDD
             TextFieldSelectEntreprise.setVisible(true);
             TextFieldSelectEvent.setVisible(true);
             TableViewAfficherEvent.setVisible(true);
+            TableViewCompetence2.setVisible(false);
+            ChoixCompetencePersonne.setVisible(false);
             clearTextfield();
 
 
@@ -364,6 +407,8 @@ Connexion classe BDD
             TableViewAfficherEvent.setVisible(false);
             TableViewEntreprise.setVisible(false);
             TextFieldSelectEntreprise.setVisible(false);
+            TableViewCompetence2.setVisible(false);
+            ChoixCompetencePersonne.setVisible(false);
             clearTextfield();
 
         }
@@ -390,6 +435,8 @@ Connexion classe BDD
             TextFieldSelectEntreprise.setVisible(false);
             TextFieldSelectEvent.setVisible(false);
             TableViewAfficherEvent.setVisible(false);
+            TableViewCompetence2.setVisible(false);
+            ChoixCompetencePersonne.setVisible(false);
             clearTextfield();
 
 
@@ -407,6 +454,8 @@ Connexion classe BDD
             BtnModifierPersonne.setDisable(true);
             TextFieldSelectEvent.setVisible(false);
             TableViewAfficherEvent.setVisible(false);
+            TableViewCompetence2.setVisible(false);
+            ChoixCompetencePersonne.setVisible(false);
             clearTextfield();
 
         }
@@ -434,6 +483,8 @@ Connexion classe BDD
             TextFieldSelectEntreprise.setVisible(true);
             TextFieldSelectEvent.setVisible(false);
             TableViewAfficherEvent.setVisible(false);
+            TableViewCompetence2.setVisible(true);
+            ChoixCompetencePersonne.setVisible(true);
             clearTextfield();
 
         } else {
@@ -450,6 +501,9 @@ Connexion classe BDD
             BtnModifierPersonne.setDisable(true);
             TextFieldSelectEvent.setVisible(false);
             TableViewAfficherEvent.setVisible(false);
+            TableViewCompetence2.setVisible(false);
+            ChoixCompetencePersonne.setVisible(false);
+
             clearTextfield();
 
         }
@@ -469,6 +523,7 @@ Connexion classe BDD
         TextFieldTel.setText(ColumnTel.getCellData(index).toString());
         TextFieldEmail.setText(ColumnEmail.getCellData(index).toString());
         TextFieldSelectEntreprise.setText(ColumnEntreprise.getCellData(index).toString());
+        ChoixCompetencePersonne.setText(ColumnCompetenceTPersone.getCellData(index).toString());
 
         LabelNom.setText(ColumnNom.getCellData(index).toString());
         LabelPrenom.setText(ColumnPrenom.getCellData(index).toString());
@@ -501,6 +556,8 @@ Connexion classe BDD
         TextFieldSelectEvent.setVisible(false);
         TableViewAfficherEvent.setVisible(false);
         CheckBoxkEvententreprise.setSelected(false);
+        ChoixCompetencePersonne.setVisible(true);
+        TableViewCompetence2.setVisible(true);
 
     }
 
@@ -539,6 +596,9 @@ Connexion classe BDD
         TextFieldSelectEvent.setVisible(false);
         TableViewAfficherEvent.setVisible(false);
         CheckBoxkEvententreprise.setSelected(false);
+        ChoixCompetencePersonne.setVisible(false);
+        TableViewCompetence2.setVisible(false);
+
     }
 
     @FXML
@@ -575,6 +635,9 @@ Connexion classe BDD
         TextFieldSelectEvent.setVisible(true);
         TableViewAfficherEvent.setVisible(true);
         CheckBoxkEvententreprise.setSelected(false);
+        ChoixCompetencePersonne.setVisible(false);
+        TableViewCompetence2.setVisible(false);
+
     }
 
     int indexGetEntreprise = -1;
@@ -586,6 +649,17 @@ Connexion classe BDD
             return;
         }
         TextFieldSelectEntreprise.setText(ColumnEntrepriseTentreprise.getCellData(indexGetEntreprise).toString());
+    }
+
+    int indexGetCompetenceP = -1;
+
+    @FXML
+    public void getSelectCompetenceP(javafx.scene.input.MouseEvent mouseEvent) {
+        indexGetCompetenceP = TableViewCompetence2.getSelectionModel().getSelectedIndex();
+        if (indexGetCompetenceP <= -1) {
+            return;
+        }
+        ChoixCompetencePersonne.setText(ColumnCompetence2.getCellData(indexGetCompetenceP).toString());
     }
 
     int indexGetEventEntreprise = -1;
@@ -679,6 +753,7 @@ Connexion classe BDD
             String TelP = TextFieldTel.getText();
             String EmailP = TextFieldEmail.getText();
             String Entreprise = TextFieldSelectEntreprise.getText();
+            String Competence = ChoixCompetencePersonne.getText();
             if (NomP.length() > 0) {
                 if (NomPIsValide(NomP)) {
                     if (PrenomP.length() > 0) {
@@ -688,50 +763,67 @@ Connexion classe BDD
                                     if (EmailP.length() > 0) {
                                         if (mailisValid(EmailP)) {
                                             if (Entreprise.length() > 0) {
-                                                String EntrepriseSelectSQL = "SELECT * FROM  entreprise WHERE Raison_Sociale = ?";
-                                                try {
-                                                    preparedStatement = connection.prepareStatement(EntrepriseSelectSQL);
-                                                    preparedStatement.setString(1, Entreprise);
-                                                    resultSet = preparedStatement.executeQuery();
-                                                    if (resultSet.next()) {
-                                                        String idEntreprise = resultSet.getString("idEntreprise");
-                                                        String VerifPersonneSQL = "SELECT NomPersone,PrenomPersone,TelPersone,EmailPersonne FROM  persone WHERE NomPersone = ? AND PrenomPersone = ? AND TelPersone = ? AND EmailPersonne = ?";
-                                                        try {
-                                                            preparedStatement = connection.prepareStatement(VerifPersonneSQL);
-                                                            preparedStatement.setString(1, NomP);
-                                                            preparedStatement.setString(2, PrenomP);
-                                                            preparedStatement.setString(3, TelP);
-                                                            preparedStatement.setString(4, EmailP);
-                                                            resultSet = preparedStatement.executeQuery();
-                                                            if (!resultSet.next()) {
-                                                                String AjouterPErsoneSQL = "INSERT INTO persone (NomPersone,PrenomPersone,TelPersone,EmailPersonne, idEntreprise) VALUE (?,?,?,?,?)";
-                                                                try {
-                                                                    preparedStatement = connection.prepareStatement(AjouterPErsoneSQL);
-                                                                    preparedStatement.setString(1, NomP);
-                                                                    preparedStatement.setString(2, PrenomP);
-                                                                    preparedStatement.setString(3, TelP);
-                                                                    preparedStatement.setString(4, EmailP);
-                                                                    preparedStatement.setString(5, idEntreprise);
-                                                                    preparedStatement.execute();
-                                                                    JOptionPane.showMessageDialog(null, "Personne Ajouter avec Succée");
-                                                                    UpdateTable();
-                                                                    clearTextfield();
-                                                                } catch (SQLException throwables) {
-                                                                    throwables.printStackTrace();
-                                                                } catch (HeadlessException e) {
-                                                                    e.printStackTrace();
-                                                                }
-                                                            } else {
-                                                                JOptionPane.showMessageDialog(null, "La personne existe déja");
-                                                                clearTextfield();
-                                                            }
+                                                if(Competence.length()>0){
 
-                                                        } catch (SQLException throwables) {
-                                                            throwables.printStackTrace();
+                                                    String EntrepriseSelectSQL = "SELECT * FROM  entreprise WHERE Raison_Sociale = ?";
+                                                    try {
+                                                        preparedStatement = connection.prepareStatement(EntrepriseSelectSQL);
+                                                        preparedStatement.setString(1, Entreprise);
+                                                        resultSet = preparedStatement.executeQuery();
+                                                        if (resultSet.next()) {
+                                                            String idEntreprise = resultSet.getString("idEntreprise");
+                                                            String SelectCompetenceZSQL = "SELECT idcompetence FROM competence Where competence = ?";
+                                                            try {
+                                                                preparedStatement = connection.prepareStatement(SelectCompetenceZSQL);
+                                                                preparedStatement.setString(1, Competence);
+                                                                resultSet = preparedStatement.executeQuery();
+                                                                if(resultSet.next()){
+                                                                    String idCompetence = resultSet.getString("idCompetence");
+                                                                    String VerifPersonneSQL = "SELECT NomPersone,PrenomPersone,TelPersone,EmailPersonne FROM  persone WHERE NomPersone = ? AND PrenomPersone = ? AND TelPersone = ? AND EmailPersonne = ?";
+                                                                    try {
+                                                                        preparedStatement = connection.prepareStatement(VerifPersonneSQL);
+                                                                        preparedStatement.setString(1, NomP);
+                                                                        preparedStatement.setString(2, PrenomP);
+                                                                        preparedStatement.setString(3, TelP);
+                                                                        preparedStatement.setString(4, EmailP);
+                                                                        resultSet = preparedStatement.executeQuery();
+                                                                        if (!resultSet.next()) {
+                                                                            String AjouterPErsoneSQL = "INSERT INTO persone (NomPersone,PrenomPersone,TelPersone,EmailPersonne, idEntreprise, idCompetence) VALUE (?,?,?,?,?,?)";
+                                                                            try {
+                                                                                preparedStatement = connection.prepareStatement(AjouterPErsoneSQL);
+                                                                                preparedStatement.setString(1, NomP);
+                                                                                preparedStatement.setString(2, PrenomP);
+                                                                                preparedStatement.setString(3, TelP);
+                                                                                preparedStatement.setString(4, EmailP);
+                                                                                preparedStatement.setString(5, idEntreprise);
+                                                                                preparedStatement.setString(6, idCompetence);
+                                                                                preparedStatement.execute();
+                                                                                JOptionPane.showMessageDialog(null, "Personne Ajouter avec Succée");
+                                                                                UpdateTable();
+                                                                                clearTextfield();
+                                                                            } catch (SQLException throwables) {
+                                                                                throwables.printStackTrace();
+                                                                            } catch (HeadlessException e) {
+                                                                                e.printStackTrace();
+                                                                            }
+                                                                        } else {
+                                                                            JOptionPane.showMessageDialog(null, "La personne existe déja");
+                                                                            clearTextfield();
+                                                                        }
+
+                                                                    } catch (SQLException throwables) {
+                                                                        throwables.printStackTrace();
+                                                                    }
+                                                                }
+                                                            } catch (SQLException throwables) {
+                                                                throwables.printStackTrace();
+                                                            }
                                                         }
+                                                    } catch (SQLException throwables) {
+                                                        throwables.printStackTrace();
                                                     }
-                                                } catch (SQLException throwables) {
-                                                    throwables.printStackTrace();
+                                                }else{
+                                                    JOptionPane.showMessageDialog(null,"competence Obligatoire");
                                                 }
 
                                             } else {
@@ -844,6 +936,7 @@ Connexion classe BDD
         String LabelPrenomP = LabelPrenom.getText();
         String LabelTelP = LabelTel.getText();
         String LabelEmailP = LabelEmail.getText();
+        String Competence =ChoixCompetencePersonne.getText();
         if (NomP.length() > 0) {
             if (NomPIsValide(NomP)) {
                 if (PrenomP.length() > 0) {
@@ -853,50 +946,67 @@ Connexion classe BDD
                                 if (EmailP.length() > 0) {
                                     if (mailisValid(EmailP)) {
                                         if (Entreprise.length() > 0) {
-                                            String EntrepriseSelectSQL = "SELECT * FROM  entreprise WHERE Raison_Sociale = ?";
-                                            try {
-                                                preparedStatement = connection.prepareStatement(EntrepriseSelectSQL);
-                                                preparedStatement.setString(1, Entreprise);
-                                                resultSet = preparedStatement.executeQuery();
-                                                if (resultSet.next()) {
+                                          if(Competence.length()>0){
+                                              String SelectCompetenceZSQL = "SELECT idcompetence FROM competence Where competence = ?";
+                                              try {
+                                                  preparedStatement = connection.prepareStatement(SelectCompetenceZSQL);
+                                                  preparedStatement.setString(1, Competence);
+                                                  resultSet = preparedStatement.executeQuery();
+                                                  if(resultSet.next()) {
+                                                      String idCompetence = resultSet.getString("idCompetence");
+                                                      String EntrepriseSelectSQL = "SELECT * FROM  entreprise WHERE Raison_Sociale = ?";
+                                                      try {
+                                                          preparedStatement = connection.prepareStatement(EntrepriseSelectSQL);
+                                                          preparedStatement.setString(1, Entreprise);
+                                                          resultSet = preparedStatement.executeQuery();
+                                                          if (resultSet.next()) {
 
-                                                    String idEntreprise = resultSet.getString("idEntreprise");
-                                                    String IdPErsonEsql = "SELECT * FROM  persone WHERE NomPersone = ? AND PrenomPersone = ? AND TelPersone = ? AND EmailPersonne = ?";
-                                                    try {
-                                                        preparedStatement = connection.prepareStatement(IdPErsonEsql);
-                                                        preparedStatement.setString(1, LabelNomP);
-                                                        preparedStatement.setString(2, LabelPrenomP);
-                                                        preparedStatement.setString(3, LabelTelP);
-                                                        preparedStatement.setString(4, LabelEmailP);
-                                                        resultSet = preparedStatement.executeQuery();
-                                                        if (resultSet.next()) {
-                                                            String idPersone = resultSet.getString("idPersone");
-                                                            System.out.println(idPersone);
-                                                            String VerifPersonneSQL = "UPDATE persone SET NomPersone = '" + NomP + "' , " +
-                                                                    "PrenomPersone = '" + PrenomP + "' , " +
-                                                                    "TelPersone = '" + TelP + "' , " +
-                                                                    "EmailPersonne = '" + EmailP + "' ,"+
-                                                                    "IdEntreprise = '"+idEntreprise+"' WHERE idPersone = '"+ idPersone + "' ";
-                                                            preparedStatement = connection.prepareStatement(VerifPersonneSQL);
-                                                            preparedStatement.execute();
+                                                              String idEntreprise = resultSet.getString("idEntreprise");
+                                                              String IdPErsonEsql = "SELECT * FROM  persone WHERE NomPersone = ? AND PrenomPersone = ? AND TelPersone = ? AND EmailPersonne = ?";
+                                                              try {
+                                                                  preparedStatement = connection.prepareStatement(IdPErsonEsql);
+                                                                  preparedStatement.setString(1, LabelNomP);
+                                                                  preparedStatement.setString(2, LabelPrenomP);
+                                                                  preparedStatement.setString(3, LabelTelP);
+                                                                  preparedStatement.setString(4, LabelEmailP);
+                                                                  resultSet = preparedStatement.executeQuery();
+                                                                  if (resultSet.next()) {
+                                                                      String idPersone = resultSet.getString("idPersone");
+                                                                      System.out.println(idPersone);
+                                                                      String VerifPersonneSQL = "UPDATE persone SET NomPersone = '" + NomP + "' , " +
+                                                                              "PrenomPersone = '" + PrenomP + "' , " +
+                                                                              "TelPersone = '" + TelP + "' , " +
+                                                                              "EmailPersonne = '" + EmailP + "' ,"+
+                                                                              "IdEntreprise = '"+idEntreprise+"' ,"+
+                                                                              " idCompetence = '"+idCompetence+"' WHERE idPersone = '"+ idPersone + "' ";
+                                                                      preparedStatement = connection.prepareStatement(VerifPersonneSQL);
+                                                                      preparedStatement.execute();
 
-                                                            JOptionPane.showMessageDialog(null, "La modification de " + PrenomP + " a etait prise en compte");
-                                                            UpdateTable();
-                                                            clearTextfield();
-                                                        }else {
+                                                                      JOptionPane.showMessageDialog(null, "La modification de " + PrenomP + " a etait prise en compte");
+                                                                      UpdateTable();
+                                                                      clearTextfield();
+                                                                  }else {
 
-                                                        }
-                                                    } catch (SQLException throwables) {
-                                                        throwables.printStackTrace();
-                                                    }
-                                                }else{
+                                                                  }
+                                                              } catch (SQLException throwables) {
+                                                                  throwables.printStackTrace();
+                                                              }
+                                                          }else{
 
-                                                }
+                                                          }
 
-                                            } catch (SQLException throwables) {
-                                                throwables.printStackTrace();
-                                            }
+                                                      } catch (SQLException throwables) {
+                                                          throwables.printStackTrace();
+                                                      }
 
+                                                  }
+                                              } catch (SQLException throwables) {
+                                                  throwables.printStackTrace();
+                                              }
+
+                                          }else{
+                                              JOptionPane.showMessageDialog(null, "Veuillez saisir une competence");
+                                          }
                                         } else {
                                             JOptionPane.showMessageDialog(null, "VEuillez selection une entreprise");
                                         }
@@ -1148,10 +1258,6 @@ Connexion classe BDD
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-    @FXML
-    void modifierEvenementEntreprise(){
-
     }
 
 }

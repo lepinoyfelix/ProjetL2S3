@@ -1,14 +1,15 @@
 package AutreClasse;
 
 public class PersonneNomPrenom {
-    String NomPersone,PrenomPersone,TelPersone,EmailPersonne,Raison_Sociale;
+    String NomPersone,PrenomPersone,TelPersone,EmailPersonne,Raison_Sociale,Competence;
 
-    public PersonneNomPrenom(String NomPersone, String PrenomPersone, String TelPersone, String EmailPersonne, String Raison_Sociale) {
+    public PersonneNomPrenom(String NomPersone, String PrenomPersone, String TelPersone, String EmailPersonne, String Raison_Sociale, String Competence) {
         this.NomPersone = NomPersone;
         this.PrenomPersone = PrenomPersone;
         this.TelPersone = TelPersone;
         this.EmailPersonne = EmailPersonne;
         this.Raison_Sociale = Raison_Sociale;
+        this.Competence = Competence;
     }
 
     public String getNomPersone() {
@@ -43,11 +44,15 @@ public class PersonneNomPrenom {
         this.EmailPersonne = EmailPersonne;
     }
 
-    public String getRaison_Sociale() {
-        return Raison_Sociale;
-    }
+    public String getRaison_Sociale() { return Raison_Sociale; }
 
     public void setRaison_Sociale(String Raison_Sociale) {
         this.Raison_Sociale = Raison_Sociale;
+    }
+
+    public String getCompetence() { return Competence; }
+
+    public void setCompetence(String Competence) {
+        this.Competence = Competence;
     }
 }
