@@ -16,7 +16,7 @@ public class ConnexionController {
     /*
     A mdoifier suivant la bdd
      */
-    String tableUser = "personne";
+    String tableUser = "user";
     String tableRole = "role";
     String colonemailTableUtilisateur = "Mail";
     String coloneroleIDTableUtilisateur = "idRole";
@@ -114,7 +114,7 @@ public class ConnexionController {
                         System.out.println("Personel");
                         Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
                         stage.close();
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AccueilPersonel.fxml")));
+                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
                         stage.setScene(scene);
                         stage.show();
                         stage.setTitle("Accueil Personel");
