@@ -361,7 +361,7 @@ Connexion classe BDD
         TableViewCompetence2.setItems(listCompetence2);
 
 
-        loadData();
+        
 
     }
 
