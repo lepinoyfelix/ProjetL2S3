@@ -23,8 +23,8 @@ public class EnvoiMailUtil {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String MoncompteEmail  = "projetl2univtours@gmail.com";
-        String Mdp = "ProjetL2Univ";
+        String MoncompteEmail  = "projetunivl2infotours@gmail.com";
+        String Mdp = "projetunivl2infotours123123";
 
         Session session = Session.getInstance(properties, new Authenticator(){
             @Override

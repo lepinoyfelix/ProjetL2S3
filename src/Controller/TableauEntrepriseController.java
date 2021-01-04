@@ -151,7 +151,7 @@ public class TableauEntrepriseController implements Initializable {
     }
 
     public static boolean AdresseIsValide(String Adresse) {
-        String mdpRegex = "[0-9]{0,4}[ ]{1}[0-9A-Z ]*}";
+        String mdpRegex = "([0-9]{0,4}[ ]{1}[0-9A-Z ]*)";
 
         Pattern pat = Pattern.compile(mdpRegex);
         if (Adresse == null)

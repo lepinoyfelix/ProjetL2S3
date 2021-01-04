@@ -6,7 +6,7 @@
 
 <Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TableauEvenementControler">
     <children>
-        <TableView fx:id="TableauEvenement" layoutX="395.0" layoutY="333.0" onMouseClicked="#getSelectEvenment" prefHeight="400.0">
+        <TableView fx:id="TableauEvenement" layoutX="395.0" layoutY="333.0" onMouseClicked="#getSelectEvenment" prefHeight="425.0" prefWidth="1141.0">
             <columns>
                 <TableColumn fx:id="ColumnNom" prefWidth="77.0" text="Nom " />
                 <TableColumn prefWidth="298.0" text="Localisation">
@@ -46,11 +46,11 @@
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font></Button>
-                <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="775.0" disable="true" onAction="#EditerEvenement" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+                <Button fx:id="ButtonModifier" disable="true" layoutX="89.0" layoutY="775.0" mnemonicParsing="false" onAction="#EditerEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
                     <font>
                         <Font name="Alef Bold" size="16.0" />
                     </font></Button>
-                <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="832.0" mnemonicParsing="false" prefHeight="30.0" disable="true"  onAction="#SupprimerEvenement"  prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
+                <Button fx:id="ButtonSupprimer" disable="true" layoutX="89.0" layoutY="832.0" mnemonicParsing="false" onAction="#SupprimerEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
                     <font>
                         <Font name="Alef Bold" size="16.0" />
                     </font></Button>
@@ -85,7 +85,7 @@
                 <TextField fx:id="TextFieldDureeConf" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Conference" visible="false" AnchorPane.topAnchor="560.0" />
                 <TextField fx:id="TextFieldAutreEvenement" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Description Autre Evenement" visible="false" />
             <CheckBox fx:id="CheckBoxAjouterEvent" layoutX="89.0" layoutY="688.0" mnemonicParsing="false" onAction="#CheckBoxAjouterEventOnAction" text="Ajouter Event" textFill="WHITE" />
-            <TableView fx:id="TableViewIntervenant" onMouseClicked="#getSelectIntervenant" layoutX="167.0" layoutY="402.0" prefHeight="100.0" prefWidth="125.0" AnchorPane.topAnchor="402.0" visible="false">
+            <TableView fx:id="TableViewIntervenant" layoutX="167.0" layoutY="402.0" onMouseClicked="#getSelectIntervenant" prefHeight="100.0" prefWidth="125.0" visible="false" AnchorPane.topAnchor="402.0">
               <columns>
                 <TableColumn fx:id="ColumnInterveant" prefWidth="125.0" text="Intervenant" />
               </columns>
@@ -95,15 +95,14 @@
         </AnchorPane>
         <AnchorPane fx:id="AnchorPane2" layoutX="317.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="5000.0" style="-fx-background-color: #332E35;" visible="true">
             <children>
-                <TextField fx:id="TextFieldRecherche" layoutX="509.0" layoutY="113.0" visible="false" />
-                <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="false" />
+                <TextField fx:id="TextFieldRecherche" disable="true" layoutX="509.0" layoutY="113.0" visible="true" />
+                <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="true" />
                 <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
                 <Button fx:id="BouttonPageEntreprise" layoutX="464.0" layoutY="48.0" mnemonicParsing="false" onAction="#BouttonPageEntrepriseOnActionOnAction" text="Page Entreprise" />
                 <Button fx:id="BtnTout" layoutX="638.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnToutOnAction" text="Tout" />
                 <Button fx:id="BtnConf" layoutX="713.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnConfOnAction" text="Conf" />
                 <Button fx:id="BtnAutre" layoutX="795.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnAutreOnAction" text="Autre" />
                 <Button fx:id="BtnCours" layoutX="878.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnCoursOnAction" text="Cours" />
-                <Button fx:id="BtnRechercher" layoutX="183.0" layoutY="113.0" mnemonicParsing="false" onAction="#BtnRechercheOnAction" text="Button" />
                 <Button layoutX="244.0" layoutY="210.0" mnemonicParsing="false" onAction="#cachermenue" prefWidth="100.0" text="Quitter Menu" />
 
 

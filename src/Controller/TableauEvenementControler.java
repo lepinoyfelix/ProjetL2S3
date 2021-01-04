@@ -650,6 +650,7 @@ public class TableauEvenementControler implements Initializable {
     @FXML
     private void ButtonRechercheOnAction(ActionEvent event) {
         labelCatégorierecherche.setText(ChoiceBoxRecherche.getValue());
+        TextFieldRecherche.setDisable(false);
         recherche_Evenement();
     }
     @FXML
@@ -785,6 +786,9 @@ public class TableauEvenementControler implements Initializable {
             TextFieldDureeConf.setVisible(false);
             TableauCompetence.setVisible(false);
             TableViewIntervenant.setVisible(false);
+            ButtonSupprimer.setDisable(true);
+            ButtonModifier.setDisable(true);
+            TextFieldNomEvenement.setDisable(false);
 
         } else {
             TableauTypeEvenement.setVisible(false);
@@ -805,6 +809,7 @@ public class TableauEvenementControler implements Initializable {
             TextFieldDureeConf.setVisible(false);
             TableauCompetence.setVisible(false);
             TableViewIntervenant.setVisible(false);
+            TextFieldNomEvenement.setDisable(true);
 
         }
     }

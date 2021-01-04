@@ -26,7 +26,7 @@ public class InscriptionController {
      */
     String colonemailBDD = "Mail";
     String colonemdpBDD = "Mdp";
-    String tableUser = "personne";
+    String tableUser = "user";
     String coloneidrole = "idRole";
 
     /*
@@ -124,6 +124,8 @@ Connexion classe BDD
                                                 LabelCodeConfMail.setVisible(true);
                                                 TextFieldCodeConfMail.setVisible(true);
                                                 LabelErreur.setText("Veuillez regarder vos mail");
+                                                String codeEnvoyerParMail = String.valueOf(EnvoiMailUtil.getNombreAleatoireVerificationMail());
+                                                System.out.println(codeEnvoyerParMail);
                                                 ButtonInscription.setVisible(false);
                                                 ButtonInscriptionFinal.setVisible(true);
 
@@ -169,6 +171,7 @@ Connexion classe BDD
         String adresseEtudiant = "etu.univ-tours.fr";
         int idRoleProf = 1;
         int idRoleEleve = 2;
+
 
         if (codeEnvoyerParMail.equals(codeConf)) {
             LabelErreur.setText("nous procédons a l'engregistrement de votre profil");
