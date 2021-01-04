@@ -1,72 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AjouterPersonneCompetence">
    <children>
-      <TableView fx:id="TableViewPersone" layoutX="375.0" layoutY="307.0" onMouseClicked="#getSelecectpersone" prefHeight="351.0" prefWidth="604.0">
-        <columns>
-          <TableColumn fx:id="ColumnNom" prefWidth="129.0" text="Nom" />
-            <TableColumn fx:id="ColumnPrenom" prefWidth="98.0" text="Prenom" />
-            <TableColumn fx:id="ColumnTel" prefWidth="102.0" text="Tel" />
-            <TableColumn fx:id="ColumnEmail" prefWidth="78.0" text="Email" />
-            <TableColumn fx:id="ColumnEntreprise" prefWidth="85.0" text="Entreprise" />
-            <TableColumn fx:id="ColumnCompetenceTPersone" prefWidth="111.0" text="Competence" />
-        </columns>
-      </TableView>
-      <TableView fx:id="TableViewCompetence" layoutX="988.0" layoutY="307.0" onMouseClicked="#getSelectCompetence" prefHeight="351.0" prefWidth="200.0">
-        <columns>
-          <TableColumn fx:id="ColumnCompetence" prefWidth="199.0" text="Competence" />
-        </columns>
-      </TableView>
-      <Button fx:id="BtnAjouter" disable="true" layoutX="80.0" layoutY="307.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="25.0" prefWidth="113.0" text="Ajouter" />
-      <Button fx:id="BtnModifierPersonne" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false" onAction="#modifierPersone" text="Modifier" />
-       <Button fx:id="BtnModifierPersonneEvenementEntreprise" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false"  text="Modifier" />
-      <Button fx:id="BtnModifierCompetence" disable="true" layoutX="295.0" layoutY="198.0" mnemonicParsing="false" onAction="#ModiferCompetence" text="Modifier" />
-      <TextField fx:id="TextFieldNom" layoutX="58.0" layoutY="362.0" promptText="Nom" visible="false" />
-      <TextField fx:id="TextFieldPrenom" layoutX="58.0" layoutY="403.0" promptText="Prenom" visible="false" />
-      <TextField fx:id="TextFieldTel" layoutX="58.0" layoutY="438.0" promptText="Tel" visible="false" />
-      <TextField fx:id="TextFieldEmail" layoutX="60.0" layoutY="470.0" promptText="Mail" visible="false" />
-      <TextField fx:id="TextFieldCompetence" layoutX="58.0" layoutY="362.0" promptText="Competence" visible="false" />
-      <CheckBox fx:id="CheckBoxPersone" layoutX="50.0" layoutY="279.0" mnemonicParsing="false" onAction="#CheckEventPersonne" text="Personne" />
-      <CheckBox fx:id="CheckBoxCompetence" layoutX="134.0" layoutY="279.0" mnemonicParsing="false" onAction="#CheckEventCompetence" text="Competence" />
-      <Button fx:id="BtnAutrePage" mnemonicParsing="false" onAction="#BouttonPageEvenementOnAction" text="AutrePage" />
-      <TableView fx:id="TableViewEntreprise" layoutX="37.0" layoutY="546.0" onMouseClicked="#getSelectEntrepriseNom" prefHeight="100.0" prefWidth="125.0" visible="false">
-        <columns>
-          <TableColumn fx:id="ColumnEntrepriseTentreprise" prefWidth="125.0" text="Entreprise" />
-        </columns>
-      </TableView>
-      <TextField fx:id="TextFieldSelectEntreprise" disable="true" layoutX="178.0" layoutY="584.0" promptText="Select Entreprise" visible="false" />
        <Label fx:id="LabelNom" visible="false" />
        <Label fx:id="LabelPrenom" visible="false" />
        <Label fx:id="LabelTel" visible="false" />
        <Label fx:id="LabelEmail" visible="false" />
        <Label fx:id="LabelComp" visible="false" />
        <Label fx:id="labelCatégorierecherche" visible="false" />
-      <Button fx:id="BtnSupprimerPersonne" disable="true" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" onAction="#SupprimerPersonne" text="Supprimer" />
-       <Button fx:id="BtnSupprimerEvenementEntreprise" disable="true" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" onAction="#SupprimerEvenementEntreprise" text="Supprimer" />
-       <Button fx:id="BtnSupprimerCompetence" disable="true" layoutX="300.0" layoutY="254.0" mnemonicParsing="false" onAction="#SupprimerCompetence" text="Supprimer" />
-      <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="479.0" layoutY="198.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
-      <TextField fx:id="TextFieldRecherche" disable="true" layoutX="678.0" layoutY="198.0" onAction="#ButtonRechercheOnAction" />
-      <TableView fx:id="TableViewEvenement" layoutX="1201.0" layoutY="307.0" onMouseClicked="#getSelectEntrepriseEvenemnt" prefHeight="351.0" prefWidth="213.0">
-        <columns>
-          <TableColumn fx:id="ColumnEvenementTEvenement" prefWidth="98.0" text="Evenement" />
-          <TableColumn fx:id="ColumnEntrepriseTEvenement" prefWidth="114.0" text="NomEntreprise" />
-        </columns>
-      </TableView>
-      <CheckBox fx:id="CheckBoxkEvententreprise" layoutX="238.0" layoutY="279.0" mnemonicParsing="false" onAction="#CheckEvententreprise" text="Entreprise/Evenment" />
-      <TableView fx:id="TableViewAfficherEvent" layoutX="37.0" layoutY="646.0" onMouseClicked="#getSelectEventEntreprise" prefHeight="100.0" prefWidth="125.0" visible="false">
-        <columns>
-          <TableColumn fx:id="ColumnEventTEvent" prefWidth="125.0" text="Evenement" />
-        </columns>
-      </TableView>
-      <TextField fx:id="TextFieldSelectEvent" disable="true" layoutX="187.0" layoutY="684.0" promptText="Select Evenement" visible="false" />
-      <TableView fx:id="TableViewCompetence2" layoutX="47.0" layoutY="656.0" onMouseClicked="#getSelectCompetenceP" prefHeight="100.0" prefWidth="125.0" visible="false">
-         <columns>
-            <TableColumn fx:id="ColumnCompetence2" prefWidth="125.0" text="Competence" />
-         </columns>
-      </TableView>
-      <TextField fx:id="ChoixCompetencePersonne" disable="true" layoutX="197.0" layoutY="694.0" promptText="Select Competence From persone" visible="false" />
+      <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css">
+         <children>
+            <TextField fx:id="TextFieldNom" layoutX="29.0" layoutY="307.0" promptText="Nom" visible="false" />
+            <TextField fx:id="TextFieldPrenom" layoutX="29.0" layoutY="340.0" promptText="Prenom" visible="false" />
+            <TextField fx:id="TextFieldTel" layoutX="29.0" layoutY="374.0" promptText="Tel" visible="false" />
+            <TextField fx:id="TextFieldEmail" layoutX="29.0" layoutY="409.0" promptText="Mail" visible="false" />
+            <TextField fx:id="TextFieldCompetence" layoutX="29.0" layoutY="258.0" promptText="Competence" visible="false" />
+            <TextField fx:id="TextFieldSelectEntreprise" disable="true" layoutX="155.0" layoutY="494.0" promptText="Select Entreprise" visible="false" />
+            <TextField fx:id="TextFieldSelectEvent" disable="true" layoutX="155.0" layoutY="615.0" promptText="Select Evenement" visible="false" />
+            <TextField fx:id="ChoixCompetencePersonne" disable="true" layoutX="155.0" layoutY="615.0" promptText="Select Competence From persone" visible="false" />
+            <TableView fx:id="TableViewAfficherEvent" layoutX="23.0" layoutY="578.0" onMouseClicked="#getSelectEventEntreprise" prefHeight="100.0" prefWidth="125.0" visible="false">
+              <columns>
+                <TableColumn fx:id="ColumnEventTEvent" prefWidth="125.0" text="Evenement" />
+              </columns>
+            </TableView>
+            <TableView fx:id="TableViewCompetence2" layoutX="23.0" layoutY="578.0" onMouseClicked="#getSelectCompetenceP" prefHeight="100.0" prefWidth="125.0" visible="false">
+               <columns>
+                  <TableColumn fx:id="ColumnCompetence2" prefWidth="125.0" text="Competence" />
+               </columns>
+            </TableView>
+            <TableView fx:id="TableViewEntreprise" layoutX="23.0" layoutY="457.0" onMouseClicked="#getSelectEntrepriseNom" prefHeight="100.0" prefWidth="125.0" visible="false">
+              <columns>
+                <TableColumn fx:id="ColumnEntrepriseTentreprise" prefWidth="125.0" text="Entreprise" />
+              </columns>
+            </TableView>
+            <CheckBox fx:id="CheckBoxPersone" layoutX="29.0" layoutY="91.0" mnemonicParsing="false" onAction="#CheckEventPersonne" text="Personne" textFill="WHITE" />
+            <CheckBox fx:id="CheckBoxCompetence" layoutX="29.0" layoutY="137.0" mnemonicParsing="false" onAction="#CheckEventCompetence" text="Competence" textFill="WHITE" />
+            <CheckBox fx:id="CheckBoxkEvententreprise" layoutX="29.0" layoutY="184.0" mnemonicParsing="false" onAction="#CheckEvententreprise" text="Entreprise/Evenment" textFill="WHITE" />
+            <Button fx:id="BtnAjouter" disable="true" layoutX="89.0" layoutY="712.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="BtnModifierPersonne" disable="true" layoutX="89.0" layoutY="775.0" mnemonicParsing="false" onAction="#modifierPersone" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+             <Button fx:id="BtnModifierPersonneEvenementEntreprise" disable="true" layoutX="89.0" layoutY="775.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="BtnModifierCompetence" disable="true" layoutX="89.0" layoutY="775.0" mnemonicParsing="false" onAction="#ModiferCompetence" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="BtnSupprimerPersonne" disable="true" layoutX="89.0" layoutY="832.0" mnemonicParsing="false" onAction="#SupprimerPersonne" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: B20C0C;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+             <Button fx:id="BtnSupprimerEvenementEntreprise" disable="true" layoutX="89.0" layoutY="832.0" mnemonicParsing="false" onAction="#SupprimerEvenementEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: B20C0C;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+             <Button fx:id="BtnSupprimerCompetence" disable="true" layoutX="89.0" layoutY="832.0" mnemonicParsing="false" onAction="#SupprimerCompetence" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: B20C0C;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="AnchorPaneAddPersonne" layoutX="317.0" prefHeight="900.0" prefWidth="1248.0">
+         <children>
+            <TableView fx:id="TableViewPersone" layoutX="35.0" layoutY="189.0" onMouseClicked="#getSelecectpersone" prefHeight="697.0" prefWidth="604.0">
+              <columns>
+                <TableColumn fx:id="ColumnNom" prefWidth="129.0" text="Nom" />
+                  <TableColumn fx:id="ColumnPrenom" prefWidth="98.0" text="Prenom" />
+                  <TableColumn fx:id="ColumnTel" prefWidth="102.0" text="Tel" />
+                  <TableColumn fx:id="ColumnEmail" prefWidth="78.0" text="Email" />
+                  <TableColumn fx:id="ColumnEntreprise" prefWidth="85.0" text="Entreprise" />
+                  <TableColumn fx:id="ColumnCompetenceTPersone" prefWidth="111.0" text="Competence" />
+              </columns>
+            </TableView>
+            <TableView fx:id="TableViewCompetence" layoutX="970.0" layoutY="189.0" onMouseClicked="#getSelectCompetence" prefHeight="698.0" prefWidth="306.0">
+              <columns>
+                <TableColumn fx:id="ColumnCompetence" prefWidth="199.0" text="Competence" />
+              </columns>
+            </TableView>
+            <TableView fx:id="TableViewEvenement" layoutX="648.0" layoutY="189.0" onMouseClicked="#getSelectEntrepriseEvenemnt" prefHeight="698.0" prefWidth="306.0">
+              <columns>
+                <TableColumn fx:id="ColumnEvenementTEvenement" prefWidth="98.0" text="Evenement" />
+                <TableColumn fx:id="ColumnEntrepriseTEvenement" prefWidth="114.0" text="NomEntreprise" />
+              </columns>
+            </TableView>
+            <AnchorPane fx:id="AnchorPane2" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css">
+               <children>
+                   <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
+                   <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu">
+                       <font>
+                           <Font size="16.0" />
+                       </font></Button>
+                  <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
+                  <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+
+       <AnchorPane fx:id="AnchorPaneMenu" prefHeight="900.0" prefWidth="318.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+           <children>
+               <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cachermenue" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
+               <Button fx:id="btnMooveToEntreprise" layoutX="74.0" layoutY="180.0" mnemonicParsing="false" onAction="#MooveToEntreprise" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Entreprise" textAlignment="CENTER" />
+               <Button fx:id="btnMooveToEvenements" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Evénements" textAlignment="CENTER" />
+               <Button fx:id="btnMooveToAddPersonne" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#MooveToAddPersonne" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Personne" textAlignment="CENTER" />
+               <Button fx:id="btnMooveToAddCompetence" layoutX="74.0" layoutY="540.0" mnemonicParsing="false" onAction="#MooveToAddCompetence" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Competence" textAlignment="CENTER" />
+               <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../Images/UnivTours-logo.png" />
+                   </image>
+               </ImageView>
+           </children>
+       </AnchorPane>
    </children>
 </Pane>

@@ -810,17 +810,7 @@ public class AdminEntrepriseController implements Initializable {
         TextFieldMontantTaxe.setVisible(false);
     }
 
-    public void affichermenue(ActionEvent actionEvent) {
-        AnchorPaneMenu.setVisible(true);
-        AnchorPaneEntreprise.setDisable(true);
-        btnMenuAdmin.setVisible(false);
-    }
 
-    public void cachermenue(ActionEvent actionEvent) {
-        AnchorPaneMenu.setVisible(false);
-        AnchorPaneEntreprise.setDisable(false);
-        btnMenuAdmin.setVisible(true);
-    }
 
     ObservableList listRecherche = FXCollections.observableArrayList();
 
@@ -974,7 +964,7 @@ public class AdminEntrepriseController implements Initializable {
     }
 
     @FXML
-    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToCours, btnMooveToStagiaires, btnMooveToAEtudiants, btnDeconnexion;
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToAddPersonne, btnMooveToAddCompetence, btnDeconnexion;
 
     public void MooveToEntreprise() throws Exception
     {
@@ -996,36 +986,27 @@ public class AdminEntrepriseController implements Initializable {
         stage.setTitle("Admin_Event");
         stage.setScene(scene);
     }
-    public void MooveToCours() throws Exception
-    {
-        Stage stage = (Stage) btnMooveToCours.getScene().getWindow();
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminCours.fxml")));
+    public void MooveToAddPersonne() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddPersonne.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
         stage.show();
         stage.setTitle("Admin_Cours");
         stage.setScene(scene);
     }
 
-    public void MooveToStagiaires() throws Exception
+    public void MooveToAddCompetence() throws Exception
     {
-        Stage stage = (Stage) btnMooveToStagiaires.getScene().getWindow();
+        Stage stage = (Stage) btnMooveToAddCompetence.getScene().getWindow();
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminStagiaires.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
         stage.show();
-        stage.setTitle("Admin_Stagiaires");
+        stage.setTitle("Admin_Cours");
         stage.setScene(scene);
     }
 
-    public void MooveToAEtudiants() throws Exception
-    {
-
-        Stage stage = (Stage) btnMooveToAEtudiants.getScene().getWindow();
-
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminAEtudiant.fxml")));
-        stage.show();
-        stage.setTitle("Admin_Anciens_Etudiants");
-        stage.setScene(scene);
-    }
 
     public void Deconnexion() throws Exception
     {
@@ -1036,6 +1017,18 @@ public class AdminEntrepriseController implements Initializable {
         stage.show();
         stage.setTitle("Connexion");
         stage.setScene(scene);
+    }
+
+    public void affichermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(true);
+        AnchorPaneEntreprise.setDisable(true);
+        btnMenuAdmin.setVisible(false);
+    }
+
+    public void cachermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(false);
+        AnchorPaneEntreprise.setDisable(false);
+        btnMenuAdmin.setVisible(true);
     }
 
 }

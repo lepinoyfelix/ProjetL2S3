@@ -36,14 +36,10 @@
             </TableView>
             <AnchorPane fx:id="AnchorPane2" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
                <children>
-                  <Button alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" styleClass="ButtonBleuClair" text="Déconnexion">
-                     <font>
-                        <Font size="14.0" />
-                     </font></Button>
-                  <Button fx:id="ButtonRecherche" layoutX="729.0" layoutY="89.0" mnemonicParsing="false" onAction="#RechercheAction" text="Rechercher" />
-                  <TextField fx:id="TextFieldRecherche" layoutX="510.0" layoutY="89.0" />
-                  <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="314.0" layoutY="89.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
-                  <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
+                  <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
+                  <TextField fx:id="TextFieldRecherche" layoutX="738.0" layoutY="135.0" />
+                  <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
+                  <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
                   <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu">
                      <font>
                         <Font size="16.0" />
@@ -103,9 +99,10 @@
       <AnchorPane fx:id="AnchorPaneMenu" prefHeight="900.0" prefWidth="318.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cachermenue" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
-            <Button fx:id="btnMooveToEntreprise" layoutX="74.0" layoutY="186.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Entreprise" textAlignment="CENTER" />
-            <Button fx:id="btnMooveToEvenements" layoutX="75.0" layoutY="296.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Evénements" textAlignment="CENTER" />
-            <Button fx:id="btnMooveToCours" layoutX="74.0" layoutY="414.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Cours" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToEntreprise" layoutX="74.0" layoutY="180.0" mnemonicParsing="false" onAction="#MooveToEntreprise" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Entreprise" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToEvenements" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Evénements" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToAddPersonne" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#MooveToAddPersonne" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Personne" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToAddCompetence" layoutX="74.0" layoutY="540.0" mnemonicParsing="false" onAction="#MooveToAddCompetence" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Competence" textAlignment="CENTER" />
             <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/UnivTours-logo.png" />

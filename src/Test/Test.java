@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -23,6 +24,8 @@ public class Test extends Application {
         primaryStageTableauEntreprise.show();
         primaryStageTableauEntreprise.setMaximized(true);
         */
+        Image image = new Image("/Images/UnivTours-logoAppli.png");
+        primaryStageTableauEntreprise.getIcons().add(image);
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml"));
         primaryStageTableauEntreprise.setTitle("Connexion");
         primaryStageTableauEntreprise.setScene(new Scene(root, 1600, 900));

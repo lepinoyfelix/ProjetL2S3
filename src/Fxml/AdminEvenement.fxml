@@ -7,9 +7,9 @@
 
 <Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminEvenementControler">
     <children>
-      <AnchorPane layoutX="316.0" prefHeight="900.0" prefWidth="1284.0">
+      <AnchorPane fx:id="AnchorPaneEvenement" layoutX="316.0" prefHeight="900.0" prefWidth="1284.0">
          <children>
-              <TableView fx:id="TableauEvenement" layoutX="22.0" layoutY="261.0" onMouseClicked="#getSelectEvenment" prefHeight="621.0" prefWidth="1250.0">
+              <TableView fx:id="TableauEvenement" layoutX="17.0" layoutY="189.0" onMouseClicked="#getSelectEvenment" prefHeight="697.0" prefWidth="1250.0">
                   <columns>
                       <TableColumn fx:id="ColumnNom" prefWidth="77.0" text="Nom " />
                       <TableColumn prefWidth="298.0" text="Localisation">
@@ -36,23 +36,24 @@
                       </TableColumn>
                       <TableColumn minWidth="0.0" prefWidth="110.0" text="Autre Evenement">
                           <columns>
-                              <TableColumn fx:id="ColumnDescriptionAutrevenement" minWidth="120.0" prefWidth="20.0" text="Desccription" />
+                              <TableColumn fx:id="ColumnDescriptionAutrevenement" minWidth="120.0" prefWidth="120.0" text="Desccription" />
                           </columns>
                       </TableColumn>
-                      <TableColumn fx:id="ColumnTypeEvenement" minWidth="0.0" prefWidth="117.0" text="Type d'evenement" />
-                      <TableColumn fx:id="ColumnCompetence" minWidth="0.0" prefWidth="96.00002441406241" text="Competence" />
+                      <TableColumn fx:id="ColumnTypeEvenement" minWidth="0.0" prefWidth="160.5999755859375" text="Type d'evenement" />
+                      <TableColumn fx:id="ColumnCompetence" minWidth="0.0" prefWidth="161.0" text="Competence" />
                   </columns>
               </TableView>
-              <AnchorPane fx:id="AnchorPane2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" prefWidth="1284.0" style="-fx-background-color: #332E35;" visible="true">
+              <AnchorPane fx:id="AnchorPane2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
                   <children>
-                      <TextField fx:id="TextFieldRecherche" disable="true" layoutX="509.0" layoutY="113.0" visible="true" />
-                      <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="313.0" layoutY="113.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="true" />
-                      <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" />
-                      <Button fx:id="BtnTout" layoutX="638.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnToutOnAction" text="Tout" />
-                      <Button fx:id="BtnConf" layoutX="713.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnConfOnAction" text="Conf" />
-                      <Button fx:id="BtnAutre" layoutX="795.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnAutreOnAction" text="Autre" />
-                      <Button fx:id="BtnCours" layoutX="878.0" layoutY="196.0" mnemonicParsing="false" onAction="#BtnCoursOnAction" text="Cours" />
-                      <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" text="Menu" />
+                      <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
+                      <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" visible="true" />
+                      <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="true" />
+                      <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
+                      <Button fx:id="BtnTout" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnToutOnAction" text="Tout" />
+                      <Button fx:id="BtnConf" layoutX="89.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnConfOnAction" text="Conf" />
+                      <Button fx:id="BtnAutre" layoutX="171.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnAutreOnAction" text="Autre" />
+                      <Button fx:id="BtnCours" layoutX="254.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnCoursOnAction" text="Cours" />
+                      <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu" />
       
       
       
@@ -60,7 +61,7 @@
               </AnchorPane>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" style="-fx-background-color: #332E35;" visible="true">
+        <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
             <children>
                 <Button fx:id="ButtonAjouter" disable="true" layoutX="89.0" layoutY="712.0" mnemonicParsing="false" onAction="#AjouterEvenement" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
                     <font>
@@ -116,6 +117,21 @@
         <Label fx:id="LabelChoixVueTableau" layoutX="786.0" layoutY="291.0" visible="false" />
         <Label fx:id="labelpourSupprimer" layoutX="786.0" layoutY="291.0" visible="false" />
 
+
+        <AnchorPane fx:id="AnchorPaneMenu" prefHeight="900.0" prefWidth="318.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cachermenue" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
+                <Button fx:id="btnMooveToEntreprise" layoutX="74.0" layoutY="180.0" mnemonicParsing="false" onAction="#MooveToEntreprise" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Entreprise" textAlignment="CENTER" />
+                <Button fx:id="btnMooveToEvenements" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Evénements" textAlignment="CENTER" />
+                <Button fx:id="btnMooveToAddPersonne" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#MooveToAddPersonne" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Personne" textAlignment="CENTER" />
+                <Button fx:id="btnMooveToAddCompetence" layoutX="74.0" layoutY="540.0" mnemonicParsing="false" onAction="#MooveToAddCompetence" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Competence" textAlignment="CENTER" />
+                <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/UnivTours-logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
 
     </children>
 </Pane>

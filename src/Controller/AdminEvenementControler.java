@@ -71,6 +71,10 @@ public class AdminEvenementControler implements Initializable {
     @FXML
     private AnchorPane AnchorPane1;
     @FXML
+    private AnchorPane AnchorPaneMenu;
+    @FXML
+    private AnchorPane AnchorPaneEvenement;
+    @FXML
     private Button ButtonMenu;
     @FXML
     private Label LabelChoixVueTableau;
@@ -126,6 +130,8 @@ public class AdminEvenementControler implements Initializable {
     private Button ButtonSupprimer;
     @FXML
     private Button ButtonModifier;
+    @FXML
+    private Button btnMenuAdmin;
 
     /*
  Connexion classe BDD
@@ -304,8 +310,7 @@ public class AdminEvenementControler implements Initializable {
 
     }
 
-    public void cachermenue(ActionEvent actionEvent) {
-    }
+
 
 
     int index3 = -1;
@@ -599,11 +604,7 @@ public class AdminEvenementControler implements Initializable {
         ColumnCompetence.setVisible(true);
     }
 
-    public void affichermenue(ActionEvent actionEvent) {
-        AnchorPane1.setVisible(true);
-        AnchorPane2.setVisible(true);
-        ButtonMenu.setVisible(false);
-    }
+
 
     ObservableList listFiltreRecherche = FXCollections.observableArrayList();
     public void loadData(){
@@ -2134,7 +2135,7 @@ public class AdminEvenementControler implements Initializable {
     }
 
     @FXML
-    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToCours, btnMooveToStagiaires, btnMooveToAEtudiants, btnDeconnexion;
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToAddPersonne, btnMooveToAddCompetence, btnDeconnexion;
 
     public void MooveToEntreprise() throws Exception
     {
@@ -2151,41 +2152,32 @@ public class AdminEvenementControler implements Initializable {
     {
         Stage stage = (Stage) btnMooveToEvenements.getScene().getWindow();
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenements.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
         stage.show();
         stage.setTitle("Admin_Event");
         stage.setScene(scene);
     }
-    public void MooveToCours() throws Exception
-    {
-        Stage stage = (Stage) btnMooveToCours.getScene().getWindow();
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminCours.fxml")));
+    public void MooveToAddPersonne() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddPersonne.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
         stage.show();
         stage.setTitle("Admin_Cours");
         stage.setScene(scene);
     }
 
-    public void MooveToStagiaires() throws Exception
+    public void MooveToAddCompetence() throws Exception
     {
-        Stage stage = (Stage) btnMooveToStagiaires.getScene().getWindow();
+        Stage stage = (Stage) btnMooveToAddCompetence.getScene().getWindow();
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminStagiaires.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
         stage.show();
-        stage.setTitle("Admin_Stagiaires");
+        stage.setTitle("Admin_Cours");
         stage.setScene(scene);
     }
 
-    public void MooveToAEtudiants() throws Exception
-    {
-
-        Stage stage = (Stage) btnMooveToAEtudiants.getScene().getWindow();
-
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminAEtudiant.fxml")));
-        stage.show();
-        stage.setTitle("Admin_Anciens_Etudiants");
-        stage.setScene(scene);
-    }
 
     public void Deconnexion() throws Exception
     {
@@ -2196,6 +2188,18 @@ public class AdminEvenementControler implements Initializable {
         stage.show();
         stage.setTitle("Connexion");
         stage.setScene(scene);
+    }
+
+    public void affichermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(true);
+        AnchorPaneEvenement.setDisable(true);
+        btnMenuAdmin.setVisible(false);
+    }
+
+    public void cachermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(false);
+        AnchorPaneEvenement.setDisable(false);
+        btnMenuAdmin.setVisible(true);
     }
 }
 
