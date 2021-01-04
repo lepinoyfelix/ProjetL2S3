@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 04 jan. 2021 à 00:44
+-- Généré le :  lun. 04 jan. 2021 à 11:17
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP :  7.4.1
 
@@ -195,16 +195,17 @@ CREATE TABLE `persone` (
   `PrenomPersone` varchar(50) NOT NULL,
   `TelPersone` varchar(10) NOT NULL,
   `EmailPersonne` varchar(320) NOT NULL,
-  `IDENTREPRISE` int(11) NOT NULL
+  `IDENTREPRISE` int(11) NOT NULL,
+  `IdCompetence` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `persone`
 --
 
-INSERT INTO `persone` (`idPersone`, `NomPersone`, `PrenomPersone`, `TelPersone`, `EmailPersonne`, `IDENTREPRISE`) VALUES
-(9, 'LEPINOY', 'FELIX', '0768211647', 'Felix.lepinoy@youyou.com', 63),
-(10, 'JEAN', 'PIERRE', '0247581625', 'jj.pier@gmail.com', 63);
+INSERT INTO `persone` (`idPersone`, `NomPersone`, `PrenomPersone`, `TelPersone`, `EmailPersonne`, `IDENTREPRISE`, `IdCompetence`) VALUES
+(9, 'LEPINOY', 'FELIX', '0768211647', 'Felix.lepinoy@youyou.com', 63, 14),
+(10, 'JEAN', 'PIERRE', '0247581625', 'jj.pier@gmail.com', 63, 10);
 
 -- --------------------------------------------------------
 
@@ -387,7 +388,7 @@ ALTER TABLE `evenemntentreprise`
 -- AUTO_INCREMENT pour la table `persone`
 --
 ALTER TABLE `persone`
-  MODIFY `idPersone` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPersone` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `role`
