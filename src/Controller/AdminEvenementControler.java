@@ -32,7 +32,7 @@ import javafx.scene.control.Button;
 
 import javax.swing.*;
 
-public class TableauEvenementControler implements Initializable {
+public class AdminEvenementControler implements Initializable {
 
     @FXML
     private Button BouttonPageEntreprise;
@@ -136,7 +136,7 @@ public class TableauEvenementControler implements Initializable {
     ResultSet resultSet = null;
 
 
-    public TableauEvenementControler() {
+    public AdminEvenementControler() {
         connection = ConexionBDD.connectdb();
     }
     ObservableList<Evenement> listEvenement;
@@ -521,7 +521,7 @@ public class TableauEvenementControler implements Initializable {
 
     public void BouttonPageEntrepriseOnActionOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)  BouttonPageEntreprise.getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEntreprise.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Entreprise");
@@ -2131,6 +2131,71 @@ public class TableauEvenementControler implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToCours, btnMooveToStagiaires, btnMooveToAEtudiants, btnDeconnexion;
+
+    public void MooveToEntreprise() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEntreprise.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Entreprise");
+        stage.setScene(scene);
+
+    }
+
+    public void MooveToEvenements() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEvenements.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenements.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Event");
+        stage.setScene(scene);
+    }
+    public void MooveToCours() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToCours.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminCours.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+    public void MooveToStagiaires() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToStagiaires.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminStagiaires.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Stagiaires");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAEtudiants() throws Exception
+    {
+
+        Stage stage = (Stage) btnMooveToAEtudiants.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminAEtudiant.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Anciens_Etudiants");
+        stage.setScene(scene);
+    }
+
+    public void Deconnexion() throws Exception
+    {
+
+        Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+        stage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+        stage.show();
+        stage.setTitle("Connexion");
+        stage.setScene(scene);
     }
 }
 

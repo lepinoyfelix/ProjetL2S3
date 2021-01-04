@@ -16,14 +16,14 @@ public class Test extends Application {
     @Override
     public void start(Stage primaryStageTableauEntreprise) throws IOException {
         /*
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/TableauEntreprise.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml"));
         final Scene scene = new Scene(root, 600, 400);
         primaryStageTableauEntreprise.setTitle("TableauEntreprise");
         primaryStageTableauEntreprise.setScene(scene);
         primaryStageTableauEntreprise.show();
         primaryStageTableauEntreprise.setMaximized(true);
         */
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml"));
         primaryStageTableauEntreprise.setTitle("Connexion");
         primaryStageTableauEntreprise.setScene(new Scene(root, 1600, 900));
         primaryStageTableauEntreprise.show();

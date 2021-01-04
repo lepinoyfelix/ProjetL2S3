@@ -121,7 +121,7 @@ public class AjouterPersonneCompetence implements Initializable {
 
     public void BouttonPageEvenementOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnAutrePage.getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEvenement.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Evenement");
@@ -1259,5 +1259,6 @@ Connexion classe BDD
             throwables.printStackTrace();
         }
     }
+
 
 }

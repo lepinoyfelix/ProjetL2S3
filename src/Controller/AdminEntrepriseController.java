@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 
-public class TableauEntrepriseController implements Initializable {
+public class AdminEntrepriseController implements Initializable {
 
     @FXML
     private TableView<Entreprise> TableauEntreprise;
@@ -97,6 +97,10 @@ public class TableauEntrepriseController implements Initializable {
     @FXML
     private javafx.scene.layout.AnchorPane AnchorPane2;
     @FXML
+    private javafx.scene.layout.AnchorPane AnchorPaneMenu;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPaneEntreprise;
+    @FXML
     private Button ButtonMenu;
     @FXML
     private TextField TextFieldRecherche;
@@ -106,6 +110,8 @@ public class TableauEntrepriseController implements Initializable {
     private Label labelCatégorierecherche;
     @FXML
     private Button  BouttonPageEvenement;
+    @FXML
+    private Button  btnMenuAdmin;
 
     /*
  Connexion classe BDD
@@ -118,7 +124,7 @@ public class TableauEntrepriseController implements Initializable {
     ObservableList<Competence> listCompetence;
 
 
-    public TableauEntrepriseController() {
+    public AdminEntrepriseController() {
         connection = ConexionBDD.connectdb();
     }
 
@@ -805,15 +811,15 @@ public class TableauEntrepriseController implements Initializable {
     }
 
     public void affichermenue(ActionEvent actionEvent) {
-        AnchorPane1.setVisible(true);
-        AnchorPane2.setVisible(true);
-        ButtonMenu.setVisible(false);
+        AnchorPaneMenu.setVisible(true);
+        AnchorPaneEntreprise.setDisable(true);
+        btnMenuAdmin.setVisible(false);
     }
 
     public void cachermenue(ActionEvent actionEvent) {
-        AnchorPane1.setVisible(false);
-        AnchorPane2.setVisible(false);
-        ButtonMenu.setVisible(true);
+        AnchorPaneMenu.setVisible(false);
+        AnchorPaneEntreprise.setDisable(false);
+        btnMenuAdmin.setVisible(true);
     }
 
     ObservableList listRecherche = FXCollections.observableArrayList();
@@ -952,15 +958,13 @@ public class TableauEntrepriseController implements Initializable {
         sortedData.comparatorProperty().bind(TableauEntreprise.comparatorProperty());
         TableauEntreprise.setItems(sortedData);
     }
-
     @FXML
-    public void BtnRechercheAtion(){
+    public void RechercheAction(){
         System.out.println(labelCatégorierecherche.getText());
         if(labelCatégorierecherche.getText().equals("Tout")){
             System.out.println("2");
         }
     }
-
     public void BouttonPageEvenementOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)  BouttonPageEvenement.getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEvenement.fxml")));
@@ -968,6 +972,72 @@ public class TableauEntrepriseController implements Initializable {
         stage.show();
         stage.setTitle("Evenement");
     }
+
+    @FXML
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToCours, btnMooveToStagiaires, btnMooveToAEtudiants, btnDeconnexion;
+
+    public void MooveToEntreprise() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEntreprise.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Entreprise");
+        stage.setScene(scene);
+
+    }
+
+    public void MooveToEvenements() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEvenements.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Event");
+        stage.setScene(scene);
+    }
+    public void MooveToCours() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToCours.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminCours.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+    public void MooveToStagiaires() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToStagiaires.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminStagiaires.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Stagiaires");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAEtudiants() throws Exception
+    {
+
+        Stage stage = (Stage) btnMooveToAEtudiants.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminAEtudiant.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Anciens_Etudiants");
+        stage.setScene(scene);
+    }
+
+    public void Deconnexion() throws Exception
+    {
+
+        Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+        stage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+        stage.show();
+        stage.setTitle("Connexion");
+        stage.setScene(scene);
+    }
+
 }
 
 
