@@ -9,12 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -337,7 +339,6 @@ Connexion classe BDD
         ColumnEntreprise.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Raison_Sociale"));
         ColumnCompetenceTPersone.setCellValueFactory(new PropertyValueFactory<PersonneNomPrenom, String>("Competence"));
         listP = getDataPersone();
-        TableViewPersone.setItems(listP);
 
         ColumnCompetence.setCellValueFactory((new PropertyValueFactory<Competence, String>("Competence")));
         listCompetence = getDataCompetence();

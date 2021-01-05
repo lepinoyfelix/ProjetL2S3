@@ -1015,6 +1015,7 @@ public class AdminEntrepriseController implements Initializable {
         Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
         stage.close();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+        stage.centerOnScreen();
         stage.show();
         stage.setTitle("Connexion");
         stage.setScene(scene);
