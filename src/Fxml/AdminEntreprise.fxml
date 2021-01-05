@@ -4,10 +4,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminEntrepriseController">
    <children>
-
       <AnchorPane fx:id="AnchorPaneEntreprise" layoutX="316.0" prefHeight="900.0" prefWidth="400.0">
          <children>
             <TableView fx:id="TableauEntreprise" layoutX="17.0" layoutY="189.0" onMouseClicked="#getSelectEntreprise" prefHeight="697.0" prefWidth="1250.0">
@@ -37,20 +35,17 @@
             <AnchorPane fx:id="AnchorPane2" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
                <children>
                   <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
-                  <TextField fx:id="TextFieldRecherche" layoutX="738.0" layoutY="135.0" promptText="Recherche" disable="true"/>
+                  <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" promptText="Recherche" />
                   <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
                   <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
                   <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu">
                      <font>
                         <Font size="16.0" />
                      </font></Button>
-      
-      
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-
       <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
          <children>
             <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
@@ -82,20 +77,14 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-
             <TableView fx:id="TableauCompetence" layoutX="11.0" layoutY="388.0" onMouseClicked="#getSelectCompetence" prefHeight="100.0" prefWidth="125.0">
               <columns>
                 <TableColumn fx:id="ColumnCompétenceTComp" minWidth="0.0" prefWidth="109.0" text="Compétence" />
-
               </columns>
             </TableView>
             <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence (obligatoire)" />
-
          </children>
       </AnchorPane>
-
-
-
       <AnchorPane fx:id="AnchorPaneMenu" prefHeight="900.0" prefWidth="318.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
          <children>
             <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cachermenue" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
@@ -110,9 +99,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-
-
-
-
    </children>
 </Pane>
+
