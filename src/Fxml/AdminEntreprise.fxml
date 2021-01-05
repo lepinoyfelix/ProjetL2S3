@@ -37,7 +37,7 @@
             <AnchorPane fx:id="AnchorPane2" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
                <children>
                   <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
-                  <TextField fx:id="TextFieldRecherche" layoutX="738.0" layoutY="135.0" />
+                  <TextField fx:id="TextFieldRecherche" layoutX="738.0" layoutY="135.0" promptText="Recherche" disable="true"/>
                   <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
                   <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
                   <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu">
@@ -65,13 +65,13 @@
                <font>
                   <Font name="Alef Bold" size="16.0" />
                </font></Button>
-            <TextField fx:id="TextFieldNomEntreprise" layoutX="74.0" layoutY="16.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Entreprise" AnchorPane.topAnchor="16.0" />
-            <TextField fx:id="TextFieldNumSiren" layoutX="74.0" layoutY="56.0" prefHeight="30.0" prefWidth="170.0" promptText="Numero  de SIREN" AnchorPane.topAnchor="56.0" />
-            <TextField fx:id="TextFieldCodePostal" layoutX="74.0" layoutY="96.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal" AnchorPane.topAnchor="96.0" />
-            <TextField fx:id="TextFieldAdresse" layoutX="74.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse" AnchorPane.topAnchor="136.0" />
-            <TextField fx:id="TextFieldVille" layoutX="74.0" layoutY="176.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville" AnchorPane.topAnchor="176.0" />
+            <TextField fx:id="TextFieldNomEntreprise" layoutX="74.0" layoutY="16.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Entreprise (obligatoire)" AnchorPane.topAnchor="16.0" />
+            <TextField fx:id="TextFieldNumSiren" layoutX="74.0" layoutY="56.0" prefHeight="30.0" prefWidth="170.0" promptText="Numero  de SIREN (obligatoire)" AnchorPane.topAnchor="56.0" />
+            <TextField fx:id="TextFieldCodePostal" layoutX="74.0" layoutY="96.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal (obligatoire)" AnchorPane.topAnchor="96.0" />
+            <TextField fx:id="TextFieldAdresse" layoutX="74.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse (obligatoire)" AnchorPane.topAnchor="136.0" />
+            <TextField fx:id="TextFieldVille" layoutX="74.0" layoutY="176.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville (obligatoire)" AnchorPane.topAnchor="176.0" />
             <TextField fx:id="TextFieldFax" layoutX="74.0" layoutY="216.0" prefHeight="30.0" prefWidth="170.0" promptText="Fax" AnchorPane.topAnchor="216.0" />
-            <TextField fx:id="TextFieldTel" layoutX="74.0" layoutY="256.0" prefHeight="30.0" prefWidth="170.0" promptText="Tel" AnchorPane.topAnchor="256.0" />
+            <TextField fx:id="TextFieldTel" layoutX="74.0" layoutY="256.0" prefHeight="30.0" prefWidth="170.0" promptText="Tel (obligatoire)" AnchorPane.topAnchor="256.0" />
             <TextField fx:id="TextFieldSiteWeb" layoutX="74.0" layoutY="296.0" prefHeight="30.0" prefWidth="170.0" promptText="Site Web" AnchorPane.topAnchor="296.0" />
             <TextField fx:id="TextFieldAutreInfo" layoutX="74.0" layoutY="336.0" prefHeight="30.0" prefWidth="170.0" promptText="Autre Info" AnchorPane.topAnchor="336.0" />
             <TextField fx:id="TextFieldDateTaxe" layoutX="74.0" layoutY="527.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Payment" visible="false" AnchorPane.topAnchor="527.0" />
@@ -89,7 +89,7 @@
 
               </columns>
             </TableView>
-            <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence" />
+            <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence (obligatoire)" />
 
          </children>
       </AnchorPane>

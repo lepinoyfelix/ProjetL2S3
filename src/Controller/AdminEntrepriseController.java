@@ -829,6 +829,7 @@ public class AdminEntrepriseController implements Initializable {
     private void ButtonRechercheOnAction(ActionEvent event) {
         labelCatégorierecherche.setText(ChoiceBoxRecherche.getValue());
         Entreprise_Search();
+        TextFieldRecherche.setDisable(false);
 
     }
 

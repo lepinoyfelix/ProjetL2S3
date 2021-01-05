@@ -15,14 +15,14 @@
        <Label fx:id="labelCatégorierecherche" visible="false" />
       <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css">
          <children>
-            <TextField fx:id="TextFieldNom" layoutX="29.0" layoutY="307.0" promptText="Nom" visible="false" />
-            <TextField fx:id="TextFieldPrenom" layoutX="29.0" layoutY="340.0" promptText="Prenom" visible="false" />
-            <TextField fx:id="TextFieldTel" layoutX="29.0" layoutY="374.0" promptText="Tel" visible="false" />
-            <TextField fx:id="TextFieldEmail" layoutX="29.0" layoutY="409.0" promptText="Mail" visible="false" />
-            <TextField fx:id="TextFieldCompetence" layoutX="29.0" layoutY="258.0" promptText="Competence" visible="false" />
+            <TextField fx:id="TextFieldNom" layoutX="29.0" layoutY="307.0" promptText="Nom (obligatoire)" visible="false" />
+            <TextField fx:id="TextFieldPrenom" layoutX="29.0" layoutY="340.0" promptText="Prenom (obligatoire)" visible="false" />
+            <TextField fx:id="TextFieldTel" layoutX="29.0" layoutY="374.0" promptText="Tel (obligatoire)" visible="false" />
+            <TextField fx:id="TextFieldEmail" layoutX="29.0" layoutY="409.0" promptText="Mail (obligatoire)" visible="false" />
+            <TextField fx:id="TextFieldCompetence" layoutX="29.0" layoutY="258.0" promptText="Competence (obligatoire)" visible="false" />
             <TextField fx:id="TextFieldSelectEntreprise" disable="true" layoutX="155.0" layoutY="494.0" promptText="Select Entreprise" visible="false" />
             <TextField fx:id="TextFieldSelectEvent" disable="true" layoutX="155.0" layoutY="615.0" promptText="Select Evenement" visible="false" />
-            <TextField fx:id="ChoixCompetencePersonne" disable="true" layoutX="155.0" layoutY="615.0" promptText="Select Competence From persone" visible="false" />
+            <TextField fx:id="ChoixCompetencePersonne" disable="true" layoutX="155.0" layoutY="615.0" promptText="Select Competence" visible="false" />
             <TableView fx:id="TableViewAfficherEvent" layoutX="23.0" layoutY="578.0" onMouseClicked="#getSelectEventEntreprise" prefHeight="100.0" prefWidth="125.0" visible="false">
               <columns>
                 <TableColumn fx:id="ColumnEventTEvent" prefWidth="125.0" text="Evenement" />
@@ -102,7 +102,7 @@
                            <Font size="16.0" />
                        </font></Button>
                   <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
-                  <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" />
+                  <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" promptText="Rechercher" />
                </children>
             </AnchorPane>
          </children>

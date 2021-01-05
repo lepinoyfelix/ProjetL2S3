@@ -46,7 +46,7 @@
               <AnchorPane fx:id="AnchorPane2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
                   <children>
                       <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
-                      <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" visible="true" />
+                      <TextField fx:id="TextFieldRecherche" disable="true" layoutX="738.0" layoutY="135.0" promptText="Recherche" visible="true" />
                       <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" visible="true" />
                       <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
                       <Button fx:id="BtnTout" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnToutOnAction" text="Tout" />
@@ -75,9 +75,9 @@
                     <font>
                         <Font name="Alef Bold" size="16.0" />
                     </font></Button>
-                <TextField fx:id="TextFieldNomEvenement" layoutX="14.0" layoutY="130.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Evenement" visible="false" AnchorPane.topAnchor="130.0" />
-                <TextField fx:id="TextFieldVilleEvenement" layoutX="14.0" layoutY="436.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment ville" visible="false" AnchorPane.topAnchor="220.0" />
-                <TextField fx:id="TextFieldDateEvenement" layoutX="14.0" layoutY="313.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Evenement" visible="false" AnchorPane.topAnchor="310.0" />
+                <TextField fx:id="TextFieldNomEvenement" layoutX="14.0" layoutY="130.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Evenement (obligatoire)" visible="false" AnchorPane.topAnchor="130.0" />
+                <TextField fx:id="TextFieldVilleEvenement" layoutX="14.0" layoutY="436.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville (obligatoire)" visible="false" AnchorPane.topAnchor="220.0" />
+                <TextField fx:id="TextFieldDateEvenement" layoutX="14.0" layoutY="313.0" prefHeight="30.0" prefWidth="170.0" promptText="Date (obligatoire)" visible="false" AnchorPane.topAnchor="310.0" />
 
                 <Button fx:id="ButtonImprier" layoutX="89.0" layoutY="848.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #94A7B1;" text="Imprimer" textFill="WHITE" visible="false">
                     <font>
@@ -97,14 +97,14 @@
                 <Label fx:id="LabelTypeEvenement" layoutX="159.0" layoutY="60.0" prefHeight="17.0" prefWidth="93.0" textFill="WHITE" visible="false" />
                 <Label fx:id="LabelCompetence" layoutX="14.0" layoutY="526.0" prefHeight="17.0" prefWidth="125.0" textFill="WHITE" />
                 <Label fx:id="labelChoiceBoxActiion" layoutX="180.0" layoutY="543.0" textFill="WHITE" visible="false" />
-                <TextField fx:id="TextFieldHeureEvenement" layoutX="14.0" layoutY="343.0" prefHeight="30.0" prefWidth="170.0" promptText="Heure Evenement" visible="false" AnchorPane.topAnchor="355.0" />
-                <TextField fx:id="TextFieldAdresseEvenement" layoutX="14.0" layoutY="305.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment Adresse" visible="false" AnchorPane.topAnchor="265.0" />
-                <TextField fx:id="TextFieldCodePostalEvenement" layoutX="14.0" layoutY="386.0" prefHeight="30.0" prefWidth="170.0" promptText="Localisation Evenment CP" visible="false" AnchorPane.topAnchor="175.0" />
-                <TextField fx:id="TextFieldSalleCours" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Salle Cours" visible="false" AnchorPane.topAnchor="560.0" />
-                <TextField fx:id="TextFieldBatimentCours" layoutX="14.0" layoutY="604.0" prefHeight="30.0" prefWidth="170.0" promptText="Batiment Cours" visible="false" AnchorPane.topAnchor="605.0" />
-                <TextField fx:id="TextFieldDureeCours" layoutX="14.0" layoutY="642.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Cours" visible="false" AnchorPane.topAnchor="650.0" />
-                <TextField fx:id="TextFieldDureeConf" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Conference" visible="false" AnchorPane.topAnchor="560.0" />
-                <TextField fx:id="TextFieldAutreEvenement" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Description Autre Evenement" visible="false" />
+                <TextField fx:id="TextFieldHeureEvenement" layoutX="14.0" layoutY="343.0" prefHeight="30.0" prefWidth="170.0" promptText="Heure (obligatoire)" visible="false" AnchorPane.topAnchor="355.0" />
+                <TextField fx:id="TextFieldAdresseEvenement" layoutX="14.0" layoutY="305.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse (obligatoire) " visible="false" AnchorPane.topAnchor="265.0" />
+                <TextField fx:id="TextFieldCodePostalEvenement" layoutX="14.0" layoutY="386.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal (obliggatoire) " visible="false" AnchorPane.topAnchor="175.0" />
+                <TextField fx:id="TextFieldSalleCours" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Salle Cours (obligatoire) " visible="false" AnchorPane.topAnchor="560.0" />
+                <TextField fx:id="TextFieldBatimentCours" layoutX="14.0" layoutY="604.0" prefHeight="30.0" prefWidth="170.0" promptText="Batiment Cours (obligatoire)" visible="false" AnchorPane.topAnchor="605.0" />
+                <TextField fx:id="TextFieldDureeCours" layoutX="14.0" layoutY="642.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Cours (obligatoire)" visible="false" AnchorPane.topAnchor="650.0" />
+                <TextField fx:id="TextFieldDureeConf" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Duree Conference (obligatoire)" visible="false" AnchorPane.topAnchor="560.0" />
+                <TextField fx:id="TextFieldAutreEvenement" layoutX="15.0" layoutY="560.0" prefHeight="30.0" prefWidth="170.0" promptText="Description Autre Evenement (obligatoire)" visible="false" />
             <CheckBox fx:id="CheckBoxAjouterEvent" layoutX="89.0" layoutY="688.0" mnemonicParsing="false" onAction="#CheckBoxAjouterEventOnAction" text="Ajouter Event" textFill="WHITE" />
             <TableView fx:id="TableViewIntervenant" layoutX="167.0" layoutY="402.0" onMouseClicked="#getSelectIntervenant" prefHeight="100.0" prefWidth="125.0" visible="false" AnchorPane.topAnchor="402.0">
               <columns>

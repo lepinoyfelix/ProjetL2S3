@@ -21,6 +21,7 @@
       <element id="archive" name="ProjetJavaFx.jar">
         <element id="module-output" name="ProjetJavaFx" />
         <element id="file-copy" path="$PROJECT_DIR$/mysql-connector-java-8.0.13.jar" />
+        <element id="library" level="project" name="Java EE 6-Java EE 6" />
       </element>
     </root>
   </artifact>
