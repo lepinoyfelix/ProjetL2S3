@@ -303,7 +303,7 @@ public class AdminEvenementControler implements Initializable {
                 int C = Integer.parseInt(ST.nextToken());
                 super.updateItem(item, empty) ;
                 if(item == null){
-
+                    setStyle("");
                 }else{
                     String DateSaise = item.getDate();
 
@@ -379,7 +379,7 @@ public class AdminEvenementControler implements Initializable {
                 int C = Integer.parseInt(ST.nextToken());
                 super.updateItem(item, empty) ;
                 if(item == null){
-
+                    setStyle("");
                 }else{
                     String DateSaise = item.getDate();
 
