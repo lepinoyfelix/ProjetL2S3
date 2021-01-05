@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 --
 -- Structure de la table `autreevenement`
 --
+CREATE DATABASE IF NOT EXISTS projetl2info
 
 CREATE TABLE `autreevenement` (
   `idAutreEvenement` int(11) NOT NULL,
