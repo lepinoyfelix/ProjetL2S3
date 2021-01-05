@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -125,7 +126,6 @@ Connexion classe BDD
                                                 TextFieldCodeConfMail.setVisible(true);
                                                 LabelErreur.setText("Veuillez regarder vos mail");
                                                 String codeEnvoyerParMail = String.valueOf(EnvoiMailUtil.getNombreAleatoireVerificationMail());
-                                                System.out.println(codeEnvoyerParMail);
                                                 ButtonInscription.setVisible(false);
                                                 ButtonInscriptionFinal.setVisible(true);
 
@@ -204,6 +204,7 @@ Connexion classe BDD
                     /*
                     ouvre  connexion si l'inscription est lavidé
                     */
+                    JOptionPane.showMessageDialog(null, "Inscription réussite");
                     Stage stage = (Stage) ButtonAnnuler.getScene().getWindow();
                     stage.close();
                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));

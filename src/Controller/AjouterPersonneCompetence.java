@@ -27,6 +27,16 @@ import java.util.regex.Pattern;
 
 public class AjouterPersonneCompetence implements Initializable {
     @FXML
+    private javafx.scene.layout.AnchorPane AnchorPane1;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPane2;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPaneMenu;
+    @FXML
+    private javafx.scene.layout.AnchorPane AnchorPaneAddPersonne;
+    @FXML
+    private Button btnMenuAdmin;
+    @FXML
     private TableView<Competence> TableViewCompetence;
     @FXML
     private TableColumn<Competence, String> ColumnCompetence;
@@ -121,7 +131,7 @@ public class AjouterPersonneCompetence implements Initializable {
 
     public void BouttonPageEvenementOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) BtnAutrePage.getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEvenement.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Evenement");
@@ -351,8 +361,6 @@ Connexion classe BDD
         TableViewCompetence2.setItems(listCompetence2);
 
 
-        loadData();
-
     }
 
     public void clearTextfield() {
@@ -369,7 +377,7 @@ Connexion classe BDD
     public void CheckEvententreprise(javafx.event.ActionEvent actionEvent){
         if (CheckBoxkEvententreprise.isSelected()) {
             BtnAjouter.setDisable(false);
-            TextFieldCompetence.setVisible(true);
+            TextFieldCompetence.setVisible(false);
             CheckBoxPersone.setSelected(false);
             CheckBoxCompetence.setSelected(false);
             TextFieldNom.setVisible(false);
@@ -419,6 +427,7 @@ Connexion classe BDD
         if (CheckBoxCompetence.isSelected()) {
             BtnAjouter.setDisable(false);
             TextFieldCompetence.setVisible(true);
+            TextFieldCompetence.setDisable(false);
             CheckBoxkEvententreprise.setSelected(false);
             CheckBoxPersone.setSelected(false);
             TextFieldNom.setVisible(false);
@@ -1191,6 +1200,20 @@ Connexion classe BDD
                         return false;
 
                 });
+            }else if(labelCatégorierecherche.getText().equals("Competence")) {
+                filteredData.setPredicate(person -> {
+
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (person.getCompetence().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                        return true;
+                    } else
+                        return false;
+
+                });
             }
         });
         SortedList<PersonneNomPrenom> sortedData = new SortedList<>(filteredData);
@@ -1259,5 +1282,74 @@ Connexion classe BDD
             throwables.printStackTrace();
         }
     }
+
+    @FXML
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToAddPersonne, btnMooveToAddCompetence, btnDeconnexion;
+
+    public void MooveToEntreprise() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEntreprise.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Entreprise");
+        stage.setScene(scene);
+
+    }
+
+    public void MooveToEvenements() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEvenements.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Event");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAddPersonne() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddPersonne.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAddCompetence() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddCompetence.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+
+    public void Deconnexion() throws Exception
+    {
+
+        Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+        stage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+        stage.show();
+        stage.setTitle("Connexion");
+        stage.setScene(scene);
+    }
+
+    public void affichermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(true);
+        AnchorPaneAddPersonne.setDisable(true);
+        btnMenuAdmin.setVisible(false);
+    }
+
+    public void cachermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(false);
+        AnchorPaneAddPersonne.setDisable(false);
+        btnMenuAdmin.setVisible(true);
+    }
+
 
 }

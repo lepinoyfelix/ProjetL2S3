@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="PaneTableauEntreprise" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminEntrepriseController">
+   <children>
+
+      <AnchorPane fx:id="AnchorPaneEntreprise" layoutX="316.0" prefHeight="900.0" prefWidth="400.0">
+         <children>
+            <TableView fx:id="TableauEntreprise" layoutX="17.0" layoutY="189.0" onMouseClicked="#getSelectEntreprise" prefHeight="697.0" prefWidth="1250.0">
+              <columns>
+                <TableColumn fx:id="ColumnNom" prefWidth="150.0" text="Nom " />
+                  <TableColumn fx:id="ColumnNumerDeSiren" prefWidth="160.0" text="Numero De Siren" />
+                  <TableColumn prefWidth="157.0" text="Localisation">
+                     <columns>
+                        <TableColumn fx:id="ColumnCodePostal" prefWidth="75.0" text="Code Postal" />
+                        <TableColumn fx:id="ColumnVille" prefWidth="75.0" text="Ville" />
+                        <TableColumn fx:id="ColumnAdresse" prefWidth="75.0" text="Adresse" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="ColumnFax" prefWidth="92.4000244140625" text="Fax" />
+                  <TableColumn fx:id="ColumnTel" prefWidth="88.39996337890625" text="Tel" />
+                  <TableColumn fx:id="ColumnSiteWeb" prefWidth="90.0" text="Site Web" />
+                  <TableColumn fx:id="ColumnAutreInfo" prefWidth="140.0" text="Autre Info" />
+                  <TableColumn prefWidth="198.0" text="Taxe d'apprentissage">
+                     <columns>
+                        <TableColumn fx:id="ColumnTaxeAprentissageDatePayment" prefWidth="100.0" text="Date payment" />
+                        <TableColumn fx:id="ColumnTaxeAprentissageMontant" prefWidth="100.0" text="Montant" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="ColumnCompetence" prefWidth="102.0" text="Compétence" />
+              </columns>
+            </TableView>
+            <AnchorPane fx:id="AnchorPane2" prefHeight="178.0" prefWidth="1284.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
+               <children>
+                  <Button fx:id="btnDeconnexion" alignment="CENTER" layoutX="1136.0" layoutY="14.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déconnexion" />
+                  <TextField fx:id="TextFieldRecherche" layoutX="738.0" layoutY="135.0" promptText="Recherche" disable="true"/>
+                  <ChoiceBox fx:id="ChoiceBoxRecherche" layoutX="542.0" layoutY="135.0" onAction="#ButtonRechercheOnAction" prefWidth="150.0" />
+                  <Label fx:id="labelCatégorierecherche" alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="152.0" prefHeight="17.0" prefWidth="150.0" textFill="WHITE" visible="false" />
+                  <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Button>
+      
+      
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="AnchorPane1" prefHeight="900.0" prefWidth="317.0" styleClass="BackGroundGrisFoncer" stylesheets="@../Css/SetupCss.css" visible="true">
+         <children>
+            <Button fx:id="ButtonAjouter" layoutX="89.0" layoutY="609.0" mnemonicParsing="false" onAction="#AjouterEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="ButtonModifier" layoutX="89.0" layoutY="672.0" mnemonicParsing="false" onAction="#EditEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #F78411;" text="Modifier" textFill="WHITE">
+               <font>
+                  <Font name="Alef Bold" size="16.0" />
+               </font></Button>
+            <Button fx:id="ButtonSupprimer" layoutX="89.0" layoutY="729.0" mnemonicParsing="false" onAction="#SupprimerEntreprise" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
+               <font>
+                  <Font name="Alef Bold" size="16.0" />
+               </font></Button>
+            <TextField fx:id="TextFieldNomEntreprise" layoutX="74.0" layoutY="16.0" prefHeight="30.0" prefWidth="170.0" promptText="Nom Entreprise (obligatoire)" AnchorPane.topAnchor="16.0" />
+            <TextField fx:id="TextFieldNumSiren" layoutX="74.0" layoutY="56.0" prefHeight="30.0" prefWidth="170.0" promptText="Numero  de SIREN (obligatoire)" AnchorPane.topAnchor="56.0" />
+            <TextField fx:id="TextFieldCodePostal" layoutX="74.0" layoutY="96.0" prefHeight="30.0" prefWidth="170.0" promptText="Code Postal (obligatoire)" AnchorPane.topAnchor="96.0" />
+            <TextField fx:id="TextFieldAdresse" layoutX="74.0" layoutY="136.0" prefHeight="30.0" prefWidth="170.0" promptText="Adresse (obligatoire)" AnchorPane.topAnchor="136.0" />
+            <TextField fx:id="TextFieldVille" layoutX="74.0" layoutY="176.0" prefHeight="30.0" prefWidth="170.0" promptText="Ville (obligatoire)" AnchorPane.topAnchor="176.0" />
+            <TextField fx:id="TextFieldFax" layoutX="74.0" layoutY="216.0" prefHeight="30.0" prefWidth="170.0" promptText="Fax" AnchorPane.topAnchor="216.0" />
+            <TextField fx:id="TextFieldTel" layoutX="74.0" layoutY="256.0" prefHeight="30.0" prefWidth="170.0" promptText="Tel (obligatoire)" AnchorPane.topAnchor="256.0" />
+            <TextField fx:id="TextFieldSiteWeb" layoutX="74.0" layoutY="296.0" prefHeight="30.0" prefWidth="170.0" promptText="Site Web" AnchorPane.topAnchor="296.0" />
+            <TextField fx:id="TextFieldAutreInfo" layoutX="74.0" layoutY="336.0" prefHeight="30.0" prefWidth="170.0" promptText="Autre Info" AnchorPane.topAnchor="336.0" />
+            <TextField fx:id="TextFieldDateTaxe" layoutX="74.0" layoutY="527.0" prefHeight="30.0" prefWidth="170.0" promptText="Date Payment" visible="false" AnchorPane.topAnchor="527.0" />
+            <TextField fx:id="TextFieldMontantTaxe" layoutX="74.0" layoutY="567.0" prefHeight="30.0" prefWidth="170.0" promptText="Montant" visible="false" AnchorPane.topAnchor="567.0" />
+            <CheckBox fx:id="CheckBoxTaxeApprentissage" layoutX="74.0" layoutY="487.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="30.0" prefWidth="170.0" text="Taxe d'aprentissage" textFill="WHITE" AnchorPane.topAnchor="487.0" />
+            <Button fx:id="ButtonImprier" layoutX="89.0" layoutY="848.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #94A7B1;" text="Imprimer" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+
+            <TableView fx:id="TableauCompetence" layoutX="11.0" layoutY="388.0" onMouseClicked="#getSelectCompetence" prefHeight="100.0" prefWidth="125.0">
+              <columns>
+                <TableColumn fx:id="ColumnCompétenceTComp" minWidth="0.0" prefWidth="109.0" text="Compétence" />
+
+              </columns>
+            </TableView>
+            <TextField fx:id="TextFieldCompetence" layoutX="144.0" layoutY="423.0" prefHeight="30.0" prefWidth="170.0" promptText="Compétence (obligatoire)" />
+
+         </children>
+      </AnchorPane>
+
+
+
+      <AnchorPane fx:id="AnchorPaneMenu" prefHeight="900.0" prefWidth="318.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+         <children>
+            <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#cachermenue" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
+            <Button fx:id="btnMooveToEntreprise" layoutX="74.0" layoutY="180.0" mnemonicParsing="false" onAction="#MooveToEntreprise" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Entreprise" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToEvenements" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" onAction="#MooveToEvenements" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Evénements" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToAddPersonne" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#MooveToAddPersonne" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Personne" textAlignment="CENTER" />
+            <Button fx:id="btnMooveToAddCompetence" layoutX="74.0" layoutY="540.0" mnemonicParsing="false" onAction="#MooveToAddCompetence" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Ajouter Competence" textAlignment="CENTER" />
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/UnivTours-logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+
+
+
+
+   </children>
+</Pane>

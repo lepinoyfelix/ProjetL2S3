@@ -7,13 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MainConnexion extends Application {
+public class Teste extends Application {
 
     @Override
     public void start(Stage primaryStageConnexion) throws Exception{
         Image image = new Image("/Images/UnivTours-logoAppli.png");
         primaryStageConnexion.getIcons().add(image);
-        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml"));
         primaryStageConnexion.setTitle("Connexion");
         primaryStageConnexion.setScene(new Scene(root, 520, 400));
         primaryStageConnexion.show();

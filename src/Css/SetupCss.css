@@ -1,0 +1,20 @@
+.BackGroundGrisClair{
+    -fx-background-color: #D2D0D0;
+}
+
+.ButtonBleuClair{
+    -fx-background-color: #04C8B5;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.ButtonBleufoncer{
+    -fx-background-color: #374750;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.BackGroundGrisFoncer{
+    -fx-background-color: #374750;
+}
+

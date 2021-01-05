@@ -3,6 +3,8 @@ package Controller;
 import AutreClasse.*;
 
 import com.sun.org.apache.bcel.internal.classfile.Code;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,18 +23,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import javafx.scene.control.Button;
 
 import javax.swing.*;
 
-public class TableauEvenementControler implements Initializable {
+public class AdminEvenementControler implements Initializable {
 
     @FXML
     private Button BouttonPageEntreprise;
@@ -70,6 +77,10 @@ public class TableauEvenementControler implements Initializable {
     private AnchorPane AnchorPane2;
     @FXML
     private AnchorPane AnchorPane1;
+    @FXML
+    private AnchorPane AnchorPaneMenu;
+    @FXML
+    private AnchorPane AnchorPaneEvenement;
     @FXML
     private Button ButtonMenu;
     @FXML
@@ -126,6 +137,8 @@ public class TableauEvenementControler implements Initializable {
     private Button ButtonSupprimer;
     @FXML
     private Button ButtonModifier;
+    @FXML
+    private Button btnMenuAdmin;
 
     /*
  Connexion classe BDD
@@ -136,7 +149,7 @@ public class TableauEvenementControler implements Initializable {
     ResultSet resultSet = null;
 
 
-    public TableauEvenementControler() {
+    public AdminEvenementControler() {
         connection = ConexionBDD.connectdb();
     }
     ObservableList<Evenement> listEvenement;
@@ -240,6 +253,9 @@ public class TableauEvenementControler implements Initializable {
         return list;
     }
 
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle rb) {
         ColumnNom.setCellValueFactory(new PropertyValueFactory<Evenement, String>("NomEvenement"));
@@ -272,9 +288,56 @@ public class TableauEvenementControler implements Initializable {
         listIntervenant = getDataIntervenant();
         TableViewIntervenant.setItems(listIntervenant);
 
+        TableauEvenement.setRowFactory(tv -> new TableRow<Evenement>() {
+
+            @Override
+            public void updateItem(Evenement item, boolean empty) {
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                String  Date = format.format(date);
+                String Separateur = "/";
+                String MaChaine = Date;
+                StringTokenizer ST = new StringTokenizer(MaChaine, Separateur);
+                int A= Integer.parseInt(ST.nextToken());
+                int B = Integer.parseInt(ST.nextToken());
+                int C = Integer.parseInt(ST.nextToken());
+                super.updateItem(item, empty) ;
+                if(item == null){
+
+                }else{
+                    String DateSaise = item.getDate();
+
+                    String Separateur2 = "/";
+                    StringTokenizer ST1 = new StringTokenizer(DateSaise, Separateur2);
+                    int D = Integer.parseInt(ST1.nextToken());
+                    int E = Integer.parseInt(ST1.nextToken());
+                    int F = Integer.parseInt(ST1.nextToken());
+
+                    if(F>C){
+                        setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+
+                    }else if(F<C){
+                        setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                    }else if (F == C){
+                        if(E>B){
+                            setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                        }else if(E<B) {
+                            setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                        } else if (E == B) {
+                            if(D>A){
+                                setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                            }else if(D<A) {
+                                setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                            } else if (D == A) {
+                                setStyle("-fx-background-color: #b2ff95;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
         loadData();
-
-
 
     }
     public void UpdateTable(){
@@ -301,11 +364,63 @@ public class TableauEvenementControler implements Initializable {
         TableViewIntervenant.setItems(listIntervenant);
         recherche_Evenement();
 
+        TableauEvenement.setRowFactory(tv -> new TableRow<Evenement>() {
+
+            @Override
+            public void updateItem(Evenement item, boolean empty) {
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                String  Date = format.format(date);
+                String Separateur = "/";
+                String MaChaine = Date;
+                StringTokenizer ST = new StringTokenizer(MaChaine, Separateur);
+                int A= Integer.parseInt(ST.nextToken());
+                int B = Integer.parseInt(ST.nextToken());
+                int C = Integer.parseInt(ST.nextToken());
+                super.updateItem(item, empty) ;
+                if(item == null){
+
+                }else{
+                    String DateSaise = item.getDate();
+
+                    String Separateur2 = "/";
+                    StringTokenizer ST1 = new StringTokenizer(DateSaise, Separateur2);
+                    int D = Integer.parseInt(ST1.nextToken());
+                    int E = Integer.parseInt(ST1.nextToken());
+                    int F = Integer.parseInt(ST1.nextToken());
+
+                    if(F>C){
+                        setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+
+                    }else if(F<C){
+                        setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                    }else if (F == C){
+                        if(E>B){
+                            setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                        }else if(E<B) {
+                            setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                        } else if (E == B) {
+                            if(D>A){
+                                setStyle("-fx-background-color:#a8f2ff;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0;");
+                            }else if(D<A) {
+                                setStyle("-fx-background-color: #ffc2c2;-fx-selection-bar: #c0c0c0;-fx-selection-text: #1c1c1c;");
+                            } else if (D == A) {
+                                setStyle("-fx-background-color: #b2ff95;-fx-selection-bar: #c0c0c0;-fx-selection-text: #c0c0c0");
+
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        loadData();
+
+
 
     }
 
-    public void cachermenue(ActionEvent actionEvent) {
-    }
+
+
 
 
     int index3 = -1;
@@ -521,7 +636,7 @@ public class TableauEvenementControler implements Initializable {
 
     public void BouttonPageEntrepriseOnActionOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage)  BouttonPageEntreprise.getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/TableauEntreprise.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Entreprise");
@@ -599,11 +714,7 @@ public class TableauEvenementControler implements Initializable {
         ColumnCompetence.setVisible(true);
     }
 
-    public void affichermenue(ActionEvent actionEvent) {
-        AnchorPane1.setVisible(true);
-        AnchorPane2.setVisible(true);
-        ButtonMenu.setVisible(false);
-    }
+
 
     ObservableList listFiltreRecherche = FXCollections.observableArrayList();
     public void loadData(){
@@ -1996,67 +2107,67 @@ public class TableauEvenementControler implements Initializable {
                                                                                                 if (resultSet.next()) {
                                                                                                     String idPersone = resultSet.getString("idPersone");
                                                                                                     if(AutreEvenement.length()>0){
-                                                                                                            String idEvenement = "SELECT idEvenement FROM evenement WHERE  NomEvenement = '"+NomEvenement+"' ";
-                                                                                                            try {
-                                                                                                                preparedStatement = connection.prepareStatement(idEvenement);
-                                                                                                                resultSet = preparedStatement.executeQuery();
-                                                                                                                if(resultSet.next()){
-                                                                                                                    String idEvenementCoursModif = resultSet.getString("idEvenement");
-                                                                                                                    String idAutreEventModif = "SELECT idAutreEvenement FROM  autreevenement WHERE idevenement = ?";
-                                                                                                                    try{
-                                                                                                                        preparedStatement = connection.prepareStatement(idAutreEventModif);
-                                                                                                                        preparedStatement.setString(1, idEvenementCoursModif);
-                                                                                                                        resultSet = preparedStatement.executeQuery();
-                                                                                                                        if(resultSet.next()) {
-                                                                                                                            String idAutreEventEvenementModif = resultSet.getString("idAutreEvenement");
-                                                                                                                            String UpdateEvenemntSQL = "UPDATE evenement SET NomEvenement = '" + NomEvenement + "' , " +
-                                                                                                                                    "CodePostal = '" + CodePostalEvenemen + "' , " +
-                                                                                                                                    "Ville = '" + VilleEvenemen + "' , " +
-                                                                                                                                    "Adresse = '" + AdresseEvenement + "' , " +
-                                                                                                                                    "Date = '" + DateEvenement + "' , " +
-                                                                                                                                    "IdCompetence = '" + idCompetence + "' , " +
-                                                                                                                                    "idPersone = '" + idPersone + "' , " +
-                                                                                                                                    "idCompetence  = '" + idCompetence + "' WHERE  idevenement = '" + idEvenementCoursModif + "' ";
+                                                                                                        String idEvenement = "SELECT idEvenement FROM evenement WHERE  NomEvenement = '"+NomEvenement+"' ";
+                                                                                                        try {
+                                                                                                            preparedStatement = connection.prepareStatement(idEvenement);
+                                                                                                            resultSet = preparedStatement.executeQuery();
+                                                                                                            if(resultSet.next()){
+                                                                                                                String idEvenementCoursModif = resultSet.getString("idEvenement");
+                                                                                                                String idAutreEventModif = "SELECT idAutreEvenement FROM  autreevenement WHERE idevenement = ?";
+                                                                                                                try{
+                                                                                                                    preparedStatement = connection.prepareStatement(idAutreEventModif);
+                                                                                                                    preparedStatement.setString(1, idEvenementCoursModif);
+                                                                                                                    resultSet = preparedStatement.executeQuery();
+                                                                                                                    if(resultSet.next()) {
+                                                                                                                        String idAutreEventEvenementModif = resultSet.getString("idAutreEvenement");
+                                                                                                                        String UpdateEvenemntSQL = "UPDATE evenement SET NomEvenement = '" + NomEvenement + "' , " +
+                                                                                                                                "CodePostal = '" + CodePostalEvenemen + "' , " +
+                                                                                                                                "Ville = '" + VilleEvenemen + "' , " +
+                                                                                                                                "Adresse = '" + AdresseEvenement + "' , " +
+                                                                                                                                "Date = '" + DateEvenement + "' , " +
+                                                                                                                                "IdCompetence = '" + idCompetence + "' , " +
+                                                                                                                                "idPersone = '" + idPersone + "' , " +
+                                                                                                                                "idCompetence  = '" + idCompetence + "' WHERE  idevenement = '" + idEvenementCoursModif + "' ";
 
-                                                                                                                            String UpdateConfSQL = "UPDATE autreevenement SET DescriptionAutreEvenement = '"+ AutreEvenement+"' WHERE idAutreEvenement = '"+ idAutreEventEvenementModif +"' ";
+                                                                                                                        String UpdateConfSQL = "UPDATE autreevenement SET DescriptionAutreEvenement = '"+ AutreEvenement+"' WHERE idAutreEvenement = '"+ idAutreEventEvenementModif +"' ";
 
-                                                                                                                            preparedStatement = connection.prepareStatement(UpdateEvenemntSQL);
-                                                                                                                            preparedStatement.execute();
-                                                                                                                            preparedStatement = connection.prepareStatement(UpdateConfSQL);
-                                                                                                                            preparedStatement.execute();
-                                                                                                                            JOptionPane.showMessageDialog(null, "La modification de " + NomEvenement + " a etait prise en compte");
-                                                                                                                            UpdateTable();
-                                                                                                                            TextFieldClear();
-                                                                                                                            TableauTypeEvenement.setVisible(false);
-                                                                                                                            TextFieldNomEvenement.setVisible(false);
-                                                                                                                            TextFieldVilleEvenement.setVisible(false);
-                                                                                                                            TextFieldAdresseEvenement.setVisible(false);
-                                                                                                                            TextFieldHeureEvenement.setVisible(false);
-                                                                                                                            TextFieldDateEvenement.setVisible(false);
-                                                                                                                            TextFieldCodePostalEvenement.setVisible(false);
-                                                                                                                            LabelCompetence.setVisible(false);
-                                                                                                                            LabelTypeEvenement.setVisible(false);
-                                                                                                                            LabelIntervenant.setVisible(false);
-                                                                                                                            TextFieldSalleCours.setVisible(false);
-                                                                                                                            TextFieldDureeCours.setVisible(false);
-                                                                                                                            TextFieldBatimentCours.setVisible(false);
-                                                                                                                            TextFieldAutreEvenement.setVisible(false);
-                                                                                                                            TextFieldDureeConf.setVisible(false);
-                                                                                                                            TableauCompetence.setVisible(false);
-                                                                                                                            TableViewIntervenant.setVisible(false);
+                                                                                                                        preparedStatement = connection.prepareStatement(UpdateEvenemntSQL);
+                                                                                                                        preparedStatement.execute();
+                                                                                                                        preparedStatement = connection.prepareStatement(UpdateConfSQL);
+                                                                                                                        preparedStatement.execute();
+                                                                                                                        JOptionPane.showMessageDialog(null, "La modification de " + NomEvenement + " a etait prise en compte");
+                                                                                                                        UpdateTable();
+                                                                                                                        TextFieldClear();
+                                                                                                                        TableauTypeEvenement.setVisible(false);
+                                                                                                                        TextFieldNomEvenement.setVisible(false);
+                                                                                                                        TextFieldVilleEvenement.setVisible(false);
+                                                                                                                        TextFieldAdresseEvenement.setVisible(false);
+                                                                                                                        TextFieldHeureEvenement.setVisible(false);
+                                                                                                                        TextFieldDateEvenement.setVisible(false);
+                                                                                                                        TextFieldCodePostalEvenement.setVisible(false);
+                                                                                                                        LabelCompetence.setVisible(false);
+                                                                                                                        LabelTypeEvenement.setVisible(false);
+                                                                                                                        LabelIntervenant.setVisible(false);
+                                                                                                                        TextFieldSalleCours.setVisible(false);
+                                                                                                                        TextFieldDureeCours.setVisible(false);
+                                                                                                                        TextFieldBatimentCours.setVisible(false);
+                                                                                                                        TextFieldAutreEvenement.setVisible(false);
+                                                                                                                        TextFieldDureeConf.setVisible(false);
+                                                                                                                        TableauCompetence.setVisible(false);
+                                                                                                                        TableViewIntervenant.setVisible(false);
 
-                                                                                                                        }
-
-                                                                                                                    } catch (SQLException throwables) {
-                                                                                                                        throwables.printStackTrace();
                                                                                                                     }
 
-                                                                                                                }else{
-
+                                                                                                                } catch (SQLException throwables) {
+                                                                                                                    throwables.printStackTrace();
                                                                                                                 }
-                                                                                                            } catch (SQLException throwables) {
-                                                                                                                throwables.printStackTrace();
+
+                                                                                                            }else{
+
                                                                                                             }
+                                                                                                        } catch (SQLException throwables) {
+                                                                                                            throwables.printStackTrace();
+                                                                                                        }
                                                                                                     }else{
                                                                                                         JOptionPane.showMessageDialog(null, "Veuillez saisir une description de autre evenement");
                                                                                                     }
@@ -2131,6 +2242,74 @@ public class TableauEvenementControler implements Initializable {
         }
 
 
+    }
+
+    @FXML
+    Button btnMooveToEntreprise, btnMooveToEvenements, btnMooveToAddPersonne, btnMooveToAddCompetence, btnDeconnexion;
+
+    public void MooveToEntreprise() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEntreprise.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEntreprise.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Entreprise");
+        stage.setScene(scene);
+
+    }
+
+    public void MooveToEvenements() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToEvenements.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AdminEvenement.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Event");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAddPersonne() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddPersonne.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+    public void MooveToAddCompetence() throws Exception
+    {
+        Stage stage = (Stage) btnMooveToAddCompetence.getScene().getWindow();
+
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AjouterPersonneCompetence.fxml")));
+        stage.show();
+        stage.setTitle("Admin_Cours");
+        stage.setScene(scene);
+    }
+
+
+    public void Deconnexion() throws Exception
+    {
+
+        Stage stage = (Stage) btnDeconnexion.getScene().getWindow();
+        stage.close();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml")));
+        stage.show();
+        stage.setTitle("Connexion");
+        stage.setScene(scene);
+    }
+
+    public void affichermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(true);
+        AnchorPaneEvenement.setDisable(true);
+        btnMenuAdmin.setVisible(false);
+    }
+
+    public void cachermenue(ActionEvent actionEvent) {
+        AnchorPaneMenu.setVisible(false);
+        AnchorPaneEvenement.setDisable(false);
+        btnMenuAdmin.setVisible(true);
     }
 }
 
