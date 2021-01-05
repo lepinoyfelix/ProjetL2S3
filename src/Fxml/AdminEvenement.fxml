@@ -54,7 +54,25 @@
                       <Button fx:id="BtnAutre" layoutX="171.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnAutreOnAction" text="Autre" />
                       <Button fx:id="BtnCours" layoutX="254.0" layoutY="135.0" mnemonicParsing="false" onAction="#BtnCoursOnAction" text="Cours" />
                       <Button fx:id="btnMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#affichermenue" prefHeight="57.0" prefWidth="83.0" styleClass="ButtonBleuClair" stylesheets="@../Css/SetupCss.css" text="Menu" />
-      
+                  <Pane layoutX="376.0" layoutY="89.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #b2ff95;" />
+                  <Pane layoutX="542.0" layoutY="91.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #a8f2ff;" />
+                  <Pane layoutX="704.0" layoutY="89.0" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #ffc2c2;" />
+                  <Label layoutX="265.0" layoutY="93.0" prefHeight="17.0" text="Evenement ce jour : " textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="431.0" layoutY="93.0" prefHeight="17.0" text="Evenement à venir :  " textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="591.0" layoutY="93.0" prefHeight="17.0" text="Evenement passée :   " textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+
       
       
                   </children>
