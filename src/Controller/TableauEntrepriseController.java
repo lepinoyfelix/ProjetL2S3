@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-import sun.plugin.javascript.navig.Anchor;
+
 
 
 import javax.swing.*;
