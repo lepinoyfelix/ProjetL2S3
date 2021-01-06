@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 04 jan. 2021 à 11:17
+-- Généré le :  mar. 05 jan. 2021 à 14:18
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP :  7.4.1
 
@@ -158,7 +158,7 @@ CREATE TABLE `evenement` (
 --
 
 INSERT INTO `evenement` (`idEvenement`, `NomEvenement`, `CodePostal`, `Ville`, `Adresse`, `Date`, `Heure`, `IdCompetence`, `idPersone`, `idtypeEvenement`) VALUES
-(27, 'COURS SUR LA BIO ETHIQUE', '37000', 'TOURS', '2 AVENUE GRANDMONT', '14/01/2021', '14:30', 14, 10, 1),
+(27, 'COURS SUR LA BIO ETHIQUE', '37000', 'TOURS', '2 AVENUE GRANDMONT', '14/01/2020', '14:30', 14, 10, 1),
 (28, 'CONFERENCE DE JEAN ', '37100', 'TOURS NORD', '65 RUE DES ROSIER', '07/07/2021', '8:00', 13, 9, 2),
 (29, 'FORUM DES ASSOCIATION', '78000', 'CRETEIL', '65 RUE DU MAIRE', '10/10/2021', '18:45', 14, 9, 3);
 
