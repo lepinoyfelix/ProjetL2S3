@@ -15,6 +15,7 @@ public class MainConnexion extends Application {
         primaryStageConnexion.getIcons().add(image);
         Parent root = FXMLLoader.load(getClass().getResource("/Fxml/Connexion.fxml"));
         primaryStageConnexion.setTitle("Connexion");
+        primaryStageConnexion.setResizable(false);
         primaryStageConnexion.centerOnScreen();
         primaryStageConnexion.setScene(new Scene(root, 520, 400));
         primaryStageConnexion.show();
