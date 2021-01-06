@@ -15,7 +15,9 @@ public class ConexionBDD {
             return conn;
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Veuillez lancer xampp/wanpp ou tout autre serveur web local");
+            JOptionPane.showMessageDialog(null, "Veuillez lancer xampp/wanpp ou tout autre serveur web local puis relancer le programme");
+            Platform.exit();
+            System.exit(0);
             return null;
         }
     }
