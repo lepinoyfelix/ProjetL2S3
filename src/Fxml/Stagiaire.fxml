@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StagiaireController">
+    <children>
+        <AnchorPane fx:id="AnchorPane" disable="false" prefHeight="900.0" prefWidth="1600.0" styleClass="BackGroundGrisClair">
+            <children>
+                <Button fx:id="BtnAjouter" layoutX="418.0" layoutY="584.0" mnemonicParsing="false" onAction="#AjouterStage" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #48DE1F;" text="Ajouter" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                <Label fx:id="LabelNombreCaractere" contentDisplay="RIGHT" layoutX="417.0" layoutY="548.0" prefHeight="17.0" prefWidth="312.0" />
+                <TextField fx:id="TefxtFieldEntreprise" disable="true" layoutX="414.0" layoutY="208.0" promptText="Selectioner une Entreprise" />
+                <TextField fx:id="TefxtFieldNomPrenom" disable="true" layoutX="414.0" layoutY="307.0" promptText="Nom et prenom" />
+                <TextField fx:id="TefxtFieldNiveau" layoutX="414.0" layoutY="359.0" promptText="Votre niveau" />
+                <TextArea fx:id="TextAreaDescription" layoutX="414.0" layoutY="414.0" onKeyPressed="#compterNbCaractere" prefHeight="128.0" prefWidth="318.0" promptText="Decriver votre stage..." />
+                <Label layoutX="256.0" layoutY="115.0" prefHeight="17.0" prefWidth="442.0" text="Si vous avez fait un stage dans une entreprise partenaire de la fac renseigner le ici :" />
+
+                <Button fx:id="Bonjour" disable="false" layoutX="1414.0" layoutY="26.0" mnemonicParsing="false" onAction="#BonjourOnAction" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déonnexion" />
+                <Button fx:id="BtnMenue" disable="false" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#BtnMenueOnAction" prefHeight="38.0" prefWidth="62.0" styleClass="ButtonBleuClair" text="Menu" />
+                <TableView fx:id="TableViewSatage" layoutX="765.0" layoutY="170.0" prefHeight="519.0" prefWidth="643.0" onMouseClicked="#getSelectStage">
+                    <columns>
+                        <TableColumn fx:id="ColumnEntreprise" prefWidth="124.0" text="Entreprise " />
+                        <TableColumn fx:id="ColumnEtudiant" prefWidth="127.0" text="Etudiant" />
+                        <TableColumn fx:id="ColumnNiveau" prefWidth="51.0" text="Niveau" />
+                        <TableColumn fx:id="ColumnDescription" prefWidth="340.0" text="Description " />
+                    </columns>
+                </TableView>
+                <TableView fx:id="TableViewEntreprise" layoutX="256.0" layoutY="161.0" onMouseClicked="#getSelectEventEntreprise" prefHeight="120.0" prefWidth="125.0">
+                    <columns>
+                        <TableColumn fx:id="ColumnEntrepriseTEntreprise" prefWidth="124.0" text="Entreprise" />
+                    </columns>
+                </TableView>
+
+                <AnchorPane fx:id="AnchorPaneMenu" prefHeight="913.0" prefWidth="318.0" styleClass="BackGroundGrisClaireFoncer" visible="false">
+                    <children>
+                        <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnCloseMenuAdminOnAction" prefHeight="38.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
+                        <Button fx:id="btnAccueilEtudiant" layoutX="74.0" layoutY="180.0" mnemonicParsing="false" onAction="#AccueilEtudiant" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Accueil" textAlignment="CENTER" />
+                        <Button fx:id="btnStagiaire" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" onAction="#Stagiaire" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Stagiaire" textAlignment="CENTER" />
+                        <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../Images/UnivTours-logo.png" />
+                            </image>
+                        </ImageView>
+                        <Button fx:id="btnStage" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#Stage" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Stage" textAlignment="CENTER" />
+                    </children>
+                </AnchorPane>
+                <Button fx:id="BtnSupprimer" disable="true" layoutX="419.0" layoutY="649.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" onAction="#ModifierOnAction" style="-fx-background-color: #F78411;" text="Modifer" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                <Button fx:id="BtnMofifier" disable="true" layoutX="419.0" layoutY="706.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" onAction="#SupprimerOnAction" style="-fx-background-color: #B20C0C;" text="Supprimer" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+            </children></AnchorPane>
+    </children>
+</Pane>

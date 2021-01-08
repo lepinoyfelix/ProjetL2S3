@@ -17,4 +17,12 @@
 .BackGroundGrisFoncer{
     -fx-background-color: #374750;
 }
+.BackGroundGrisClaireFoncer{
+    -fx-background-color: #a6a4a4;
+}.Elipse {
+     -fx-shape: "M483,514c-6.9,5.5-11.5,9.6-13,11c-71.9,65.8-83,172.1-80.5,249.5c0-109.7,0-219.3,0-329h329C593.8,443,521.8,483.3,483,514  z M470,525";
+
+ }
+
+
 

@@ -1,36 +1,28 @@
 package Controller;
-import javafx.fxml.FXMLLoader;
+
+import AutreClasse.ConexionBDD;
+import AutreClasse.Evenement;
+import AutreClasse.User;
+import Controller.AccueilEtudiantController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import AutreClasse.ConexionBDD;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
+import java.util.ResourceBundle;
 
-public class ConnexionController {
-    /*
-    A mdoifier suivant la bdd
-     */
-    String tableUser = "user";
-    String tableRole = "role";
-    String colonemailTableUtilisateur = "Mail";
-    String coloneroleIDTableUtilisateur = "idRole";
-    String colonemdpBDDTableUtilisateur = "Mdp";
-    String coloneRoleTableRole = "role";
-    String roleEtudiantTableRole= "Etudiant";
-    String rolePresonelTableRole= "Personel";
-    int idroleEtudiantTableRole = 2;
-    int idrolePersonelTableRole =1;
-    String coloneidRoleTableRole = "idRole";
+public class ConnexionController  implements Initializable {
 
-    /*
-    Création des boutons/label/text field
-     */
     @FXML
     private Button ButtonConnexion;
     @FXML
@@ -44,20 +36,39 @@ public class ConnexionController {
     @FXML
     private Label LabelErreurConnexion;
 
+    String tableUser = "user";
+    String tableRole = "role";
+    String colonemailTableUtilisateur = "Mail";
+    String coloneroleIDTableUtilisateur = "idRole";
+    String colonemdpBDDTableUtilisateur = "Mdp";
+    String coloneRoleTableRole = "role";
+    String roleEtudiantTableRole= "Etudiant";
+    String rolePresonelTableRole= "Personel";
+    int idroleEtudiantTableRole = 2;
+    int idrolePersonelTableRole =1;
+    String coloneidRoleTableRole = "idRole";
+
     /*
-    Connexion classe BDD
-     */
+Connexion classe BDD
+*/
     Connection connection = null;
-    Statement statement =null;
+    Statement statement = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+
+
     public ConnexionController() {
         connection = ConexionBDD.connectdb();
     }
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
     /*
-    Création  action bouton Connexion
-     */
+Création  action bouton Connexion
+ */
     public void ButtonConnexionOnAction(ActionEvent event) {
         /*
         Verification email pas vide
@@ -120,15 +131,27 @@ public class ConnexionController {
                         stage.setTitle("Accueil Personel");
 
                     } else if (idRoleConnexion == idroleEtudiantTableRole && roleMailConnexion.equals(roleEtudiantTableRole)) {
-                        LabelErreurConnexion.setText("Etudiant");
-                        Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
-                        stage.close();
-                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AccueilEtudiant.fxml")));
-                        stage.setScene(scene);
-                        stage.show();
-                        stage.setTitle("Accueil Etudiant");
+                        String idEtudiant = "Select idPersonnes FROM  user Where Mail = ?";
+                        try {
+                            preparedStatement = connection.prepareStatement(idEtudiant);
+                            preparedStatement.setString(1, mail);
+                            resultSet = preparedStatement.executeQuery();
+                            if(resultSet.next()){
+                                String idEtu = resultSet.getString("idPersonnes");
+                                LabelErreurConnexion.setText("Etudiant");
+                                User.Mail(TextFieldMail.getText());
+                                Stage stage = (Stage) ButtonConnexion.getScene().getWindow();
+                                stage.close();
+                                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/Fxml/AccueilEtudiant.fxml")));
+                                stage.setScene(scene);
+                                stage.show();
+                                stage.setTitle("Accueil Etudiant");
+                            }
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
 
-                    } else {
+                    }else {
                         LabelErreurConnexion.setText("Probleme role pas reconeu");
                     }
                 }
@@ -159,6 +182,4 @@ public class ConnexionController {
         Stage stage = (Stage) ButtonInscription.getScene().getWindow();
         stage.close();
     }
-
 }
-

@@ -1,13 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccueilEtudiantController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" styleClass="BackGroundGrisClair" stylesheets="@../Css/SetupCss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccueilEtudiantController">
     <children>
-        <AnchorPane layoutX="100.0" layoutY="68.0" prefHeight="324.0" prefWidth="314.0">
-         <children>
-            <Button fx:id="BtnRetourConnexion" layoutX="234.0" onAction="#retourConnexion" layoutY="150.0" mnemonicParsing="false" text="Retour Connexion" />
-         </children></AnchorPane>
+        <Label fx:id="LabelDeBienVenu" layoutX="170.0" layoutY="48.0" prefHeight="38.0" prefWidth="1487.0">
+            <font>
+                <Font name="SansSerif Regular" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="Bonjour" disable="false" layoutX="1414.0" layoutY="26.0" mnemonicParsing="false" onAction="#BonjourOnAction" prefHeight="38.0" prefWidth="126.0" styleClass="ButtonBleuClair" text="Déonnexion" />
+        <TableView fx:id="TableViewConference" disable="false" layoutX="950.0" layoutY="90.0" prefHeight="720.0" prefWidth="480.0">
+            <columns>
+                <TableColumn fx:id="ColumnConference" prefWidth="138.0" text="Conference" />
+                <TableColumn fx:id="ColumnDate" minWidth="1.0" prefWidth="74.0" text="Date" />
+                <TableColumn fx:id="ColumnHeure" minWidth="0.0" prefWidth="61.0" text="Heure" />
+                <TableColumn fx:id="ColumnLieu" minWidth="0.0" prefWidth="206.0" text="Lieux">
+                    <columns>
+                        <TableColumn fx:id="ColumnVille" prefWidth="75.0" text="Ville" />
+                        <TableColumn fx:id="ColumnAdresse" prefWidth="131.0" text="Adresse" />
+                    </columns></TableColumn>
+            </columns>
+        </TableView>
+        <ComboBox fx:id="ChoiceBoxRecherche" disable="false" layoutX="725.0" layoutY="187.0" onAction="#ComboBoxOnAction" prefWidth="150.0" promptText="Choix recherche" style="-fx-background-radius: 50px;" />
+        <TextField fx:id="TextFieldRecherche" disable="true" layoutX="726.0" layoutY="252.0" promptText="Recherche..." style="-fx-background-radius: 50px;" />
+        <WebView fx:id="viewWeb" disable="false" layoutX="170.0" layoutY="90.0" prefHeight="720.0" prefWidth="480.0" />
+        <Label fx:id="labelCatégorierecherche" layoutX="199.0" layoutY="48.0" prefHeight="38.0" prefWidth="1487.0" visible="false" />
+
+        <AnchorPane fx:id="AnchorPaneMenu" prefHeight="913.0" prefWidth="318.0" styleClass="BackGroundGrisClaireFoncer" stylesheets="@../Css/SetupCss.css" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+            <children>
+                <Button fx:id="btnCloseMenuAdmin" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnCloseMenuAdminOnAction" prefHeight="46.0" prefWidth="62.0" styleClass="ButtonBleufoncer" text="Close" />
+                <Button fx:id="btnAccueilEtudiant" onAction="#AccueilEtudiant" layoutX="74.0" layoutY="180.0"  mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Accueil" textAlignment="CENTER" />
+                <Button fx:id="btnStagiaire" onAction="#Stagiaire" layoutX="74.0" layoutY="300.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Stagiaire" textAlignment="CENTER" />
+                <Button fx:id="btnStage" layoutX="74.0" layoutY="420.0" mnemonicParsing="false" onAction="#Stage" prefHeight="60.0" prefWidth="150.0" styleClass="ButtonBleuClair" text="Stage" textAlignment="CENTER" />
+                <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="840.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Images/UnivTours-logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <Button fx:id="BtnMenue" disable="false" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#BtnMenueOnAction" prefHeight="38.0" prefWidth="62.0" styleClass="ButtonBleuClair" text="Menu" />
     </children>
-</VBox>
+</Pane>
