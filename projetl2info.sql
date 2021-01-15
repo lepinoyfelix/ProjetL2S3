@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 05 jan. 2021 à 14:18
+-- Généré le :  ven. 15 jan. 2021 à 10:52
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP :  7.4.1
 
@@ -158,8 +158,8 @@ CREATE TABLE `evenement` (
 --
 
 INSERT INTO `evenement` (`idEvenement`, `NomEvenement`, `CodePostal`, `Ville`, `Adresse`, `Date`, `Heure`, `IdCompetence`, `idPersone`, `idtypeEvenement`) VALUES
-(27, 'COURS SUR LA BIO ETHIQUE', '37000', 'TOURS', '2 AVENUE GRANDMONT', '14/01/2020', '14:30', 14, 10, 1),
-(28, 'CONFERENCE DE JEAN ', '37100', 'TOURS NORD', '65 RUE DES ROSIER', '07/07/2021', '8:00', 13, 9, 2),
+(27, 'COURS SUR LA BIO ETHIQUE', '37000', 'TOURS', '2 AVENUE GRANDMONT', '06/01/2021', '14:30', 14, 10, 1),
+(28, 'CONFERENCE DE JEAN ', '37100', 'TOURS NORD', '65 RUE DES ROSIER', '05/01/2021', '8:00', 13, 9, 2),
 (29, 'FORUM DES ASSOCIATION', '78000', 'CRETEIL', '65 RUE DU MAIRE', '10/10/2021', '18:45', 14, 9, 3);
 
 -- --------------------------------------------------------
@@ -225,6 +225,29 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`idRole`, `role`) VALUES
 (1, 'Personel'),
 (2, 'Etudiant');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `stage`
+--
+
+CREATE TABLE `stage` (
+  `IdStage` int(11) NOT NULL,
+  `idEntreprise` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `Niveau` varchar(3) NOT NULL,
+  `NoteDeStage` varchar(500) NOT NULL,
+  `NomPrenom` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `stage`
+--
+
+INSERT INTO `stage` (`IdStage`, `idEntreprise`, `idUser`, `Niveau`, `NoteDeStage`, `NomPrenom`) VALUES
+(1, 62, 1, 'M2', 'AZZAAAAA', 'Felix Lepinoy'),
+(8, 63, 1, 'L3', 'tout c\'est tres bien passée ', 'Felix Lepinoy');
 
 -- --------------------------------------------------------
 
@@ -327,6 +350,12 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`idRole`);
 
 --
+-- Index pour la table `stage`
+--
+ALTER TABLE `stage`
+  ADD PRIMARY KEY (`IdStage`);
+
+--
 -- Index pour la table `typeevenement`
 --
 ALTER TABLE `typeevenement`
@@ -395,6 +424,12 @@ ALTER TABLE `persone`
 --
 ALTER TABLE `role`
   MODIFY `idRole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `stage`
+--
+ALTER TABLE `stage`
+  MODIFY `IdStage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `typeevenement`
